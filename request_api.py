@@ -2,7 +2,12 @@ import json
 
 import requests
 
-def request_api(endpoint, client_id, api_key, data):
+def request_api(
+    endpoint: str,
+    client_id: str,
+    api_key: str,
+    data: object,
+) -> object:
     session = requests.Session()
     response = session.post(
         'https://api-seller.ozon.ru' + endpoint,
