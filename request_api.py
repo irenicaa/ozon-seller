@@ -12,10 +12,7 @@ def request_api(
     session = requests.Session()
     response = session.post(
         'https://api-seller.ozon.ru' + endpoint,
-        headers={
-            'Client-Id': credentials.client_id,
-            'Api-Key': credentials.api_key,
-        },
+        headers=credentials.to_headers(),
         data=json.dumps(data),
     )
     response.raise_for_status()
