@@ -3,6 +3,9 @@ from typing import List
 
 from dataclasses_json import dataclass_json
 
+import request_api
+import credentials
+
 # Request
 
 @dataclass_json
@@ -46,3 +49,15 @@ class GetProductInfoStocksResponseResult:
 @dataclass
 class GetProductInfoStocksResponseResultWrapper:
     result: GetProductInfoStocksResponseResult
+
+def get_product_info_stocks(
+    credentials: credentials.Credentials,
+    data: PaginatedProductFilter,
+) -> GetProductInfoStocksResponseResultWrapper:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v3/product/info/stocks',
+        credentials,
+        data.to_json(),
+    )
+    return GetProductInfoStocksResponseResultWrapper.from_json(response)

@@ -11,18 +11,17 @@ import stocks
 if __name__ == '__main__':
     dotenv.load_dotenv()
 
-    filter = stocks.PaginatedProductFilter(
+    data = stocks.PaginatedProductFilter(
         filter=stocks.ProductFilter(
-            offer_id=['1', '2', '3'],
-            product_id=['4', '5', '6'],
+            offer_id=[],
+            product_id=[],
             visibility='ALL',
         ),
         limit=100,
         last_id='',
     )
-    print(filter.to_json())
+    print(data.to_json())
 
     ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
-    data = {'limit': 100, 'last_id': '', 'filter': {'visibility': 'ALL'}}
-    stocks = request_api.request_api('POST', '/v3/product/info/stocks', ozon_credentials, data)
+    stocks = stocks.get_product_info_stocks(ozon_credentials, data)
     print(stocks)
