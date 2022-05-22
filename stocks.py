@@ -35,7 +35,7 @@ class GetProductInfoStocksResponseStock:
 class GetProductInfoStocksResponseItem:
     offer_id: str
     product_id: int
-    stocks: GetProductInfoStocksResponseStock
+    stocks: list[GetProductInfoStocksResponseStock]
 
 @dataclass_json
 @dataclass
@@ -59,4 +59,4 @@ def get_product_info_stocks(
         credentials,
         data.to_json(),
     )
-    return GetProductInfoStocksResponseResultWrapper.from_json(response)
+    return GetProductInfoStocksResponseResultWrapper.schema().loads(response)

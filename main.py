@@ -17,7 +17,7 @@ if __name__ == '__main__':
             product_id=[],
             visibility='ALL',
         ),
-        limit=100,
+        limit=10,
         last_id='',
     )
     print(data.to_json())
