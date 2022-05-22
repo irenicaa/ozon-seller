@@ -60,3 +60,16 @@ def get_product_info_stocks(
         data.to_json(),
     )
     return GetProductInfoStocksResponseResultWrapper.schema().loads(response)
+
+def get_product_info_stocks_iterative(
+    credentials: credentials.Credentials,
+    data: PaginatedProductFilter,
+) -> GetProductInfoStocksResponseResultWrapper:
+    while True:
+        stocks = get_product_info_stocks(credentials, data)
+        if stocks.result.items == []:
+            break
+
+        yield stocks
+
+        data.last_id = stocks.result.last_id
