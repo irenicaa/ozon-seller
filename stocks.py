@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List
 
 from dataclasses_json import dataclass_json
 
@@ -11,8 +10,8 @@ import credentials
 @dataclass_json
 @dataclass
 class ProductFilter:
-    offer_id: List[str]
-    product_id: List[str]
+    offer_id: list[str]
+    product_id: list[str]
     visibility: str
 
 @dataclass_json
@@ -41,7 +40,7 @@ class GetProductInfoStocksResponseItem:
 @dataclass_json
 @dataclass
 class GetProductInfoStocksResponseResult:
-    items: List[GetProductInfoStocksResponseItem]
+    items: list[GetProductInfoStocksResponseItem]
     last_id: str
     total: int
 
