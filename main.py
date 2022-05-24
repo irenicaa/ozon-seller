@@ -19,12 +19,12 @@ if __name__ == '__main__':
         last_free_waiting_day=None,
         posting_number=None,
         ),
-        limit=1000,
+        limit=2,
         offset=0,
     )
     print(data.to_json())
 
     ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
-    for returned in returns_fbs.get_returns_from_fbs(ozon_credentials, data):
+    for returned in returns_fbs.get_returns_from_fbs_iterative(ozon_credentials, data):
         print(returned)
         time.sleep(2)

@@ -89,3 +89,16 @@ def get_returns_from_fbs(
         data.to_json(),
     )
     return returnsGetReturnsCompanyFBSResponse.schema().loads(response)
+
+def get_returns_from_fbs_iterative(
+    credentials: credentials.Credentials,
+    data: ProductFilter,
+) -> returnsGetReturnsCompanyFBSResponse:
+    while True:
+        returns = get_returns_from_fbs(credentials, data)
+        if returns.result.count < data.limit:
+            break
+
+        yield returns
+
+        data.offset += data.limit
