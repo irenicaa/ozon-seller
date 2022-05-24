@@ -97,7 +97,7 @@ def get_returns_from_fbs_iterative(
 ) -> returnsGetReturnsCompanyFBSResponse:
     while True:
         returns = get_returns_from_fbs(credentials, data)
-        if returns.result.count < data.limit:
+        if returns.result.returns == []:
             break
 
         yield returns
