@@ -1,47 +1,49 @@
-from dataclasses import dataclass
-from dataclasses import field
+from dataclasses import dataclass, field
+from typing import Optional
 import datetime
 
-from dataclasses_json import dataclass_json
-from dataclasses_json import config
-from typing import Optional
-from dataclasses_json import Undefined
+from dataclasses_json import dataclass_json, Undefined, config
 
 import request_api
 import credentials
 
 # Request
 
+def format_datetime(value):
+    return value \
+        .astimezone(datetime.timezone.utc) \
+        .isoformat(timespec='microseconds')
 
-# TODO: time type
 @dataclass_json
 @dataclass
 class FilterTimeRange:
-    time_from: datetime.datetime = field(metadata=config(encoder=lambda value:  value.astimezone(datetime.timezone.utc).isoformat(timespec='microseconds')))
-    time_to: datetime.datetime = field(metadata=config(encoder=lambda value: value.astimezone(datetime.timezone.utc).isoformat(timespec='microseconds')))
+    time_from: datetime.datetime = \
+        field(metadata=config(encoder=format_datetime))
+    time_to: datetime.datetime = field(metadata=config(encoder=format_datetime))
+
 @dataclass_json
 @dataclass
-class returnsGetReturnsCompanyFBSRequestFilter:
-    accepted_from_customer_moment: Optional[list[FilterTimeRange]]
-    last_free_waiting_day: Optional[list[FilterTimeRange]]
-    order_id: Optional[int]=None
-    posting_number: list[str]=field(default_factory=list)
+class GetReturnsCompanyFBSFilter:
+    accepted_from_customer_moment: Optional[list[FilterTimeRange]] = None
+    last_free_waiting_day: Optional[list[FilterTimeRange]] = None
+    order_id: Optional[int] = None
+    posting_number: list[str] = field(default_factory=list)
     product_name: str = ''
     product_offer_id: str = ''
     status: str = ''
 
 @dataclass_json
 @dataclass
-class ProductFilter:
-    filter: returnsGetReturnsCompanyFBSRequestFilter
-    limit: int
+class PaginatedGetReturnsCompanyFBSFilter:
+    filter: GetReturnsCompanyFBSFilter
     offset: int
+    limit: int
 
 # Response
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ResultGetReturnsCompanyFBSItem:
+class GetReturnsCompanyFBSResponseItem:
     accepted_from_customer_moment: Optional[str]
     clearing_id: Optional[int]
     commission: Optional[float]
@@ -71,32 +73,32 @@ class ResultGetReturnsCompanyFBSItem:
 @dataclass_json
 @dataclass
 class GetReturnsCompanyFBSResponseResult:
+    returns: list[GetReturnsCompanyFBSResponseItem]
     count: int
-    returns: list[ResultGetReturnsCompanyFBSItem]
 
 @dataclass_json
 @dataclass
-class returnsGetReturnsCompanyFBSResponse:
+class GetReturnsCompanyFBSResponseResultWrapper:
     result: GetReturnsCompanyFBSResponseResult
 
-def get_returns_from_fbs(
+def get_returns_company_fbs(
     credentials: credentials.Credentials,
-    data: ProductFilter,
-) -> returnsGetReturnsCompanyFBSResponse:
+    data: PaginatedGetReturnsCompanyFBSFilter,
+) -> GetReturnsCompanyFBSResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v2/returns/company/fbs',
         credentials,
         data.to_json(),
     )
-    return returnsGetReturnsCompanyFBSResponse.schema().loads(response)
+    return GetReturnsCompanyFBSResponseResultWrapper.schema().loads(response)
 
-def get_returns_from_fbs_iterative(
+def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
-    data: ProductFilter,
-) -> returnsGetReturnsCompanyFBSResponse:
+    data: PaginatedGetReturnsCompanyFBSFilter,
+) -> GetReturnsCompanyFBSResponseResultWrapper:
     while True:
-        returns = get_returns_from_fbs(credentials, data)
+        returns = get_returns_company_fbs(credentials, data)
         if returns.result.returns == []:
             break
 
