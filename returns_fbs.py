@@ -1,29 +1,14 @@
 from dataclasses import dataclass
+from dataclasses import field
 
 from dataclasses_json import dataclass_json
+from typing import Optional
 
 import request_api
 import credentials
 
 # Request
 
-@dataclass_json
-@dataclass
-class ProductFilter:
-    filter: returnsGetReturnsCompanyFBSRequestFilter
-    limit: int
-    offset: int
-
-@dataclass_json
-@dataclass
-class returnsGetReturnsCompanyFBSRequestFilter:
-    accepted_from_customer_moment: list[FilterTimeRange]
-    last_free_waiting_day: list[FilterTimeRange]
-    order_id: int
-    posting_number: list[str]
-    product_name: str
-    product_offer_id: str
-    status: str
 
 # TODO: time type
 @dataclass_json
@@ -32,18 +17,25 @@ class FilterTimeRange:
     time_from: str
     time_to: str
 
+@dataclass_json
+@dataclass
+class returnsGetReturnsCompanyFBSRequestFilter:
+    accepted_from_customer_moment: Optional[list[FilterTimeRange]]
+    last_free_waiting_day: Optional[list[FilterTimeRange]]
+    order_id: Optional[int] = None
+    posting_number: list[str]=field(default_factory=list)
+    product_name: str = ''
+    product_offer_id: str = ''
+    status: str = ''
+
+@dataclass_json
+@dataclass
+class ProductFilter:
+    filter: returnsGetReturnsCompanyFBSRequestFilter
+    limit: int
+    offset: int
+
 # Response
-
-@dataclass_json
-@dataclass
-class returnsGetReturnsCompanyFBSResponse:
-    result: list[GetReturnsCompanyFBSResponseResult]
-
-@dataclass_json
-@dataclass
-class GetReturnsCompanyFBSResponseResult:
-    count: int
-    returns: list[ResultGetReturnsCompanyFBSItem]
 
 @dataclass_json
 @dataclass
@@ -73,3 +65,26 @@ class ResultGetReturnsCompanyFBSItem:
     returns_keeping_cost: float
     sku: int
     status: str
+
+@dataclass_json
+@dataclass
+class GetReturnsCompanyFBSResponseResult:
+    count: int
+    returns: list[ResultGetReturnsCompanyFBSItem]
+
+@dataclass_json
+@dataclass
+class returnsGetReturnsCompanyFBSResponse:
+    result: GetReturnsCompanyFBSResponseResult
+
+def get_returns_from_fbs(
+    credentials: credentials.Credentials,
+    data: ProductFilter,
+) -> returnsGetReturnsCompanyFBSResponse:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v2/returns/company/fbs',
+        credentials,
+        data.to_json(),
+    )
+    return returnsGetReturnsCompanyFBSResponse.schema().loads(response)

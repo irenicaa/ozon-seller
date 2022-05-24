@@ -4,26 +4,27 @@ import time
 
 import requests
 import dotenv
+from typing import Optional
 
 import request_api
 import credentials
 import stocks
+import returns_fbs
 
 if __name__ == '__main__':
     dotenv.load_dotenv()
-
-    data = stocks.PaginatedProductFilter(
-        filter=stocks.ProductFilter(
-            offer_id=[],
-            product_id=[],
-            visibility='ALL',
+    data = returns_fbs.ProductFilter(
+        filter=returns_fbs.returnsGetReturnsCompanyFBSRequestFilter(
+        accepted_from_customer_moment=None,
+        last_free_waiting_day=None,
+        posting_number=None,
         ),
-        limit=70,
-        last_id='',
+        limit=1000,
+        offset=0,
     )
     print(data.to_json())
 
     ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
-    for stocks in stocks.get_product_info_stocks_iterative(ozon_credentials, data):
-        print(stocks)
+    for returned in returns_fbs.get_returns_from_fbs(ozon_credentials, data):
+        print(returned)
         time.sleep(2)
