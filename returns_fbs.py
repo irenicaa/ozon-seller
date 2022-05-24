@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from dataclasses import field
+import datetime
 
 from dataclasses_json import dataclass_json
+from dataclasses_json import config
 from typing import Optional
 from dataclasses_json import Undefined
 
@@ -15,15 +17,14 @@ import credentials
 @dataclass_json
 @dataclass
 class FilterTimeRange:
-    time_from: str
-    time_to: str
-
+    time_from: datetime.datetime = field(metadata=config(encoder=lambda value:  value.astimezone(datetime.timezone.utc).isoformat(timespec='microseconds')))
+    time_to: datetime.datetime = field(metadata=config(encoder=lambda value: value.astimezone(datetime.timezone.utc).isoformat(timespec='microseconds')))
 @dataclass_json
 @dataclass
 class returnsGetReturnsCompanyFBSRequestFilter:
     accepted_from_customer_moment: Optional[list[FilterTimeRange]]
     last_free_waiting_day: Optional[list[FilterTimeRange]]
-    order_id: Optional[int] = None
+    order_id: Optional[int]=None
     posting_number: list[str]=field(default_factory=list)
     product_name: str = ''
     product_offer_id: str = ''
