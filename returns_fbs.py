@@ -3,6 +3,7 @@ from dataclasses import field
 
 from dataclasses_json import dataclass_json
 from typing import Optional
+from dataclasses_json import Undefined
 
 import request_api
 import credentials
@@ -37,34 +38,34 @@ class ProductFilter:
 
 # Response
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class ResultGetReturnsCompanyFBSItem:
-    accepted_from_customer_moment: str
-    clearing_id: int
-    commission: float
-    commission_percent: float
-    id: int
-    is_moving: bool
-    is_opened: bool
-    last_free_waiting_day: str
-    place_id: int
-    moving_to_place_name: str
-    picking_amount: float
-    posting_number: str
-    price: float
-    price_without_commission: float
-    product_id: int
-    product_name: str
-    quantity: int
-    return_date: str
-    return_reason_name: str
-    waiting_for_seller_date_time: str
-    returned_to_seller_date_time: str
-    waiting_for_seller_days: int
-    returns_keeping_cost: float
-    sku: int
-    status: str
+    accepted_from_customer_moment: Optional[str]
+    clearing_id: Optional[int]
+    commission: Optional[float]
+    commission_percent: Optional[float]
+    id: Optional[int]
+    is_moving: Optional[bool]
+    is_opened: Optional[bool]
+    last_free_waiting_day: Optional[str]
+    place_id: Optional[int]
+    moving_to_place_name: Optional[str]
+    picking_amount: Optional[float]
+    posting_number: Optional[str]
+    price: Optional[float]
+    price_without_commission: Optional[float]
+    product_id: Optional[int]
+    product_name: Optional[str]
+    quantity: Optional[int]
+    return_date: Optional[str]
+    return_reason_name: Optional[str]
+    waiting_for_seller_date_time: Optional[str]
+    returned_to_seller_date_time: Optional[str]
+    waiting_for_seller_days: Optional[int]
+    returns_keeping_cost: Optional[float]
+    sku: Optional[int]
+    status: Optional[str]
 
 @dataclass_json
 @dataclass
