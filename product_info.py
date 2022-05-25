@@ -7,14 +7,13 @@ from marshmallow import fields
 
 import request_api
 import credentials
-import returns_fbs
 
 # Request
 
 @dataclass_json
 @dataclass
 class ProductData:
-    offer_id: str  = ''
+    offer_id: Optional[str] = None
     product_id: Optional[int] = None
     sku: Optional[int] = None
 
@@ -22,13 +21,12 @@ class ProductData:
 
 @dataclass_json(undefined=Undefined.INCLUDE)
 @dataclass
-class Property:
+class GetProductInfoResponseOptionalDescriptionElements:
     properties: CatchAll
 
-# TODO: property name*
 @dataclass_json
 @dataclass
-class ItemError:
+class GetProductInfoResponseItemError:
     code: str
     state: str
     level: str
@@ -36,24 +34,7 @@ class ItemError:
     field: str
     attribute_id: str
     attribute_name: str
-    optional_description_elements: Property
-
-@dataclass_json
-@dataclass
-class ProductStatus:
-    state: str
-    state_failed: str
-    moderate_status: str
-    decline_reasons: list[str]
-    validation_state: str
-    state_name: str
-    state_description: str
-    is_failed: bool
-    is_created: bool
-    state_tooltip: str
-    item_errors: list[ItemError]
-    state_updated_at: datetime.datetime = \
-        field(metadata=config(decoder=datetime.datetime.fromisoformat, mm_field= fields.DateTime(format='iso')))
+    optional_description_elements: GetProductInfoResponseOptionalDescriptionElements
 
 @dataclass_json
 @dataclass
@@ -64,7 +45,7 @@ class GetProductInfoResponseVisibilityDetails:
 
 @dataclass_json
 @dataclass
-class GetProductInfoResponseStock:
+class GetProductInfoResponseStocks:
     coming: int
     present: int
     reserved: int
@@ -75,6 +56,27 @@ class GetProductInfoResponseSource:
     is_enabled: bool
     sku: int
     source: str
+
+@dataclass_json
+@dataclass
+class GetProductInfoResponseStatus:
+    state: str
+    state_failed: str
+    moderate_status: str
+    decline_reasons: list[str]
+    validation_state: str
+    state_name: str
+    state_description: str
+    is_failed: bool
+    is_created: bool
+    state_tooltip: str
+    item_errors: list[GetProductInfoResponseItemError]
+    state_updated_at: datetime.datetime = field(
+        metadata=config(
+            decoder=datetime.datetime.fromisoformat,
+            mm_field=fields.DateTime(format='iso'),
+        ),
+    )
 
 @dataclass_json
 @dataclass
@@ -94,8 +96,12 @@ class GetProductInfoResponseResult:
     category_id: int
     color_image: str
     commissions: list[GetProductInfoResponseCommissions]
-    created_at: datetime.datetime = \
-        field(metadata=config(decoder=datetime.datetime.fromisoformat, mm_field=fields.DateTime(format='iso')))
+    created_at: datetime.datetime = field(
+        metadata=config(
+            decoder=datetime.datetime.fromisoformat,
+            mm_field=fields.DateTime(format='iso'),
+        ),
+    )
     fbo_sku: int
     fbs_sku: int
     id: int
@@ -114,9 +120,9 @@ class GetProductInfoResponseResult:
     price: str
     price_index: str
     recommended_price: str
-    status: ProductStatus
+    status: GetProductInfoResponseStatus
     sources: list[GetProductInfoResponseSource]
-    stocks: GetProductInfoResponseStock
+    stocks: GetProductInfoResponseStocks
     vat: str
     visibility_details: GetProductInfoResponseVisibilityDetails
     visible: bool
