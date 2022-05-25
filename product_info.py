@@ -121,3 +121,20 @@ class GetProductInfoResponseResult:
     visibility_details: GetProductInfoResponseVisibilityDetails
     visible: bool
     volume_weight: float
+
+@dataclass_json
+@dataclass
+class GetProductInfoResponseResultWrapper:
+    result: GetProductInfoResponseResult
+
+def get_product_info(
+    credentials: credentials.Credentials,
+    data: ProductData,
+) -> GetProductInfoResponseResultWrapper:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v2/product/info',
+        credentials,
+        data.to_json(),
+    )
+    return GetProductInfoResponseResultWrapper.schema().loads(response)
