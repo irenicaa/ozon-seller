@@ -9,7 +9,7 @@ import credentials
 
 @dataclass_json
 @dataclass
-class ActionProducts:
+class PaginatedActionProducts:
     action_id: float
     limit: float
     offset: float
@@ -38,3 +38,28 @@ class GetSellerProductResponseResult:
 @dataclass
 class GetSellerProductResponseResultWrapper:
     result: GetSellerProductResponseResult
+
+def get_action_products(
+    credentials: credentials.Credentials,
+    data: PaginatedActionProducts,
+) -> GetSellerProductResponseResultWrapper:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v1/actions/products',
+        credentials,
+        data.to_json(),
+    )
+    return GetSellerProductResponseResultWrapper.schema().loads(response)
+
+def get_action_products_iterative(
+    credentials: credentials.Credentials,
+    data: PaginatedActionProducts,
+) -> GetSellerProductResponseResultWrapper:
+    while True:
+        products = get_action_products(credentials, data)
+        if products.result.products == []:
+            break
+
+        yield products
+
+        data.offset += data.limit
