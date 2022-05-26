@@ -16,3 +16,27 @@ class CandidatesForActions:
     action_id: float
     limit: float
     offset: float
+
+# Response
+
+@dataclass_json
+@dataclass
+class CandidatesForActionsProducts:
+    id: float
+    price: float
+    action_price: float
+    max_action_price: float
+    add_mode: str
+    min_stock: float
+    stock: float
+
+@dataclass_json
+@dataclass
+class GetActionsCandidatesResponseResult:
+    products: list[CandidatesForActionsProducts]
+    total: float
+
+@dataclass_json
+@dataclass
+class GetActionsCandidatesResponseResultWrapper:
+    result: GetActionsCandidatesResponseResult
