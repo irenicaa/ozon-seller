@@ -1,9 +1,6 @@
-from dataclasses import dataclass, field
-from typing import Optional
-import datetime
+from dataclasses import dataclass
 
-from dataclasses_json import dataclass_json, Undefined, config, CatchAll
-from marshmallow import fields
+from dataclasses_json import dataclass_json
 
 import request_api
 import credentials
@@ -28,8 +25,21 @@ class GetSellerActionsResponse:
     order_amount: float
     discount_type: str
     discount_value: float
+    is_voucher_action: bool
 
 @dataclass_json
 @dataclass
 class GetSellerActionsResponseWrapper:
     result: list[GetSellerActionsResponse]
+
+def get_actions(
+    credentials: credentials.Credentials,
+    data: str,
+) -> GetSellerActionsResponseWrapper:
+    response = request_api.request_api_raw(
+        'GET',
+        '/v1/actions',
+        credentials,
+        data,
+    )
+    return GetSellerActionsResponseWrapper.schema().loads(response)
