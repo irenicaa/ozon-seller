@@ -52,3 +52,16 @@ def get_actions_candidates(
         data.to_json(),
     )
     return GetActionsCandidatesResponseResultWrapper.schema().loads(response)
+
+def get_actions_candidates_iterative(
+    credentials: credentials.Credentials,
+    data: PaginatedCandidatesForActions,
+) -> GetActionsCandidatesResponseResultWrapper:
+    while True:
+        products = get_actions_candidates(credentials, data)
+        if products.result.products == []:
+            break
+
+        yield products
+
+        data.offset += data.limit
