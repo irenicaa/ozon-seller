@@ -17,6 +17,7 @@ def request_api_raw(
         headers=credentials.to_headers(),
         data=data,
     )
+    print(response.text)
     response.raise_for_status()
 
     return response.text

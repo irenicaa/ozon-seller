@@ -12,7 +12,7 @@ import credentials
 
 @dataclass_json
 @dataclass
-class CandidatesForActions:
+class PaginatedCandidatesForActions:
     action_id: float
     limit: float
     offset: float
@@ -40,3 +40,15 @@ class GetActionsCandidatesResponseResult:
 @dataclass
 class GetActionsCandidatesResponseResultWrapper:
     result: GetActionsCandidatesResponseResult
+
+def get_actions_candidates(
+    credentials: credentials.Credentials,
+    data: PaginatedCandidatesForActions,
+) -> GetActionsCandidatesResponseResultWrapper:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v1/actions/candidates',
+        credentials,
+        data.to_json(),
+    )
+    return GetActionsCandidatesResponseResultWrapper.schema().loads(response)
