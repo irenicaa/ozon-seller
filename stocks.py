@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 from dataclasses_json import dataclass_json
 
@@ -10,9 +11,9 @@ import credentials
 @dataclass_json
 @dataclass
 class ProductFilter:
-    offer_id: list[str]
-    product_id: list[str]
-    visibility: str
+    offer_id: Optional[list[str]] = None
+    product_id: Optional[list[str]] = None
+    visibility: Optional[list[str]] = None
 
 @dataclass_json
 @dataclass

@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 import datetime
 
-from dataclasses_json import dataclass_json, Undefined, config, CatchAll
+from dataclasses_json import dataclass_json
 from marshmallow import fields
 
 import request_api
@@ -13,9 +13,9 @@ import credentials
 @dataclass_json
 @dataclass
 class PaginatedCandidatesForActions:
-    action_id: float
-    limit: float
-    offset: float
+    action_id: Optional[float] = None
+    limit: Optional[float] = None
+    offset: Optional[float] = None
 
 # Response
 

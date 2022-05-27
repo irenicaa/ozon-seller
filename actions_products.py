@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 from dataclasses_json import dataclass_json
 
@@ -10,9 +11,9 @@ import credentials
 @dataclass_json
 @dataclass
 class PaginatedActionProducts:
-    action_id: float
-    limit: float
-    offset: float
+    action_id: Optional[float] = None
+    limit: Optional[float] = None
+    offset: Optional[float] = None
 
 # Response
 
