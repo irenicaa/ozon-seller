@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 import requests
 
@@ -8,7 +9,7 @@ def request_api_raw(
     method: str,
     endpoint: str,
     credentials: credentials.Credentials,
-    data: str,
+    data: Optional[str],
 ) -> str:
     session = requests.Session()
     response = session.request(

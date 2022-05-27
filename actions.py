@@ -34,12 +34,11 @@ class GetSellerActionsResponseWrapper:
 
 def get_actions(
     credentials: credentials.Credentials,
-    data: str,
 ) -> GetSellerActionsResponseWrapper:
     response = request_api.request_api_raw(
         'GET',
         '/v1/actions',
         credentials,
-        data,
+        None,
     )
     return GetSellerActionsResponseWrapper.schema().loads(response)
