@@ -19,7 +19,7 @@ class GetReturnsCompanyFboRequestFilter:
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboRequest:
+class PaginatedGetReturnsCompanyFboRequest:
     filter: Optional[GetReturnsCompanyFboRequestFilter] = None
     offset: Optional[int] = None
     limit: Optional[int] = None
@@ -55,11 +55,11 @@ class GetReturnsCompanyFboResponse:
 @dataclass
 class GetReturnsCompanyFboResponseWrapper:
     count: int
-    returns: list[GetReturnsCompanyFboRequest]
+    returns: list[PaginatedGetReturnsCompanyFboRequest]
 
 def get_returns_company_fbo(
     credentials: credentials.Credentials,
-    data: GetReturnsCompanyFboRequest,
+    data: PaginatedGetReturnsCompanyFboRequest,
 ) -> GetReturnsCompanyFboResponseWrapper:
     response = request_api.request_api_raw(
         'POST',
@@ -68,3 +68,16 @@ def get_returns_company_fbo(
         data.to_json(),
     )
     return GetReturnsCompanyFboResponseWrapper.schema().loads(response)
+
+def get_returns_company_fbo_iterative(
+    credentials: credentials.Credentials,
+    data: PaginatedGetReturnsCompanyFboRequest,
+) -> GetReturnsCompanyFboResponseWrapper:
+    while True:
+        returns = get_returns_company_fbo(credentials, data)
+        if returns.returns == []:
+            break
+
+        yield returns
+
+        data.offset += data.limit
