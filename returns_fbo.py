@@ -3,6 +3,7 @@ from typing import Optional
 import datetime
 
 from dataclasses_json import dataclass_json, config
+from typing import Optional
 from marshmallow import fields
 
 import request_api
@@ -13,21 +14,21 @@ import credentials
 @dataclass_json
 @dataclass
 class GetReturnsCompanyFboRequestFilter:
-    posting_number: str
-    status: list[str]
+    posting_number: Optional[str] = None
+    status: Optional[list[str]] = None
 
 @dataclass_json
 @dataclass
 class GetReturnsCompanyFboRequest:
-    filter: GetReturnsCompanyFboRequestFilter
-    offset: int
-    limit: int
+    filter: Optional[GetReturnsCompanyFboRequestFilter] = None
+    offset: Optional[int] = None
+    limit: Optional[int] = None
 
 # Response
 
 @dataclass_json
 @dataclass
-class ReturnsCompanyFboResponse:
+class GetReturnsCompanyFboResponse:
     accepted_from_customer_moment: datetime.datetime = field(
         metadata=config(
             decoder=datetime.datetime.fromisoformat,
@@ -52,6 +53,18 @@ class ReturnsCompanyFboResponse:
 
 @dataclass_json
 @dataclass
-class ReturnsCompanyFboResponseWrapper:
+class GetReturnsCompanyFboResponseWrapper:
     count: int
-    returns: list[ReturnsCompanyFboResponse]
+    returns: list[GetReturnsCompanyFboRequest]
+
+def get_returns_company_fbo(
+    credentials: credentials.Credentials,
+    data: GetReturnsCompanyFboRequest,
+) -> GetReturnsCompanyFboResponseWrapper:
+    response = request_api.request_api_raw(
+        'POST',
+        '/v2/returns/company/fbo',
+        credentials,
+        data.to_json(),
+    )
+    return GetReturnsCompanyFboResponseWrapper.schema().loads(response)

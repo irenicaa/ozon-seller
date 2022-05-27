@@ -19,7 +19,6 @@ def request_api_raw(
     )
 
     response.raise_for_status()
-
     return response.text
 
 def request_api(
