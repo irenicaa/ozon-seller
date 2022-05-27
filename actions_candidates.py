@@ -21,7 +21,7 @@ class PaginatedCandidatesForActions:
 
 @dataclass_json
 @dataclass
-class CandidatesForActionsProducts:
+class GetActionsCandidatesResponseProducts:
     id: float
     price: float
     action_price: float
@@ -33,7 +33,7 @@ class CandidatesForActionsProducts:
 @dataclass_json
 @dataclass
 class GetActionsCandidatesResponseResult:
-    products: list[CandidatesForActionsProducts]
+    products: list[GetActionsCandidatesResponseProducts]
     total: float
 
 @dataclass_json

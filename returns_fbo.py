@@ -13,14 +13,14 @@ import credentials
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboRequestFilter:
+class GetReturnsCompanyFboFilter:
     posting_number: Optional[str] = None
     status: Optional[list[str]] = None
 
 @dataclass_json
 @dataclass
-class PaginatedGetReturnsCompanyFboRequest:
-    filter: Optional[GetReturnsCompanyFboRequestFilter] = None
+class PaginatedGetReturnsCompanyFboFilter:
+    filter: Optional[GetReturnsCompanyFboFilter] = None
     offset: Optional[int] = None
     limit: Optional[int] = None
 
@@ -28,7 +28,7 @@ class PaginatedGetReturnsCompanyFboRequest:
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboResponse:
+class GetReturnsCompanyFboResponseItem:
     accepted_from_customer_moment: datetime.datetime = field(
         metadata=config(
             decoder=datetime.datetime.fromisoformat,
@@ -53,26 +53,26 @@ class GetReturnsCompanyFboResponse:
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboResponseWrapper:
+class GetReturnsCompanyFboResponseResult:
+    returns: list[GetReturnsCompanyFboResponseItem]
     count: int
-    returns: list[PaginatedGetReturnsCompanyFboRequest]
 
 def get_returns_company_fbo(
     credentials: credentials.Credentials,
-    data: PaginatedGetReturnsCompanyFboRequest,
-) -> GetReturnsCompanyFboResponseWrapper:
+    data: PaginatedGetReturnsCompanyFboFilter,
+) -> GetReturnsCompanyFboResponseResult:
     response = request_api.request_api_raw(
         'POST',
         '/v2/returns/company/fbo',
         credentials,
         data.to_json(),
     )
-    return GetReturnsCompanyFboResponseWrapper.schema().loads(response)
+    return GetReturnsCompanyFboResponseResult.schema().loads(response)
 
 def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
-    data: PaginatedGetReturnsCompanyFboRequest,
-) -> GetReturnsCompanyFboResponseWrapper:
+    data: PaginatedGetReturnsCompanyFboFilter,
+) -> GetReturnsCompanyFboResponseResult:
     while True:
         returns = get_returns_company_fbo(credentials, data)
         if returns.returns == []:

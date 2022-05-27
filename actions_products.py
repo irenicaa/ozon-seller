@@ -28,7 +28,6 @@ class GetSellerProductResponseProducts:
     min_stock: float
     stock: float
 
-
 @dataclass_json
 @dataclass
 class GetSellerProductResponseResult:
