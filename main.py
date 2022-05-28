@@ -3,16 +3,13 @@ import os
 import dotenv
 
 import credentials
-import returns_fbo
+import product_description
 
 if __name__ == '__main__':
     dotenv.load_dotenv()
-    data = returns_fbo.PaginatedGetReturnsCompanyFboFilter(
-        limit=2,
-        offset=0,
-    )
+    data = product_description.ProductData(offer_id='0008')
     print(data.to_json())
 
     ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
-    for returned in returns_fbo.get_returns_company_fbo_iterative(ozon_credentials, data):
-        print(returned)
+    list =  product_description.get_product_description(ozon_credentials, data)
+    print(list)
