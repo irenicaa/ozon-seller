@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Generator
 
 from dataclasses_json import dataclass_json
 
@@ -65,7 +65,7 @@ def get_product_info_stocks(
 def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> GetProductInfoStocksResponseResultWrapper:
+) -> Generator[GetProductInfoStocksResponseResultWrapper, None, None]:
     while True:
         stocks = get_product_info_stocks(credentials, data)
         if stocks.result.items == []:

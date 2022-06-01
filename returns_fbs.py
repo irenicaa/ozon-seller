@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Generator
 import datetime
 
 from dataclasses_json import dataclass_json, Undefined, config
@@ -96,7 +96,7 @@ def get_returns_company_fbs(
 def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
-) -> GetReturnsCompanyFBSResponseResultWrapper:
+) -> Generator[GetReturnsCompanyFBSResponseResultWrapper, None, None]:
     while True:
         returns = get_returns_company_fbs(credentials, data)
         if returns.result.returns == []:

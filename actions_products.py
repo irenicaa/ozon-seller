@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Generator
 
 from dataclasses_json import dataclass_json
 
@@ -54,7 +54,7 @@ def get_action_products(
 def get_action_products_iterative(
     credentials: credentials.Credentials,
     data: PaginatedActionProducts,
-) -> GetSellerProductResponseResultWrapper:
+) -> Generator[GetSellerProductResponseResultWrapper, None, None]:
     while True:
         products = get_action_products(credentials, data)
         if products.result.products == []:
