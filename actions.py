@@ -9,7 +9,7 @@ import credentials
 
 @dataclass_json
 @dataclass
-class GetSellerActionsResponse:
+class GetSellerActionsResponseResult:
     id: float
     title: str
     action_type: str
@@ -29,16 +29,16 @@ class GetSellerActionsResponse:
 
 @dataclass_json
 @dataclass
-class GetSellerActionsResponseWrapper:
-    result: list[GetSellerActionsResponse]
+class GetSellerActionsResponseResultWrapper:
+    result: list[GetSellerActionsResponseResult]
 
 def get_actions(
     credentials: credentials.Credentials,
-) -> GetSellerActionsResponseWrapper:
+) -> GetSellerActionsResponseResultWrapper:
     response = request_api.request_api_raw(
         'GET',
         '/v1/actions',
         credentials,
         None,
     )
-    return GetSellerActionsResponseWrapper.schema().loads(response)
+    return GetSellerActionsResponseResultWrapper.schema().loads(response)

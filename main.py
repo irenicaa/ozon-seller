@@ -1,4 +1,5 @@
 import os
+import datetime
 
 import dotenv
 
@@ -7,14 +8,15 @@ import posting_fbs_list
 
 if __name__ == '__main__':
     dotenv.load_dotenv()
-    data = posting_fbs_list.GetFbsPostingListRequest(
+
+    data = posting_fbs_list.PaginatedGetPostingFBSListFilter(
+        filter=posting_fbs_list.GetPostingFBSListFilter(
+            since=datetime.datetime(2021, 11, 1),
+            to=datetime.datetime(2023, 11, 1),
+            status='awaiting_packaging',
+        ),
         limit=2,
         offset=0,
-        filter=posting_fbs_list.GetFbsPostingListRequestFilter(
-            since='2021-11-01T00:00:00.000Z',
-            status='awaiting_packaging',
-            to='2023-12-01T23:59:59.000Z',
-        ),
     )
     print(data.to_json())
 

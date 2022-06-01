@@ -7,6 +7,7 @@ from marshmallow import fields
 
 import request_api
 import credentials
+import returns_fbs
 
 def parse_datetime(value):
     if value is None:
@@ -22,7 +23,7 @@ def parse_datetime(value):
 
 @dataclass_json
 @dataclass
-class GetFbsPostingWithParams:
+class PostingAdditionalFields:
     analytics_data: Optional[bool] = False
     barcodes: Optional[bool] = False
     financial_data: Optional[bool] = False
@@ -30,41 +31,38 @@ class GetFbsPostingWithParams:
 
 @dataclass_json
 @dataclass
-class GetFbsPostingListRequestFilter:
-    delivery_method_id:  Optional[list[int]] = None
+class GetPostingFBSListFilter:
+    delivery_method_id: Optional[list[int]] = None
     order_id: Optional[int] = None
     provider_id: Optional[list[int]] = None
-    since:  Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format='iso'),
-        ),
+    since: Optional[datetime.datetime] = field(
+        metadata=config(encoder=returns_fbs.format_datetime),
         default=None,
     )
-    to:  Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format='iso'),
-        ),
+    to: Optional[datetime.datetime] = field(
+        metadata=config(encoder=returns_fbs.format_datetime),
         default=None,
     )
-    status:  Optional[str] = None
-    warehouse_id:  Optional[list[int]] = None
+    status: Optional[str] = None
+    warehouse_id: Optional[list[int]] = None
 
 @dataclass_json
 @dataclass
-class GetFbsPostingListRequest:
+class PaginatedGetPostingFBSListFilter:
+    filter: Optional[GetPostingFBSListFilter] = None
     dir: Optional[str] = 'ASC'
-    filter: Optional[GetFbsPostingListRequestFilter] = None
     limit: Optional[int] = None
     offset: Optional[int] = None
-    with_: Optional[GetFbsPostingWithParams] = field(metadata=config(field_name="with"), default=None)
+    with_: Optional[PostingAdditionalFields] = field(
+        default=None,
+        metadata=config(field_name="with"),
+    )
 
-# Request
+# Response
 
 @dataclass_json
 @dataclass
-class FbsPostingRequirements:
+class GetPostingFBSListResponseRequirements:
     products_requiring_gtd: Optional[list[int]]
     products_requiring_country: Optional[list[int]]
     products_requiring_mandatory_mark: Optional[list[int]]
@@ -72,7 +70,7 @@ class FbsPostingRequirements:
 
 @dataclass_json
 @dataclass
-class PostingProductDetail:
+class GetPostingFBSListResponseProduct:
     mandatory_mark: list[str]
     name: str
     offer_id: str
@@ -81,10 +79,9 @@ class PostingProductDetail:
     sku: int
     currency_code: str
 
-
 @dataclass_json
 @dataclass
-class ProductPicking:
+class GetPostingFBSListResponsePicking:
     amount: float
     moment: datetime.datetime = field(
         metadata=config(
@@ -96,7 +93,7 @@ class ProductPicking:
 
 @dataclass_json
 @dataclass
-class PostingFinancialDataServices:
+class GetPostingFBSListResponseFinancialDataServices:
     marketplace_service_item_deliv_to_customer: float
     marketplace_service_item_direct_flow_trans: float
     marketplace_service_item_dropoff_ff: float
@@ -111,15 +108,15 @@ class PostingFinancialDataServices:
 
 @dataclass_json
 @dataclass
-class PostingFinancialDataProduct:
+class GetPostingFBSListResponseFinancialDataProduct:
     actions: list[str]
     client_price: str
     commission_amount: float
     commission_percent: int
-    item_services: PostingFinancialDataServices
+    item_services: GetPostingFBSListResponseFinancialDataServices
     old_price: float
     payout: float
-    picking: ProductPicking
+    picking: GetPostingFBSListResponsePicking
     price: float
     product_id: int
     quantity: int
@@ -128,13 +125,13 @@ class PostingFinancialDataProduct:
 
 @dataclass_json
 @dataclass
-class PostingFinancialData:
-    posting_services: PostingFinancialDataServices
-    products: list[PostingFinancialDataProduct]
+class GetPostingFBSListResponseFinancialData:
+    posting_services: GetPostingFBSListResponseFinancialDataServices
+    products: list[GetPostingFBSListResponseFinancialDataProduct]
 
 @dataclass_json
 @dataclass
-class DeliveryMethod:
+class GetPostingFBSListResponseDeliveryMethod:
     id: int
     name: str
     tpl_provider: str
@@ -144,7 +141,7 @@ class DeliveryMethod:
 
 @dataclass_json
 @dataclass
-class Address:
+class GetPostingFBSListResponseAddress:
     address_tail: str
     city: str
     comment: str
@@ -159,8 +156,8 @@ class Address:
 
 @dataclass_json
 @dataclass
-class Customer:
-    address: Address
+class GetPostingFBSListResponseCustomer:
+    address: GetPostingFBSListResponseAddress
     customer_email: str
     customer_id: int
     name: str
@@ -168,7 +165,7 @@ class Customer:
 
 @dataclass_json
 @dataclass
-class Cancellation:
+class GetPostingFBSListResponseCancellation:
     affect_cancellation_rating: bool
     cancel_reason: str
     cancel_reason_id: int
@@ -178,18 +175,18 @@ class Cancellation:
 
 @dataclass_json
 @dataclass
-class Barcodes:
+class GetPostingFBSListResponseBarcodes:
     lower_barcode: str
     upper_barcode: str
 
 @dataclass_json
 @dataclass
-class AnalyticsData:
+class GetPostingFBSListResponseAnalyticsData:
     city: str
     delivery_date_begin: Optional[datetime.datetime] = field(
         metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format='iso'),
+            decoder=parse_datetime,
+            mm_field=fields.DateTime(format='iso', allow_none=True),
         ),
     )
     is_premium: bool
@@ -202,39 +199,39 @@ class AnalyticsData:
 
 @dataclass_json
 @dataclass
-class Addressee:
-    mame: str
+class GetPostingFBSListResponseAddressee:
+    name: str
     phone: str
 
 @dataclass_json
 @dataclass
-class GetFbsPostingListResponsePosting:
-    addressee: Optional[Addressee]
-    analytics_data: Optional[AnalyticsData]
-    barcodes: Optional[Barcodes]
-    cancellation: Optional[Cancellation]
-    customer: Optional[Customer]
+class GetPostingFBSListResponsePosting:
+    addressee: Optional[GetPostingFBSListResponseAddressee]
+    analytics_data: Optional[GetPostingFBSListResponseAnalyticsData]
+    barcodes: Optional[GetPostingFBSListResponseBarcodes]
+    cancellation: Optional[GetPostingFBSListResponseCancellation]
+    customer: Optional[GetPostingFBSListResponseCustomer]
     delivering_date: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
             mm_field=fields.DateTime(format='iso', allow_none=True),
         ),
     )
-    delivery_method: Optional[DeliveryMethod]
-    financial_data: Optional[PostingFinancialData]
+    delivery_method: Optional[GetPostingFBSListResponseDeliveryMethod]
+    financial_data: Optional[GetPostingFBSListResponseFinancialData]
     in_process_at: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
-            mm_field=fields.DateTime(format='iso'),
+            mm_field=fields.DateTime(format='iso', allow_none=True),
         ),
     )
     is_express: bool
     order_id: int
     order_number: str
     posting_number: str
-    products: list[PostingProductDetail]
-    requirements: Optional[FbsPostingRequirements]
-    shipment_date: datetime.datetime = field(
+    products: list[GetPostingFBSListResponseProduct]
+    requirements: Optional[GetPostingFBSListResponseRequirements]
+    shipment_date: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
             mm_field=fields.DateTime(format='iso', allow_none=True),
@@ -246,24 +243,23 @@ class GetFbsPostingListResponsePosting:
 
 @dataclass_json
 @dataclass
-class GetFbsPostingListResponseResult:
+class GetPostingFBSListResponseResult:
+    postings: list[GetPostingFBSListResponsePosting]
     has_next: bool
-    postings: list[GetFbsPostingListResponsePosting]
-
 
 @dataclass_json
 @dataclass
-class GetFbsPostingListResponseResultWrapper:
-    result: GetFbsPostingListResponseResult
+class GetPostingFBSListResponseResultWrapper:
+    result: GetPostingFBSListResponseResult
 
 def get_posting_fbs_list(
     credentials: credentials.Credentials,
-    data: GetFbsPostingListRequest,
-) -> GetFbsPostingListResponseResultWrapper:
+    data: PaginatedGetPostingFBSListFilter,
+) -> GetPostingFBSListResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v3/posting/fbs/list',
         credentials,
         data.to_json(),
     )
-    return GetFbsPostingListResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSListResponseResultWrapper.schema().loads(response)

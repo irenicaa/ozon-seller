@@ -13,14 +13,14 @@ import credentials
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboFilter:
+class GetReturnsCompanyFBOFilter:
     posting_number: Optional[str] = None
     status: Optional[list[str]] = None
 
 @dataclass_json
 @dataclass
-class PaginatedGetReturnsCompanyFboFilter:
-    filter: Optional[GetReturnsCompanyFboFilter] = None
+class PaginatedGetReturnsCompanyFBOFilter:
+    filter: Optional[GetReturnsCompanyFBOFilter] = None
     offset: Optional[int] = None
     limit: Optional[int] = None
 
@@ -28,7 +28,7 @@ class PaginatedGetReturnsCompanyFboFilter:
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboResponseItem:
+class GetReturnsCompanyFBOResponseItem:
     accepted_from_customer_moment: datetime.datetime = field(
         metadata=config(
             decoder=datetime.datetime.fromisoformat,
@@ -53,26 +53,26 @@ class GetReturnsCompanyFboResponseItem:
 
 @dataclass_json
 @dataclass
-class GetReturnsCompanyFboResponseResult:
-    returns: list[GetReturnsCompanyFboResponseItem]
+class GetReturnsCompanyFBOResponseResult:
+    returns: list[GetReturnsCompanyFBOResponseItem]
     count: int
 
 def get_returns_company_fbo(
     credentials: credentials.Credentials,
-    data: PaginatedGetReturnsCompanyFboFilter,
-) -> GetReturnsCompanyFboResponseResult:
+    data: PaginatedGetReturnsCompanyFBOFilter,
+) -> GetReturnsCompanyFBOResponseResult:
     response = request_api.request_api_raw(
         'POST',
         '/v2/returns/company/fbo',
         credentials,
         data.to_json(),
     )
-    return GetReturnsCompanyFboResponseResult.schema().loads(response)
+    return GetReturnsCompanyFBOResponseResult.schema().loads(response)
 
 def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
-    data: PaginatedGetReturnsCompanyFboFilter,
-) -> GetReturnsCompanyFboResponseResult:
+    data: PaginatedGetReturnsCompanyFBOFilter,
+) -> GetReturnsCompanyFBOResponseResult:
     while True:
         returns = get_returns_company_fbo(credentials, data)
         if returns.returns == []:

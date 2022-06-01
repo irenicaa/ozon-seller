@@ -19,7 +19,7 @@ class ProductData:
 
 @dataclass_json
 @dataclass
-class GetProductInfoDescriptionResponse:
+class GetProductInfoDescriptionResponseResult:
     description: str
     id: int
     name: str
@@ -27,17 +27,17 @@ class GetProductInfoDescriptionResponse:
 
 @dataclass_json
 @dataclass
-class GetProductInfoDescriptionResponseWrapper:
-    result: GetProductInfoDescriptionResponse
+class GetProductInfoDescriptionResponseResultWrapper:
+    result: GetProductInfoDescriptionResponseResult
 
 def get_product_description(
     credentials: credentials.Credentials,
     data: ProductData,
-) -> GetProductInfoDescriptionResponseWrapper:
+) -> GetProductInfoDescriptionResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v1/product/info/description',
         credentials,
         data.to_json(),
     )
-    return GetProductInfoDescriptionResponseWrapper.schema().loads(response)
+    return GetProductInfoDescriptionResponseResultWrapper.schema().loads(response)

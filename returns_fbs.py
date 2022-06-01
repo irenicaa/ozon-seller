@@ -7,12 +7,12 @@ from dataclasses_json import dataclass_json, Undefined, config
 import request_api
 import credentials
 
-# Request
-
 def format_datetime(value):
     return value \
         .astimezone(datetime.timezone.utc) \
         .isoformat(timespec='microseconds')
+
+# Request
 
 @dataclass_json
 @dataclass
