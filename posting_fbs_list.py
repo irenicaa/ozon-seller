@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Generator
 import datetime
 
 from dataclasses_json import dataclass_json, Undefined, config, CatchAll
@@ -263,3 +263,16 @@ def get_posting_fbs_list(
         data.to_json(),
     )
     return GetPostingFBSListResponseResultWrapper.schema().loads(response)
+
+def get_posting_fbs_list_iterative(
+    credentials: credentials.Credentials,
+    data: PaginatedGetPostingFBSListFilter,
+) -> Generator[GetPostingFBSListResponseResultWrapper, None, None]:
+    while True:
+        stocks = get_posting_fbs_list(credentials, data)
+        if stocks.result.postings == []:
+            break
+
+        yield stocks
+
+        data.offset += stocks.limit

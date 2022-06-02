@@ -21,5 +21,5 @@ if __name__ == '__main__':
     print(data.to_json())
 
     ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
-    list = posting_fbs_list.get_posting_fbs_list(ozon_credentials, data)
-    print(list)
+    for list in posting_fbs_list.get_posting_fbs_list_iterative(ozon_credentials, data):
+        print(list)
