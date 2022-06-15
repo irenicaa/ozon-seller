@@ -38,12 +38,11 @@ class PostingFBSData:
         metadata=config(field_name="with"),
     )
 
-
 # Response
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseRequirements:
+class GetPostingFBSDataResponseRequirements:
     products_requiring_gtd: Optional[list[int]]
     products_requiring_country: Optional[list[int]]
     products_requiring_mandatory_mark: Optional[list[int]]
@@ -51,7 +50,7 @@ class GetPostinDataFBSResponseRequirements:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseDimensions:
+class GetPostingFBSDataResponseDimensions:
     height: str
     length: str
     weight: str
@@ -59,8 +58,8 @@ class GetPostinDataFBSResponseDimensions:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseProduct:
-    dimensions: GetPostinDataFBSResponseDimensions
+class GetPostingFBSDataResponseProduct:
+    dimensions: GetPostingFBSDataResponseDimensions
     mandatory_mark: list[str]
     name: str
     offer_id: str
@@ -71,7 +70,7 @@ class GetPostinDataFBSResponseProduct:
 
 @dataclass_json
 @dataclass
-class  GetPostinDataFBSResponseProductExemplarInfo:
+class GetPostingFBSDataResponseExemplarProductInfo:
     mandatory_mark: str
     gtd: str
     is_gtd_absent: bool
@@ -80,18 +79,18 @@ class  GetPostinDataFBSResponseProductExemplarInfo:
 
 @dataclass_json
 @dataclass
-class  GetPostinDataFBSResponseProducts:
-    exemplars: list[GetPostinDataFBSResponseProductExemplarInfo]
+class GetPostingFBSDataResponseExemplarProduct:
+    exemplars: list[GetPostingFBSDataResponseExemplarProductInfo]
     sku: int
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseProductExemplars:
-    products: list[GetPostinDataFBSResponseProducts]
+class GetPostingFBSDataResponseProductExemplars:
+    products: list[GetPostingFBSDataResponseExemplarProduct]
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseFinancialPicking:
+class GetPostingFBSDataResponseFinancialPicking:
     amount: float
     moment: datetime.datetime = field(
         metadata=config(
@@ -103,7 +102,7 @@ class GetPostinDataFBSResponseFinancialPicking:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseFinancialDataServices:
+class GetPostingFBSDataResponseFinancialDataServices:
     marketplace_service_item_deliv_to_customer: float
     marketplace_service_item_direct_flow_trans: float
     marketplace_service_item_dropoff_ff: float
@@ -118,15 +117,15 @@ class GetPostinDataFBSResponseFinancialDataServices:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseDataProduct:
+class GetPostingFBSDataResponseDataProduct:
     actions: list[str]
     client_price: str
     commission_amount: float
     commission_percent: int
-    item_services: GetPostinDataFBSResponseFinancialDataServices
+    item_services: GetPostingFBSDataResponseFinancialDataServices
     old_price: float
     payout: float
-    picking: GetPostinDataFBSResponseFinancialPicking
+    picking: GetPostingFBSDataResponseFinancialPicking
     price: float
     product_id: int
     quantity: int
@@ -135,13 +134,13 @@ class GetPostinDataFBSResponseDataProduct:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseFinancialData:
-    posting_services: GetPostinDataFBSResponseFinancialDataServices
-    products: list[GetPostinDataFBSResponseDataProduct]
+class GetPostingFBSDataResponseFinancialData:
+    posting_services: GetPostingFBSDataResponseFinancialDataServices
+    products: list[GetPostingFBSDataResponseDataProduct]
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseDeliveryMethod:
+class GetPostingFBSDataResponseDeliveryMethod:
     id: int
     name: str
     tpl_provider: str
@@ -151,7 +150,7 @@ class GetPostinDataFBSResponseDeliveryMethod:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseAddress:
+class GetPostingFBSDataResponseAddress:
     address_tail: str
     city: str
     comment: str
@@ -166,8 +165,8 @@ class GetPostinDataFBSResponseAddress:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseCustomer:
-    address: GetPostinDataFBSResponseAddress
+class GetPostingFBSDataResponseCustomer:
+    address: GetPostingFBSDataResponseAddress
     customer_email: str
     customer_id: int
     name: str
@@ -175,7 +174,7 @@ class GetPostinDataFBSResponseCustomer:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseCourier:
+class GetPostingFBSDataResponseCourier:
     car_model: str
     car_number: str
     name: str
@@ -183,7 +182,7 @@ class GetPostinDataFBSResponseCourier:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseCancellation:
+class GetPostingFBSDataResponseCancellation:
     affect_cancellation_rating: bool
     cancel_reason: str
     cancel_reason_id: int
@@ -193,13 +192,13 @@ class GetPostinDataFBSResponseCancellation:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseBarcodes:
+class GetPostingFBSDataResponseBarcodes:
     lower_barcode: str
     upper_barcode: str
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBStResponseAnalyticsData:
+class GetPostingFBSDatatResponseAnalyticsData:
     city: str
     delivery_date_begin: Optional[datetime.datetime] = field(
         metadata=config(
@@ -217,35 +216,35 @@ class GetPostinDataFBStResponseAnalyticsData:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseAddressee:
+class GetPostingFBSDataResponseAddressee:
     name: str
     phone: str
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseAdditionalDataItem:
+class GetPostingFBSDataResponseAdditionalDataItem:
     key: str
     value: str
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseResult:
-    additional_data: Optional[list[GetPostinDataFBSResponseAdditionalDataItem]]
-    addressee: Optional[GetPostinDataFBSResponseAddressee]
-    analytics_data: Optional[GetPostinDataFBStResponseAnalyticsData]
-    barcodes: Optional[GetPostinDataFBSResponseBarcodes]
-    cancellation: Optional[GetPostinDataFBSResponseCancellation]
-    courier: Optional[GetPostinDataFBSResponseCourier]
-    customer: Optional[GetPostinDataFBSResponseCustomer]
+class GetPostingFBSDataResponseResult:
+    additional_data: Optional[list[GetPostingFBSDataResponseAdditionalDataItem]]
+    addressee: Optional[GetPostingFBSDataResponseAddressee]
+    analytics_data: Optional[GetPostingFBSDatatResponseAnalyticsData]
+    barcodes: Optional[GetPostingFBSDataResponseBarcodes]
+    cancellation: Optional[GetPostingFBSDataResponseCancellation]
+    courier: Optional[GetPostingFBSDataResponseCourier]
+    customer: Optional[GetPostingFBSDataResponseCustomer]
     delivering_date: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
             mm_field=fields.DateTime(format='iso', allow_none=True),
         ),
     )
-    delivery_method: Optional[GetPostinDataFBSResponseDeliveryMethod]
+    delivery_method: Optional[GetPostingFBSDataResponseDeliveryMethod]
     delivery_price: str
-    financial_data: Optional[GetPostinDataFBSResponseFinancialData]
+    financial_data: Optional[GetPostingFBSDataResponseFinancialData]
     in_process_at: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
@@ -256,10 +255,10 @@ class GetPostinDataFBSResponseResult:
     order_id: int
     order_number: str
     posting_number: str
-    product_exemplars: Optional[GetPostinDataFBSResponseProductExemplars]
-    products: list[GetPostinDataFBSResponseProduct]
-    provider_status	: str
-    requirements: Optional[GetPostinDataFBSResponseRequirements]
+    product_exemplars: Optional[GetPostingFBSDataResponseProductExemplars]
+    products: list[GetPostingFBSDataResponseProduct]
+    provider_status: str
+    requirements: Optional[GetPostingFBSDataResponseRequirements]
     shipment_date: Optional[datetime.datetime] = field(
         metadata=config(
             decoder=parse_datetime,
@@ -272,17 +271,17 @@ class GetPostinDataFBSResponseResult:
 
 @dataclass_json
 @dataclass
-class GetPostinDataFBSResponseResultWrapper:
-    result: GetPostinDataFBSResponseResult
+class GetPostingFBSDataResponseResultWrapper:
+    result: GetPostingFBSDataResponseResult
 
 def get_posting_fbs_data(
     credentials: credentials.Credentials,
     data: PostingFBSData,
-) -> GetPostinDataFBSResponseResultWrapper:
+) -> GetPostingFBSDataResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v3/posting/fbs/get',
         credentials,
         data.to_json(),
     )
-    return GetPostinDataFBSResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSDataResponseResultWrapper.schema().loads(response)

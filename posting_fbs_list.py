@@ -275,4 +275,4 @@ def get_posting_fbs_list_iterative(
 
         yield stocks
 
-        data.offset += stocks.limit
+        data.offset += data.limit

@@ -20,23 +20,23 @@ class CountryFilter:
 
 @dataclass_json
 @dataclass
-class GetFBSProductCountryListResponseResult:
+class GetPostingFBSProductCountryListResponseResult:
     name: str
     country_iso_code: str
 
 @dataclass_json
 @dataclass
-class GetFBSProductCountryListResponseResultWrapper:
-    result: list[GetFBSProductCountryListResponseResult]
+class GetPostingFBSProductCountryListResponseResultWrapper:
+    result: list[GetPostingFBSProductCountryListResponseResult]
 
-def get_fbs_product_country_list(
+def get_posting_fbs_product_country_list(
     credentials: credentials.Credentials,
     data: CountryFilter,
-) -> GetFBSProductCountryListResponseResultWrapper:
+) -> GetPostingFBSProductCountryListResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v2/posting/fbs/product/country/list',
         credentials,
         data.to_json(),
     )
-    return GetFBSProductCountryListResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSProductCountryListResponseResultWrapper.schema().loads(response)

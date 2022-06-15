@@ -115,14 +115,13 @@ class GetPostingFBOListResponseFinancialData:
     posting_services: GetPostingFBOListResponseFinancialDataServices
     products: list[GetPostingFBOListResponseFinancialDataProduct]
 
-
 @dataclass_json
 @dataclass
 class GetPostingFBOListResponseAnalyticsData:
     city: str
     delivery_type: str
     is_legal: bool
-    is_premium	: bool
+    is_premium: bool
     payment_type_group_name: str
     region: str
     warehouse_id: int
@@ -187,4 +186,4 @@ def get_posting_fbo_list_iterative(
 
         yield list
 
-        data.offset += list.limit
+        data.offset += data.limit

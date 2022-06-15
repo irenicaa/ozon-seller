@@ -11,35 +11,36 @@ import returns_fbs
 
 # Request
 
+@dataclass_json
 @dataclass
-class FBSProductExemplarInfo:
+class PostingFBSShipWithGTDAdditionalFields:
+    additional_data: Optional[bool] = False
+
+@dataclass_json
+@dataclass
+class PostingFBSShipWithGTDExemplarInfo:
     mandatory_mark: Optional[str] = None
     gtd: Optional[str] = None
     is_gtd_absent: Optional[bool] = True
 
 @dataclass_json
 @dataclass
-class FBSPackageProducts:
-    exemplar_info: Optional[list[FBSProductExemplarInfo]] = None
+class PostingFBSShipWithGTDProduct:
+    exemplar_info: Optional[list[PostingFBSShipWithGTDExemplarInfo]] = None
     product_id: Optional[int] = None
     quantity: Optional[int] = None
 
 @dataclass_json
 @dataclass
-class PostingShipRequestPackages:
-    products: Optional[list[FBSPackageProducts]] = None
+class PostingFBSShipWithGTDPackage:
+    products: Optional[list[PostingFBSShipWithGTDProduct]] = None
 
 @dataclass_json
 @dataclass
-class FBSPostingShipRequestWith:
-    additional_data: Optional[bool] = False
-
-@dataclass_json
-@dataclass
-class PostingFBSShip:
-    packages: Optional[list[PostingShipRequestPackages]] = None
+class PostingFBSShipWithGTDData:
+    packages: Optional[list[PostingFBSShipWithGTDPackage]] = None
     posting_number: Optional[str] = None
-    with_: Optional[FBSPostingShipRequestWith] = field(
+    with_: Optional[PostingFBSShipWithGTDAdditionalFields] = field(
         default=None,
         metadata=config(field_name="with"),
     )
@@ -48,17 +49,17 @@ class PostingFBSShip:
 
 @dataclass_json
 @dataclass
-class PostingFBSShipResponseResult:
+class CreatePostingFBSShipWithGTDResponseResultWrapper:
     result: list[str]
 
-def posting_fbs_ship(
+def create_posting_fbs_ship_with_gtd(
     credentials: credentials.Credentials,
-    data: PostingFBSShip,
-) -> PostingFBSShipResponseResult:
+    data: PostingFBSShipWithGTDData,
+) -> CreatePostingFBSShipWithGTDResponseResultWrapper:
     response = request_api.request_api_raw(
         'POST',
         '/v3/posting/fbs/ship',
         credentials,
         data.to_json(),
     )
-    return PostingFBSShipResponseResult.schema().loads(response)
+    return CreatePostingFBSShipWithGTDResponseResultWrapper.schema().loads(response)
