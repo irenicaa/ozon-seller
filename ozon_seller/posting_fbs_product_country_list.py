@@ -5,9 +5,7 @@ from typing import Generator, Optional
 from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-import credentials
-import request_api
-import returns_fbs
+from . import credentials, request_api, returns_fbs
 
 # Request
 

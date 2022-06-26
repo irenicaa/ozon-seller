@@ -4,8 +4,7 @@ from typing import Generator, Optional
 
 from dataclasses_json import Undefined, config, dataclass_json
 
-import credentials
-import request_api
+from . import credentials, request_api
 
 
 def format_datetime(value):

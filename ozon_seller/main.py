@@ -3,8 +3,7 @@ import os
 
 import dotenv
 
-import credentials
-import posting_fbs_act_check_status
+from . import credentials, posting_fbs_act_check_status
 
 if __name__ == "__main__":
     dotenv.load_dotenv()

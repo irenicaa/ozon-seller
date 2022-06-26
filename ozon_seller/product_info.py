@@ -5,8 +5,7 @@ from typing import Optional
 from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-import credentials
-import request_api
+from . import credentials, request_api
 
 # Request
 

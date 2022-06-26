@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-import credentials
+from . import credentials
 
 
 def request_api_raw(
