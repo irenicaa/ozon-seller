@@ -17,19 +17,19 @@ class FBSPackageItem:
     sku: Optional[int] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingShipRequestPackages:
     items: Optional[list[FBSPackageItem]] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class FBSPostingShipRequestWith:
     additional_data: Optional[bool] = False
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShip:
     packages: Optional[list[PostingShipRequestPackages]] = None
@@ -39,7 +39,7 @@ class PostingFBSShip:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipResponseResult:
     result: list[str]

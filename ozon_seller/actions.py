@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 
 from . import credentials, request_api
 
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetSellerActionsResponseResult:
     id: float
@@ -28,7 +28,7 @@ class GetSellerActionsResponseResult:
     is_voucher_action: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetSellerActionsResponseResultWrapper:
     result: list[GetSellerActionsResponseResult]

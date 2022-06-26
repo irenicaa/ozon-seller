@@ -10,13 +10,13 @@ from . import credentials, request_api, returns_fbs
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipWithGTDAdditionalFields:
     additional_data: Optional[bool] = False
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipWithGTDExemplarInfo:
     mandatory_mark: Optional[str] = None
@@ -24,7 +24,7 @@ class PostingFBSShipWithGTDExemplarInfo:
     is_gtd_absent: Optional[bool] = True
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipWithGTDProduct:
     exemplar_info: Optional[list[PostingFBSShipWithGTDExemplarInfo]] = None
@@ -32,13 +32,13 @@ class PostingFBSShipWithGTDProduct:
     quantity: Optional[int] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipWithGTDPackage:
     products: Optional[list[PostingFBSShipWithGTDProduct]] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSShipWithGTDData:
     packages: Optional[list[PostingFBSShipWithGTDPackage]] = None
@@ -52,11 +52,10 @@ class PostingFBSShipWithGTDData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class CreatePostingFBSShipWithGTDResponseResultWrapper:
     result: list[str]
-
 
 def create_posting_fbs_ship_with_gtd(
     credentials: credentials.Credentials,

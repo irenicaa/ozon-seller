@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import config, dataclass_json
+from dataclasses_json import Undefined, config, dataclass_json
 from marshmallow import fields
 
 from . import credentials, request_api
@@ -10,14 +10,14 @@ from . import credentials, request_api
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBOFilter:
     posting_number: Optional[str] = None
     status: Optional[list[str]] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedGetReturnsCompanyFBOFilter:
     filter: Optional[GetReturnsCompanyFBOFilter] = None
@@ -28,7 +28,7 @@ class PaginatedGetReturnsCompanyFBOFilter:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBOResponseItem:
     accepted_from_customer_moment: datetime.datetime = field(
@@ -54,7 +54,7 @@ class GetReturnsCompanyFBOResponseItem:
     status_name: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBOResponseResult:
     returns: list[GetReturnsCompanyFBOResponseItem]

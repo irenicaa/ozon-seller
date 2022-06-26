@@ -15,7 +15,7 @@ def format_datetime(value):
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFSBDeliveryData:
     containers_count: Optional[int] = None
@@ -29,13 +29,13 @@ class PostingFSBDeliveryData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSActCreateResponseActResult:
     id: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSActCreateResponseActResultWrapper:
     result: PostingFBSActCreateResponseActResult

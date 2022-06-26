@@ -10,7 +10,7 @@ from . import credentials, request_api
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class FBSPackageData:
     posting_number: list[str]
@@ -19,7 +19,7 @@ class FBSPackageData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSResonseResult:
     content: bytes

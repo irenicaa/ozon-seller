@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 from marshmallow import fields
 
 from . import credentials, request_api
@@ -10,7 +10,7 @@ from . import credentials, request_api
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFSBActData:
     id: Optional[int] = None
@@ -19,7 +19,7 @@ class PostingFSBActData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSActCheckStatusResponseResult:
     act_type: str
@@ -28,7 +28,7 @@ class PostingFBSActCheckStatusResponseResult:
     status: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSActCreateResponseActResultWrapper:
     result: PostingFBSActCheckStatusResponseResult

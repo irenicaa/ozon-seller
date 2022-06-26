@@ -10,7 +10,7 @@ from . import credentials, request_api, returns_fbs
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class CountryFilter:
     name_search: Optional[str] = None
@@ -19,14 +19,14 @@ class CountryFilter:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSProductCountryListResponseResult:
     name: str
     country_iso_code: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSProductCountryListResponseResultWrapper:
     result: list[GetPostingFBSProductCountryListResponseResult]

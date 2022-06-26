@@ -10,7 +10,7 @@ from . import credentials, request_api
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class ProductData:
     offer_id: Optional[str] = None
@@ -27,7 +27,7 @@ class GetProductInfoResponseOptionalDescriptionElements:
     properties: CatchAll
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseItemError:
     code: str
@@ -40,7 +40,7 @@ class GetProductInfoResponseItemError:
     optional_description_elements: GetProductInfoResponseOptionalDescriptionElements
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseVisibilityDetails:
     active_product: bool
@@ -48,7 +48,7 @@ class GetProductInfoResponseVisibilityDetails:
     has_stock: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseStocks:
     coming: int
@@ -56,7 +56,7 @@ class GetProductInfoResponseStocks:
     reserved: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseSource:
     is_enabled: bool
@@ -64,7 +64,7 @@ class GetProductInfoResponseSource:
     source: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseStatus:
     state: str
@@ -86,7 +86,7 @@ class GetProductInfoResponseStatus:
     )
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseCommissions:
     delivery_amount: float
@@ -138,7 +138,7 @@ class GetProductInfoResponseResult:
     volume_weight: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoResponseResultWrapper:
     result: GetProductInfoResponseResult

@@ -22,7 +22,7 @@ def parse_datetime(value):
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingAdditionalFields:
     analytics_data: Optional[bool] = False
@@ -31,7 +31,7 @@ class PostingAdditionalFields:
     translit: Optional[bool] = False
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListFilter:
     delivery_method_id: Optional[list[int]] = None
@@ -49,7 +49,7 @@ class GetPostingFBSListFilter:
     warehouse_id: Optional[list[int]] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedGetPostingFBSListFilter:
     filter: Optional[GetPostingFBSListFilter] = None
@@ -65,7 +65,7 @@ class PaginatedGetPostingFBSListFilter:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseRequirements:
     products_requiring_gtd: Optional[list[int]]
@@ -74,7 +74,7 @@ class GetPostingFBSListResponseRequirements:
     products_requiring_rnpt: Optional[list[int]]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseProduct:
     mandatory_mark: list[str]
@@ -86,7 +86,7 @@ class GetPostingFBSListResponseProduct:
     currency_code: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponsePicking:
     amount: float
@@ -99,7 +99,7 @@ class GetPostingFBSListResponsePicking:
     tag: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseFinancialDataServices:
     marketplace_service_item_deliv_to_customer: float
@@ -115,7 +115,7 @@ class GetPostingFBSListResponseFinancialDataServices:
     marketplace_service_item_return_part_goods_customer: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseFinancialDataProduct:
     actions: list[str]
@@ -133,14 +133,14 @@ class GetPostingFBSListResponseFinancialDataProduct:
     total_discount_value: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseFinancialData:
     posting_services: GetPostingFBSListResponseFinancialDataServices
     products: list[GetPostingFBSListResponseFinancialDataProduct]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseDeliveryMethod:
     id: int
@@ -151,7 +151,7 @@ class GetPostingFBSListResponseDeliveryMethod:
     warehouse_id: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseAddress:
     address_tail: str
@@ -167,7 +167,7 @@ class GetPostingFBSListResponseAddress:
     zip_code: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseCustomer:
     address: GetPostingFBSListResponseAddress
@@ -177,7 +177,7 @@ class GetPostingFBSListResponseCustomer:
     phone: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseCancellation:
     affect_cancellation_rating: bool
@@ -188,14 +188,14 @@ class GetPostingFBSListResponseCancellation:
     cancelled_after_ship: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseBarcodes:
     lower_barcode: str
     upper_barcode: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseAnalyticsData:
     city: str
@@ -214,14 +214,14 @@ class GetPostingFBSListResponseAnalyticsData:
     warehouse_id: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseAddressee:
     name: str
     phone: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponsePosting:
     addressee: Optional[GetPostingFBSListResponseAddressee]
@@ -260,14 +260,14 @@ class GetPostingFBSListResponsePosting:
     tracking_number: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseResult:
     postings: list[GetPostingFBSListResponsePosting]
     has_next: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSListResponseResultWrapper:
     result: GetPostingFBSListResponseResult

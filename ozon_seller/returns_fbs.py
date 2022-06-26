@@ -14,14 +14,14 @@ def format_datetime(value):
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class FilterTimeRange:
     time_from: datetime.datetime = field(metadata=config(encoder=format_datetime))
     time_to: datetime.datetime = field(metadata=config(encoder=format_datetime))
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBSFilter:
     accepted_from_customer_moment: Optional[list[FilterTimeRange]] = None
@@ -33,7 +33,7 @@ class GetReturnsCompanyFBSFilter:
     status: str = ""
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedGetReturnsCompanyFBSFilter:
     filter: GetReturnsCompanyFBSFilter
@@ -74,14 +74,14 @@ class GetReturnsCompanyFBSResponseItem:
     status: Optional[str]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBSResponseResult:
     returns: list[GetReturnsCompanyFBSResponseItem]
     count: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBSResponseResultWrapper:
     result: GetReturnsCompanyFBSResponseResult

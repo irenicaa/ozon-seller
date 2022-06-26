@@ -22,14 +22,14 @@ def parse_datetime(value):
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingAdditionalFields:
     analytics_data: Optional[bool] = False
     financial_data: Optional[bool] = False
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListFilter:
     since: Optional[datetime.datetime] = field(
@@ -43,7 +43,7 @@ class GetPostingFBOListFilter:
     status: Optional[str] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedGetPostingFBOListFilter:
     filter: Optional[GetPostingFBOListFilter] = None
@@ -60,7 +60,7 @@ class PaginatedGetPostingFBOListFilter:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseProduct:
     digital_code: str
@@ -71,7 +71,7 @@ class GetPostingFBOListResponseProduct:
     sku: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponsePicking:
     amount: float
@@ -84,7 +84,7 @@ class GetPostingFBOListResponsePicking:
     tag: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseFinancialDataServices:
     marketplace_service_item_deliv_to_customer: float
@@ -100,7 +100,7 @@ class GetPostingFBOListResponseFinancialDataServices:
     marketplace_service_item_return_part_goods_customer: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseFinancialDataProduct:
     actions: list[str]
@@ -118,14 +118,14 @@ class GetPostingFBOListResponseFinancialDataProduct:
     total_discount_value: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseFinancialData:
     posting_services: GetPostingFBOListResponseFinancialDataServices
     products: list[GetPostingFBOListResponseFinancialDataProduct]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseAnalyticsData:
     city: str
@@ -138,14 +138,14 @@ class GetPostingFBOListResponseAnalyticsData:
     warehouse_name: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOAdditionalDataItem:
     key: str
     value: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseResult:
     additional_data: list[GetPostingFBOAdditionalDataItem]
@@ -171,7 +171,7 @@ class GetPostingFBOListResponseResult:
     status: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseResultWrapper:
     result: list[GetPostingFBOListResponseResult]

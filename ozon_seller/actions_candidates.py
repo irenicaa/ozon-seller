@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 from marshmallow import fields
 
 from . import credentials, request_api
@@ -10,7 +10,7 @@ from . import credentials, request_api
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedCandidatesForActions:
     action_id: Optional[float] = None
@@ -21,7 +21,7 @@ class PaginatedCandidatesForActions:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetActionsCandidatesResponseProducts:
     id: float
@@ -33,14 +33,14 @@ class GetActionsCandidatesResponseProducts:
     stock: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetActionsCandidatesResponseResult:
     products: list[GetActionsCandidatesResponseProducts]
     total: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetActionsCandidatesResponseResultWrapper:
     result: GetActionsCandidatesResponseResult

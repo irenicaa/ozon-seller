@@ -2,14 +2,14 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 
 from . import credentials, request_api
 
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class OderData:
     posting_number: Optional[str]
@@ -19,7 +19,7 @@ class OderData:
 
 # Response
 # TODO: example
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetCountrySetFBSResponseResult:
     product_id: int

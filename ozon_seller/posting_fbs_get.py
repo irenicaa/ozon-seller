@@ -22,7 +22,7 @@ def parse_datetime(value):
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingAdditionalFields:
     analytics_data: Optional[bool] = False
@@ -31,7 +31,7 @@ class PostingAdditionalFields:
     translit: Optional[bool] = False
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSData:
     posting_number: str
@@ -44,7 +44,7 @@ class PostingFBSData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseRequirements:
     products_requiring_gtd: Optional[list[int]]
@@ -53,7 +53,7 @@ class GetPostingFBSDataResponseRequirements:
     products_requiring_rnpt: Optional[list[int]]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseDimensions:
     height: str
@@ -62,7 +62,7 @@ class GetPostingFBSDataResponseDimensions:
     width: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseProduct:
     dimensions: GetPostingFBSDataResponseDimensions
@@ -75,7 +75,7 @@ class GetPostingFBSDataResponseProduct:
     currency_code: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseExemplarProductInfo:
     mandatory_mark: str
@@ -85,20 +85,20 @@ class GetPostingFBSDataResponseExemplarProductInfo:
     is_rnpt_absent: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseExemplarProduct:
     exemplars: list[GetPostingFBSDataResponseExemplarProductInfo]
     sku: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseProductExemplars:
     products: list[GetPostingFBSDataResponseExemplarProduct]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseFinancialPicking:
     amount: float
@@ -111,7 +111,7 @@ class GetPostingFBSDataResponseFinancialPicking:
     tag: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseFinancialDataServices:
     marketplace_service_item_deliv_to_customer: float
@@ -127,7 +127,7 @@ class GetPostingFBSDataResponseFinancialDataServices:
     marketplace_service_item_return_part_goods_customer: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseDataProduct:
     actions: list[str]
@@ -145,14 +145,14 @@ class GetPostingFBSDataResponseDataProduct:
     total_discount_value: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseFinancialData:
     posting_services: GetPostingFBSDataResponseFinancialDataServices
     products: list[GetPostingFBSDataResponseDataProduct]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseDeliveryMethod:
     id: int
@@ -163,7 +163,7 @@ class GetPostingFBSDataResponseDeliveryMethod:
     warehouse_id: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseAddress:
     address_tail: str
@@ -179,7 +179,7 @@ class GetPostingFBSDataResponseAddress:
     zip_code: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseCustomer:
     address: GetPostingFBSDataResponseAddress
@@ -189,7 +189,7 @@ class GetPostingFBSDataResponseCustomer:
     phone: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseCourier:
     car_model: str
@@ -198,7 +198,7 @@ class GetPostingFBSDataResponseCourier:
     phone: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseCancellation:
     affect_cancellation_rating: bool
@@ -209,14 +209,14 @@ class GetPostingFBSDataResponseCancellation:
     cancelled_after_ship: bool
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseBarcodes:
     lower_barcode: str
     upper_barcode: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDatatResponseAnalyticsData:
     city: str
@@ -235,21 +235,21 @@ class GetPostingFBSDatatResponseAnalyticsData:
     warehouse_id: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseAddressee:
     name: str
     phone: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseAdditionalDataItem:
     key: str
     value: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseResult:
     additional_data: Optional[list[GetPostingFBSDataResponseAdditionalDataItem]]
@@ -293,7 +293,7 @@ class GetPostingFBSDataResponseResult:
     tracking_number: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBSDataResponseResultWrapper:
     result: GetPostingFBSDataResponseResult

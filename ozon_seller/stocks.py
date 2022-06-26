@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 
 from . import credentials, request_api
 
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class ProductFilter:
     offer_id: Optional[list[str]] = None
@@ -16,7 +16,7 @@ class ProductFilter:
     visibility: Optional[list[str]] = None
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedProductFilter:
     filter: ProductFilter
@@ -27,7 +27,7 @@ class PaginatedProductFilter:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoStocksResponseStock:
     present: int
@@ -35,7 +35,7 @@ class GetProductInfoStocksResponseStock:
     type: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoStocksResponseItem:
     offer_id: str
@@ -43,7 +43,7 @@ class GetProductInfoStocksResponseItem:
     stocks: list[GetProductInfoStocksResponseStock]
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoStocksResponseResult:
     items: list[GetProductInfoStocksResponseItem]
@@ -51,7 +51,7 @@ class GetProductInfoStocksResponseResult:
     total: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoStocksResponseResultWrapper:
     result: GetProductInfoStocksResponseResult

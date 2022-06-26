@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 
 from . import credentials, request_api
 
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PaginatedActionProducts:
     action_id: Optional[float] = None
@@ -19,7 +19,7 @@ class PaginatedActionProducts:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetSellerProductResponseProducts:
     id: int
@@ -31,14 +31,14 @@ class GetSellerProductResponseProducts:
     stock: float
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetSellerProductResponseResult:
     products: list[GetSellerProductResponseProducts]
     total: int
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetSellerProductResponseResultWrapper:
     result: GetSellerProductResponseResult

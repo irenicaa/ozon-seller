@@ -2,14 +2,14 @@ import datetime
 from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import dataclass_json
+from dataclasses_json import Undefined, dataclass_json
 
 from . import credentials, request_api
 
 # Request
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class ProductData:
     offer_id: Optional[str] = None
@@ -19,7 +19,7 @@ class ProductData:
 # Response
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoDescriptionResponseResult:
     description: str
@@ -28,7 +28,7 @@ class GetProductInfoDescriptionResponseResult:
     offer_id: str
 
 
-@dataclass_json
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoDescriptionResponseResultWrapper:
     result: GetProductInfoDescriptionResponseResult
