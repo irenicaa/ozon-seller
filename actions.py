@@ -2,10 +2,11 @@ from dataclasses import dataclass
 
 from dataclasses_json import dataclass_json
 
-import request_api
 import credentials
+import request_api
 
 # Response
+
 
 @dataclass_json
 @dataclass
@@ -27,17 +28,19 @@ class GetSellerActionsResponseResult:
     discount_value: float
     is_voucher_action: bool
 
+
 @dataclass_json
 @dataclass
 class GetSellerActionsResponseResultWrapper:
     result: list[GetSellerActionsResponseResult]
 
+
 def get_actions(
     credentials: credentials.Credentials,
 ) -> GetSellerActionsResponseResultWrapper:
     response = request_api.request_api_raw(
-        'GET',
-        '/v1/actions',
+        "GET",
+        "/v1/actions",
         credentials,
         None,
     )

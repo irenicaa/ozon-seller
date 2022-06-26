@@ -1,14 +1,15 @@
+import datetime
 from dataclasses import dataclass, field
 from typing import Optional
-import datetime
 
-from dataclasses_json import dataclass_json, Undefined, config, CatchAll
+from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-import request_api
 import credentials
+import request_api
 
 # Request
+
 
 @dataclass_json
 @dataclass
@@ -17,12 +18,15 @@ class ProductData:
     product_id: Optional[int] = None
     sku: Optional[int] = None
 
+
 # Response
+
 
 @dataclass_json(undefined=Undefined.INCLUDE)
 @dataclass
 class GetProductInfoResponseOptionalDescriptionElements:
     properties: CatchAll
+
 
 @dataclass_json
 @dataclass
@@ -36,12 +40,14 @@ class GetProductInfoResponseItemError:
     attribute_name: str
     optional_description_elements: GetProductInfoResponseOptionalDescriptionElements
 
+
 @dataclass_json
 @dataclass
 class GetProductInfoResponseVisibilityDetails:
     active_product: bool
     has_price: bool
     has_stock: bool
+
 
 @dataclass_json
 @dataclass
@@ -50,12 +56,14 @@ class GetProductInfoResponseStocks:
     present: int
     reserved: int
 
+
 @dataclass_json
 @dataclass
 class GetProductInfoResponseSource:
     is_enabled: bool
     sku: int
     source: str
+
 
 @dataclass_json
 @dataclass
@@ -74,9 +82,10 @@ class GetProductInfoResponseStatus:
     state_updated_at: datetime.datetime = field(
         metadata=config(
             decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format='iso'),
+            mm_field=fields.DateTime(format="iso"),
         ),
     )
+
 
 @dataclass_json
 @dataclass
@@ -87,6 +96,7 @@ class GetProductInfoResponseCommissions:
     return_amount: float
     sale_schema: str
     value: float
+
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
@@ -99,7 +109,7 @@ class GetProductInfoResponseResult:
     created_at: datetime.datetime = field(
         metadata=config(
             decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format='iso'),
+            mm_field=fields.DateTime(format="iso"),
         ),
     )
     fbo_sku: int
@@ -128,18 +138,20 @@ class GetProductInfoResponseResult:
     visible: bool
     volume_weight: float
 
+
 @dataclass_json
 @dataclass
 class GetProductInfoResponseResultWrapper:
     result: GetProductInfoResponseResult
+
 
 def get_product_info(
     credentials: credentials.Credentials,
     data: ProductData,
 ) -> GetProductInfoResponseResultWrapper:
     response = request_api.request_api_raw(
-        'POST',
-        '/v2/product/info',
+        "POST",
+        "/v2/product/info",
         credentials,
         data.to_json(),
     )

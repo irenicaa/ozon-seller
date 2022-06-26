@@ -1,25 +1,26 @@
-from dataclasses import dataclass, field
-from typing import Optional, Generator
 import datetime
+from dataclasses import dataclass, field
+from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json, Undefined, config
+from dataclasses_json import Undefined, config, dataclass_json
 
-import request_api
 import credentials
+import request_api
+
 
 def format_datetime(value):
-    return value \
-        .astimezone(datetime.timezone.utc) \
-        .isoformat(timespec='microseconds')
+    return value.astimezone(datetime.timezone.utc).isoformat(timespec="microseconds")
+
 
 # Request
+
 
 @dataclass_json
 @dataclass
 class FilterTimeRange:
-    time_from: datetime.datetime = \
-        field(metadata=config(encoder=format_datetime))
+    time_from: datetime.datetime = field(metadata=config(encoder=format_datetime))
     time_to: datetime.datetime = field(metadata=config(encoder=format_datetime))
+
 
 @dataclass_json
 @dataclass
@@ -28,9 +29,10 @@ class GetReturnsCompanyFBSFilter:
     last_free_waiting_day: Optional[list[FilterTimeRange]] = None
     order_id: Optional[int] = None
     posting_number: list[str] = field(default_factory=list)
-    product_name: str = ''
-    product_offer_id: str = ''
-    status: str = ''
+    product_name: str = ""
+    product_offer_id: str = ""
+    status: str = ""
+
 
 @dataclass_json
 @dataclass
@@ -39,7 +41,9 @@ class PaginatedGetReturnsCompanyFBSFilter:
     offset: int
     limit: int
 
+
 # Response
+
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
@@ -70,28 +74,32 @@ class GetReturnsCompanyFBSResponseItem:
     sku: Optional[int]
     status: Optional[str]
 
+
 @dataclass_json
 @dataclass
 class GetReturnsCompanyFBSResponseResult:
     returns: list[GetReturnsCompanyFBSResponseItem]
     count: int
 
+
 @dataclass_json
 @dataclass
 class GetReturnsCompanyFBSResponseResultWrapper:
     result: GetReturnsCompanyFBSResponseResult
+
 
 def get_returns_company_fbs(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
 ) -> GetReturnsCompanyFBSResponseResultWrapper:
     response = request_api.request_api_raw(
-        'POST',
-        '/v2/returns/company/fbs',
+        "POST",
+        "/v2/returns/company/fbs",
         credentials,
         data.to_json(),
     )
     return GetReturnsCompanyFBSResponseResultWrapper.schema().loads(response)
+
 
 def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,

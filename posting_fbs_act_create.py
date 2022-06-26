@@ -1,19 +1,20 @@
-from dataclasses import dataclass, field
-from typing import Optional, Generator
 import datetime
+from dataclasses import dataclass, field
+from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json, Undefined, config, CatchAll
+from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-import request_api
 import credentials
+import request_api
+
 
 def format_datetime(value):
-    return value \
-        .astimezone(datetime.timezone.utc) \
-        .isoformat(timespec='microseconds')
+    return value.astimezone(datetime.timezone.utc).isoformat(timespec="microseconds")
+
 
 # Request
+
 
 @dataclass_json
 @dataclass
@@ -25,25 +26,29 @@ class PostingFSBDeliveryData:
         default=None,
     )
 
+
 # Response
+
 
 @dataclass_json
 @dataclass
 class PostingFBSActCreateResponseActResult:
     id: int
 
+
 @dataclass_json
 @dataclass
 class PostingFBSActCreateResponseActResultWrapper:
     result: PostingFBSActCreateResponseActResult
+
 
 def create_posting_fbs_act(
     credentials: credentials.Credentials,
     data: PostingFSBDeliveryData,
 ) -> PostingFBSActCreateResponseActResultWrapper:
     response = request_api.request_api_raw(
-        'POST',
-        '/v2/posting/fbs/act/create',
+        "POST",
+        "/v2/posting/fbs/act/create",
         credentials,
         data.to_json(),
     )

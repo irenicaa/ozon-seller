@@ -1,14 +1,15 @@
-from dataclasses import dataclass, field
-from typing import Optional, Generator
 import datetime
+from dataclasses import dataclass, field
+from typing import Generator, Optional
 
 from dataclasses_json import dataclass_json
 from marshmallow import fields
 
-import request_api
 import credentials
+import request_api
 
 # Request
+
 
 @dataclass_json
 @dataclass
@@ -17,7 +18,9 @@ class PaginatedCandidatesForActions:
     limit: Optional[float] = None
     offset: Optional[float] = None
 
+
 # Response
+
 
 @dataclass_json
 @dataclass
@@ -30,28 +33,32 @@ class GetActionsCandidatesResponseProducts:
     min_stock: float
     stock: float
 
+
 @dataclass_json
 @dataclass
 class GetActionsCandidatesResponseResult:
     products: list[GetActionsCandidatesResponseProducts]
     total: float
 
+
 @dataclass_json
 @dataclass
 class GetActionsCandidatesResponseResultWrapper:
     result: GetActionsCandidatesResponseResult
+
 
 def get_actions_candidates(
     credentials: credentials.Credentials,
     data: PaginatedCandidatesForActions,
 ) -> GetActionsCandidatesResponseResultWrapper:
     response = request_api.request_api_raw(
-        'POST',
-        '/v1/actions/candidates',
+        "POST",
+        "/v1/actions/candidates",
         credentials,
         data.to_json(),
     )
     return GetActionsCandidatesResponseResultWrapper.schema().loads(response)
+
 
 def get_actions_candidates_iterative(
     credentials: credentials.Credentials,

@@ -1,20 +1,22 @@
-from dataclasses import dataclass, field
-from typing import Optional, Generator
 import datetime
+from dataclasses import dataclass, field
+from typing import Generator, Optional
 
-from dataclasses_json import dataclass_json, Undefined, config, CatchAll
+from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-import request_api
 import credentials
+import request_api
 import returns_fbs
 
 # Request
+
 
 @dataclass_json
 @dataclass
 class PostingFBSShipWithGTDAdditionalFields:
     additional_data: Optional[bool] = False
+
 
 @dataclass_json
 @dataclass
@@ -23,6 +25,7 @@ class PostingFBSShipWithGTDExemplarInfo:
     gtd: Optional[str] = None
     is_gtd_absent: Optional[bool] = True
 
+
 @dataclass_json
 @dataclass
 class PostingFBSShipWithGTDProduct:
@@ -30,10 +33,12 @@ class PostingFBSShipWithGTDProduct:
     product_id: Optional[int] = None
     quantity: Optional[int] = None
 
+
 @dataclass_json
 @dataclass
 class PostingFBSShipWithGTDPackage:
     products: Optional[list[PostingFBSShipWithGTDProduct]] = None
+
 
 @dataclass_json
 @dataclass
@@ -45,20 +50,23 @@ class PostingFBSShipWithGTDData:
         metadata=config(field_name="with"),
     )
 
+
 # Response
+
 
 @dataclass_json
 @dataclass
 class CreatePostingFBSShipWithGTDResponseResultWrapper:
     result: list[str]
 
+
 def create_posting_fbs_ship_with_gtd(
     credentials: credentials.Credentials,
     data: PostingFBSShipWithGTDData,
 ) -> CreatePostingFBSShipWithGTDResponseResultWrapper:
     response = request_api.request_api_raw(
-        'POST',
-        '/v3/posting/fbs/ship',
+        "POST",
+        "/v3/posting/fbs/ship",
         credentials,
         data.to_json(),
     )
