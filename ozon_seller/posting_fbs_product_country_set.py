@@ -36,4 +36,4 @@ def posting_fbs_product_country_set(
         credentials,
         data.to_json(),
     )
-    return GetCountrySetFBSResponseResult.schema().loads(response)
+    return GetCountrySetFBSResponseResult.schema().loads(response.text)

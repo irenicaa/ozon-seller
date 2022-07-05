@@ -283,7 +283,7 @@ def get_posting_fbs_list(
         credentials,
         data.to_json(),
     )
-    return GetPostingFBSListResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSListResponseResultWrapper.schema().loads(response.text)
 
 
 def get_posting_fbs_list_iterative(

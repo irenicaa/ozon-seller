@@ -71,7 +71,7 @@ def get_returns_company_fbo(
         credentials,
         data.to_json(),
     )
-    return GetReturnsCompanyFBOResponseResult.schema().loads(response)
+    return GetReturnsCompanyFBOResponseResult.schema().loads(response.text)
 
 
 def get_returns_company_fbo_iterative(

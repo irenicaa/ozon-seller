@@ -43,4 +43,4 @@ def get_actions(
         credentials,
         None,
     )
-    return GetSellerActionsResponseResultWrapper.schema().loads(response)
+    return GetSellerActionsResponseResultWrapper.schema().loads(response.text)

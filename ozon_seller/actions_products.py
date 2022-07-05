@@ -54,7 +54,7 @@ def get_action_products(
         credentials,
         data.to_json(),
     )
-    return GetSellerProductResponseResultWrapper.schema().loads(response)
+    return GetSellerProductResponseResultWrapper.schema().loads(response.text)
 
 
 def get_action_products_iterative(

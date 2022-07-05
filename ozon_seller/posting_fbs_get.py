@@ -309,4 +309,4 @@ def get_posting_fbs_data(
         credentials,
         data.to_json(),
     )
-    return GetPostingFBSDataResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSDataResponseResultWrapper.schema().loads(response.text)

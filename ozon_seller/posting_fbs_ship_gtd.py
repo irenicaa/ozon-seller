@@ -67,4 +67,4 @@ def create_posting_fbs_ship_with_gtd(
         credentials,
         data.to_json(),
     )
-    return CreatePostingFBSShipWithGTDResponseResultWrapper.schema().loads(response)
+    return CreatePostingFBSShipWithGTDResponseResultWrapper.schema().loads(response.text)

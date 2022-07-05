@@ -67,7 +67,7 @@ def get_product_info_stocks(
         credentials,
         data.to_json(),
     )
-    return GetProductInfoStocksResponseResultWrapper.schema().loads(response)
+    return GetProductInfoStocksResponseResultWrapper.schema().loads(response.text)
 
 
 def get_product_info_stocks_iterative(

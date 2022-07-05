@@ -97,7 +97,7 @@ def get_returns_company_fbs(
         credentials,
         data.to_json(),
     )
-    return GetReturnsCompanyFBSResponseResultWrapper.schema().loads(response)
+    return GetReturnsCompanyFBSResponseResultWrapper.schema().loads(response.text)
 
 
 def get_returns_company_fbs_iterative(

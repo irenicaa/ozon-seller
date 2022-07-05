@@ -44,4 +44,4 @@ def get_product_description(
         credentials,
         data.to_json(),
     )
-    return GetProductInfoDescriptionResponseResultWrapper.schema().loads(response)
+    return GetProductInfoDescriptionResponseResultWrapper.schema().loads(response.text)

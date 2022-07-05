@@ -51,4 +51,4 @@ def create_posting_fbs_act(
         credentials,
         data.to_json(),
     )
-    return PostingFBSActCreateResponseActResultWrapper.schema().loads(response)
+    return PostingFBSActCreateResponseActResultWrapper.schema().loads(response.text)

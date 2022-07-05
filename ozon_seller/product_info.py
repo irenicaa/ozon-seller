@@ -154,4 +154,4 @@ def get_product_info(
         credentials,
         data.to_json(),
     )
-    return GetProductInfoResponseResultWrapper.schema().loads(response)
+    return GetProductInfoResponseResultWrapper.schema().loads(response.text)

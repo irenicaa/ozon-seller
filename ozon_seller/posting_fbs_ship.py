@@ -55,4 +55,4 @@ def posting_fbs_ship(
         credentials,
         data.to_json(),
     )
-    return PostingFBSShipResponseResult.schema().loads(response)
+    return PostingFBSShipResponseResult.schema().loads(response.text)

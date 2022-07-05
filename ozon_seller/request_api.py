@@ -11,7 +11,7 @@ def request_api_raw(
     endpoint: str,
     credentials: credentials.Credentials,
     data: Optional[str],
-) -> str:
+) -> requests.models.Response:
     session = requests.Session()
     response = session.request(
         method,
@@ -20,21 +20,4 @@ def request_api_raw(
         data=data,
     )
     response.raise_for_status()
-    return response.text
-
-
-def request_api_content(
-    method: str,
-    endpoint: str,
-    credentials: credentials.Credentials,
-    data: Optional[str],
-) -> str:
-    session = requests.Session()
-    response = session.request(
-        method,
-        "https://api-seller.ozon.ru" + endpoint,
-        headers=credentials.to_headers(),
-        data=data,
-    )
-    response.raise_for_status()
-    return response.content
+    return response

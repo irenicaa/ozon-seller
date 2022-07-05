@@ -187,7 +187,7 @@ def get_posting_fbo_list(
         credentials,
         data.to_json(),
     )
-    return GetPostingFBOListResponseResultWrapper.schema().loads(response)
+    return GetPostingFBOListResponseResultWrapper.schema().loads(response.text)
 
 
 def get_posting_fbo_list_iterative(

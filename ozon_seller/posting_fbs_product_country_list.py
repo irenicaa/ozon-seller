@@ -42,4 +42,4 @@ def get_posting_fbs_product_country_list(
         credentials,
         data.to_json(),
     )
-    return GetPostingFBSProductCountryListResponseResultWrapper.schema().loads(response)
+    return GetPostingFBSProductCountryListResponseResultWrapper.schema().loads(response.text)

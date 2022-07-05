@@ -56,7 +56,7 @@ def get_actions_candidates(
         credentials,
         data.to_json(),
     )
-    return GetActionsCandidatesResponseResultWrapper.schema().loads(response)
+    return GetActionsCandidatesResponseResultWrapper.schema().loads(response.text)
 
 
 def get_actions_candidates_iterative(
