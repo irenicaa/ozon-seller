@@ -6,6 +6,13 @@ import requests
 from . import credentials
 
 
+class HTTPError(RuntimeError):
+    def __init__(self, message, status, *args):
+        super().__init__(message, status, *args)
+
+        self.status = status
+
+
 def request_api_raw(
     method: str,
     endpoint: str,
@@ -19,5 +26,7 @@ def request_api_raw(
         headers=credentials.to_headers(),
         data=data,
     )
-    response.raise_for_status()
+    if response.status_code < 200 or response.status_code >= 300:
+        raise HTTPError(response.text, response.status_code)
+
     return response
