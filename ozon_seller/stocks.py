@@ -61,13 +61,14 @@ def get_product_info_stocks(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
 ) -> GetProductInfoStocksResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v3/product/info/stocks",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetProductInfoStocksResponseResultWrapper,
     )
-    return GetProductInfoStocksResponseResultWrapper.schema().loads(response.text)
+
 
 
 def get_product_info_stocks_iterative(

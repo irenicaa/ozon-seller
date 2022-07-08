@@ -48,13 +48,14 @@ def get_action_products(
     credentials: credentials.Credentials,
     data: PaginatedActionProducts,
 ) -> GetSellerProductResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v1/actions/products",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetSellerProductResponseResultWrapper,
     )
-    return GetSellerProductResponseResultWrapper.schema().loads(response.text)
+
 
 
 def get_action_products_iterative(

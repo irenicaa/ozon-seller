@@ -303,10 +303,10 @@ def get_posting_fbs_data(
     credentials: credentials.Credentials,
     data: PostingFBSData,
 ) -> GetPostingFBSDataResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v3/posting/fbs/get",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetPostingFBSDataResponseResultWrapper,
     )
-    return GetPostingFBSDataResponseResultWrapper.schema().loads(response.text)

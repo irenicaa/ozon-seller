@@ -1,5 +1,5 @@
 import json
-from typing import Optional
+from typing import Optional, Type, TypeVar
 
 import requests
 
@@ -11,6 +11,9 @@ class HTTPError(RuntimeError):
         super().__init__(message, status, *args)
 
         self.status = status
+
+
+T = TypeVar("T")
 
 
 def request_api_raw(
@@ -30,3 +33,20 @@ def request_api_raw(
         raise HTTPError(response.text, response.status_code)
 
     return response
+
+
+def request_api_json(
+    method: str,
+    endpoint: str,
+    credentials: credentials.Credentials,
+    data: Optional[object],
+    *,
+    response_cls: Type[T],
+) -> T:
+    response = request_api_raw(
+        method,
+        endpoint,
+        credentials,
+        data.to_json() if data is not None else None,
+    )
+    return response_cls.schema().loads(response.text)

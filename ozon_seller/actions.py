@@ -37,10 +37,10 @@ class GetSellerActionsResponseResultWrapper:
 def get_actions(
     credentials: credentials.Credentials,
 ) -> GetSellerActionsResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "GET",
         "/v1/actions",
         credentials,
         None,
+        response_cls=GetSellerActionsResponseResultWrapper,
     )
-    return GetSellerActionsResponseResultWrapper.schema().loads(response.text)

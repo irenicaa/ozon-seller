@@ -91,13 +91,14 @@ def get_returns_company_fbs(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
 ) -> GetReturnsCompanyFBSResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/returns/company/fbs",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetReturnsCompanyFBSResponseResultWrapper,
     )
-    return GetReturnsCompanyFBSResponseResultWrapper.schema().loads(response.text)
+
 
 
 def get_returns_company_fbs_iterative(

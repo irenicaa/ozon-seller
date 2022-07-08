@@ -50,13 +50,13 @@ def get_actions_candidates(
     credentials: credentials.Credentials,
     data: PaginatedCandidatesForActions,
 ) -> GetActionsCandidatesResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v1/actions/candidates",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetActionsCandidatesResponseResultWrapper,
     )
-    return GetActionsCandidatesResponseResultWrapper.schema().loads(response.text)
 
 
 def get_actions_candidates_iterative(

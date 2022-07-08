@@ -277,13 +277,13 @@ def get_posting_fbs_list(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBSListFilter,
 ) -> GetPostingFBSListResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v3/posting/fbs/list",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetPostingFBSListResponseResultWrapper,
     )
-    return GetPostingFBSListResponseResultWrapper.schema().loads(response.text)
 
 
 def get_posting_fbs_list_iterative(

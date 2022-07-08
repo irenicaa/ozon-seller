@@ -36,10 +36,10 @@ def get_posting_fbs_product_country_list(
     credentials: credentials.Credentials,
     data: CountryFilter,
 ) -> GetPostingFBSProductCountryListResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/posting/fbs/product/country/list",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetPostingFBSProductCountryListResponseResultWrapper,
     )
-    return GetPostingFBSProductCountryListResponseResultWrapper.schema().loads(response.text)

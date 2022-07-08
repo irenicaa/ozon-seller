@@ -61,10 +61,10 @@ def create_posting_fbs_ship_with_gtd(
     credentials: credentials.Credentials,
     data: PostingFBSShipWithGTDData,
 ) -> CreatePostingFBSShipWithGTDResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v3/posting/fbs/ship",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=CreatePostingFBSShipWithGTDResponseResultWrapper,
     )
-    return CreatePostingFBSShipWithGTDResponseResultWrapper.schema().loads(response.text)

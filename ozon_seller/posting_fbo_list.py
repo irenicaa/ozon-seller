@@ -181,13 +181,14 @@ def get_posting_fbo_list(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBOListFilter,
 ) -> GetPostingFBOListResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/posting/fbo/list",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetPostingFBOListResponseResultWrapper,
     )
-    return GetPostingFBOListResponseResultWrapper.schema().loads(response.text)
+
 
 
 def get_posting_fbo_list_iterative(

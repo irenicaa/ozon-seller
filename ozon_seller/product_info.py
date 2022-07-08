@@ -148,10 +148,10 @@ def get_product_info(
     credentials: credentials.Credentials,
     data: ProductData,
 ) -> GetProductInfoResponseResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/product/info",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetProductInfoResponseResultWrapper,
     )
-    return GetProductInfoResponseResultWrapper.schema().loads(response.text)

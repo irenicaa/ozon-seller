@@ -65,13 +65,14 @@ def get_returns_company_fbo(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBOFilter,
 ) -> GetReturnsCompanyFBOResponseResult:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/returns/company/fbo",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetReturnsCompanyFBOResponseResult,
     )
-    return GetReturnsCompanyFBOResponseResult.schema().loads(response.text)
+
 
 
 def get_returns_company_fbo_iterative(

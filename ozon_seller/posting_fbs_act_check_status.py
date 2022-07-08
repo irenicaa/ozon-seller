@@ -38,10 +38,10 @@ def create_posting_fbs_act(
     credentials: credentials.Credentials,
     data: PostingFSBActData,
 ) -> PostingFBSActCreateResponseActResultWrapper:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/posting/fbs/act/check-status",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=PostingFBSActCreateResponseActResultWrapper,
     )
-    return PostingFBSActCreateResponseActResultWrapper.schema().loads(response.text)

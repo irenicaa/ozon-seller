@@ -30,10 +30,10 @@ def posting_fbs_product_country_set(
     credentials: credentials.Credentials,
     data: OderData,
 ) -> GetCountrySetFBSResponseResult:
-    response = request_api.request_api_raw(
+    return request_api.request_api_json(
         "POST",
         "/v2/posting/fbs/product/country/set",
         credentials,
-        data.to_json(),
+        data,
+        response_cls=GetCountrySetFBSResponseResult,
     )
-    return GetCountrySetFBSResponseResult.schema().loads(response.text)
