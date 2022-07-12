@@ -1,5 +1,5 @@
 import json
-from typing import Optional, Type, TypeVar
+from typing import Optional, TypeVar
 
 import requests
 
@@ -41,7 +41,7 @@ def request_api_json(
     credentials: credentials.Credentials,
     data: Optional[object],
     *,
-    response_cls: Type[T],
+    response_cls: type[T],
 ) -> T:
     response = request_api_raw(
         method,
