@@ -1,9 +1,8 @@
-import json
 from typing import Generic, Optional, TypeVar
 
 import requests
 
-from .common import credentials, error_response
+from . import credentials, error_response
 
 T = TypeVar("T")
 
@@ -37,6 +36,7 @@ def request_api_raw(
         data=data,
     )
     if response.status_code < 200 or response.status_code >= 300:
+        # use the response text both as an error message and as an error response data
         raise HTTPError(response.text, response.status_code, response.text)
 
     return response

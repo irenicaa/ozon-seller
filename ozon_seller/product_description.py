@@ -4,8 +4,7 @@ from typing import Optional
 
 from dataclasses_json import Undefined, dataclass_json
 
-from . import request_api, returns_fbs
-from .common import credentials
+from .common import credentials, request_api
 
 # Request
 

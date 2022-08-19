@@ -5,8 +5,8 @@ from typing import Generator, Optional
 from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-from . import request_api, returns_fbs
-from .common import credentials
+from . import returns_fbs
+from .common import credentials, request_api
 
 
 def parse_datetime(value):

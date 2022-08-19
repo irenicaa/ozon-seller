@@ -3,8 +3,8 @@ import os
 
 import dotenv
 
-from . import posting_fbs_list, request_api, stocks
-from .common import credentials
+from . import posting_fbs_list, stocks
+from .common import credentials, request_api
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
