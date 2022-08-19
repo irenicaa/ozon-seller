@@ -4,7 +4,7 @@ import os
 import dotenv
 
 from . import posting_fbs_list, stocks
-from .common import credentials, request_api
+from .common import credentials, http_error
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
@@ -23,6 +23,6 @@ if __name__ == "__main__":
         ozon_credentials = credentials.Credentials(os.getenv('OZON_CLIENT_ID'), os.getenv('OZON_API_KEY'))
         list = posting_fbs_list.get_posting_fbs_list(ozon_credentials, data)
         print(list)
-    except request_api.HTTPError as error:
+    except http_error.HTTPError as error:
         print('ERROR', error)
         print('ERROR response_data', error.response_data)
