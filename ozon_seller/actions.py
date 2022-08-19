@@ -2,7 +2,8 @@ from dataclasses import dataclass
 
 from dataclasses_json import Undefined, dataclass_json
 
-from . import credentials, request_api
+from . import request_api
+from .common import credentials
 
 # Response
 

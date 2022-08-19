@@ -5,7 +5,8 @@ from typing import Generator, Optional
 from dataclasses_json import Undefined, dataclass_json
 from marshmallow import fields
 
-from . import credentials, request_api
+from . import request_api
+from .common import credentials
 
 # Request
 

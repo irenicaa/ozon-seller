@@ -5,7 +5,8 @@ from typing import Generator, Optional
 from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-from . import credentials, request_api
+from . import request_api
+from .common import credentials
 
 
 def format_datetime(value):
