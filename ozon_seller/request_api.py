@@ -3,8 +3,7 @@ from typing import Generic, Optional, TypeVar
 
 import requests
 
-from . import error_response
-from .common import credentials
+from .common import credentials, error_response
 
 T = TypeVar("T")
 

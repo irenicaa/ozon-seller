@@ -15,7 +15,7 @@ if __name__ == "__main__":
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 since=datetime.datetime(2021, 11, 1),
                 to=datetime.datetime(2023, 11, 1),
-                status='awaiting_packaging',
+                status='awaiting_parrrckaging',
             ),
         )
         print(data.to_json())

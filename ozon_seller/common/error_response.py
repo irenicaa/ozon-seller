@@ -1,11 +1,7 @@
-import datetime
 from dataclasses import dataclass, field
-from typing import Generator, Optional
+from typing import Optional
 
 from dataclasses_json import Undefined, config, dataclass_json
-
-from . import request_api
-from .common import credentials
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
