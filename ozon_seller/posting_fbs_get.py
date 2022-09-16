@@ -6,18 +6,7 @@ from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
 from . import returns_fbs
-from .common import credentials, request_api
-
-
-def parse_datetime(value):
-    if value is None:
-        return None
-    elif isinstance(value, str):
-        return datetime.datetime.fromisoformat(value)
-    elif isinstance(value, datetime.datetime):
-        return value
-    else:
-        raise RuntimeError("unsopported time for a datetime field")
+from .common import credentials, request_api, datetime_field
 
 
 # Request
@@ -103,13 +92,8 @@ class GetPostingFBSDataResponseProductExemplars:
 @dataclass
 class GetPostingFBSDataResponseFinancialPicking:
     amount: float
-    moment: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     tag: str
+    moment: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -221,12 +205,6 @@ class GetPostingFBSDataResponseBarcodes:
 @dataclass
 class GetPostingFBSDatatResponseAnalyticsData:
     city: str
-    delivery_date_begin: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     is_premium: bool
     payment_type_group_name: str
     region: str
@@ -234,6 +212,9 @@ class GetPostingFBSDatatResponseAnalyticsData:
     tpl_provider_id: int
     warehouse: str
     warehouse_id: int
+    delivery_date_begin: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -260,21 +241,9 @@ class GetPostingFBSDataResponseResult:
     cancellation: Optional[GetPostingFBSDataResponseCancellation]
     courier: Optional[GetPostingFBSDataResponseCourier]
     customer: Optional[GetPostingFBSDataResponseCustomer]
-    delivering_date: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     delivery_method: Optional[GetPostingFBSDataResponseDeliveryMethod]
     delivery_price: str
     financial_data: Optional[GetPostingFBSDataResponseFinancialData]
-    in_process_at: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     is_express: bool
     order_id: int
     order_number: str
@@ -283,15 +252,18 @@ class GetPostingFBSDataResponseResult:
     products: list[GetPostingFBSDataResponseProduct]
     provider_status: str
     requirements: Optional[GetPostingFBSDataResponseRequirements]
-    shipment_date: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     status: str
     tpl_integration_type: str
     tracking_number: str
+    delivering_date: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
+    in_process_at: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
+    shipment_date: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
