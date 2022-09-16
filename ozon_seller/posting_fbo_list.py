@@ -6,19 +6,7 @@ from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
 from . import returns_fbs
-from .common import credentials, request_api
-
-
-def parse_datetime(value):
-    if value is None:
-        return None
-    elif isinstance(value, str):
-        return datetime.datetime.fromisoformat(value)
-    elif isinstance(value, datetime.datetime):
-        return value
-    else:
-        raise RuntimeError("unsopported time for a datetime field")
-
+from .common import credentials, request_api, datetime_field
 
 # Request
 
@@ -33,14 +21,8 @@ class PostingAdditionalFields:
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListFilter:
-    since: Optional[datetime.datetime] = field(
-        metadata=config(encoder=returns_fbs.format_datetime),
-        default=None,
-    )
-    to: Optional[datetime.datetime] = field(
-        metadata=config(encoder=returns_fbs.format_datetime),
-        default=None,
-    )
+    since: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
+    to: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
     status: Optional[str] = None
 
 
@@ -76,13 +58,8 @@ class GetPostingFBOListResponseProduct:
 @dataclass
 class GetPostingFBOListResponsePicking:
     amount: float
-    moment: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     tag: str
+    moment: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -152,24 +129,16 @@ class GetPostingFBOListResponseResult:
     additional_data: list[GetPostingFBOAdditionalDataItem]
     analytics_data: Optional[GetPostingFBOListResponseAnalyticsData]
     cancel_reason_id: int
-    created_at: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     financial_data: Optional[GetPostingFBOListResponseFinancialData]
-    in_process_at: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     order_id: int
     order_number: str
     posting_number: str
     products: list[GetPostingFBOListResponseProduct]
     status: str
+    created_at: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
+    in_process_at: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
