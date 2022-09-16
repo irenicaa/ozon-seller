@@ -57,6 +57,7 @@ class PostingFBSShipWithGTDData:
 class CreatePostingFBSShipWithGTDResponseResultWrapper:
     result: list[str]
 
+
 def create_posting_fbs_ship_with_gtd(
     credentials: credentials.Credentials,
     data: PostingFBSShipWithGTDData,

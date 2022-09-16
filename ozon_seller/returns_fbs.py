@@ -100,7 +100,6 @@ def get_returns_company_fbs(
     )
 
 
-
 def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,

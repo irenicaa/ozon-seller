@@ -74,7 +74,6 @@ def get_returns_company_fbo(
     )
 
 
-
 def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBOFilter,

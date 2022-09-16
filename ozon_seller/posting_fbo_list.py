@@ -191,7 +191,6 @@ def get_posting_fbo_list(
     )
 
 
-
 def get_posting_fbo_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBOListFilter,

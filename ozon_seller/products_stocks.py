@@ -37,7 +37,6 @@ class SetProductStocksResponseResult:
     warehouse_id: int
 
 
-
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class SetProductStocksResponseResultWrapper:

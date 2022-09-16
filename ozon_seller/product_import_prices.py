@@ -36,6 +36,7 @@ class GetProductImportPriceResponseError:
     code: str
     message: str
 
+
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductImportPriceResponseResult:
@@ -43,6 +44,7 @@ class GetProductImportPriceResponseResult:
     offer_id: str
     product_id: int
     updated: bool
+
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass

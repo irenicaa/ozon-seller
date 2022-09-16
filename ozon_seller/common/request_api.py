@@ -7,7 +7,6 @@ from . import credentials, error_response, http_error
 T = TypeVar("T")
 
 
-
 def request_api_raw(
     method: str,
     endpoint: str,

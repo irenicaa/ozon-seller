@@ -57,7 +57,6 @@ def get_action_products(
     )
 
 
-
 def get_action_products_iterative(
     credentials: credentials.Credentials,
     data: PaginatedActionProducts,

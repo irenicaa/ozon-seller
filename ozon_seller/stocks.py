@@ -70,7 +70,6 @@ def get_product_info_stocks(
     )
 
 
-
 def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
