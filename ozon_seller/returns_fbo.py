@@ -5,7 +5,7 @@ from typing import Generator, Optional
 from dataclasses_json import Undefined, config, dataclass_json
 from marshmallow import fields
 
-from .common import credentials, request_api
+from .common import credentials, request_api, datetime_field
 
 # Request
 
@@ -31,12 +31,6 @@ class PaginatedGetReturnsCompanyFBOFilter:
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetReturnsCompanyFBOResponseItem:
-    accepted_from_customer_moment: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     company_id: int
     current_place_name: str
     dst_place_name: str
@@ -44,14 +38,10 @@ class GetReturnsCompanyFBOResponseItem:
     is_opened: bool
     posting_number: str
     return_reason_name: str
-    returned_to_ozon_moment: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     sku: int
     status_name: str
+    accepted_from_customer_moment: datetime.datetime = datetime_field.datetime_field()
+    returned_to_ozon_moment: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
