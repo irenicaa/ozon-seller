@@ -5,7 +5,7 @@ from typing import Optional
 from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
-from .common import credentials, request_api
+from .common import credentials, request_api, datetime_field
 
 # Request
 
@@ -78,12 +78,7 @@ class GetProductInfoResponseStatus:
     is_created: bool
     state_tooltip: str
     item_errors: list[GetProductInfoResponseItemError]
-    state_updated_at: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
+    state_updated_at: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -105,12 +100,6 @@ class GetProductInfoResponseResult:
     category_id: int
     color_image: str
     commissions: list[GetProductInfoResponseCommissions]
-    created_at: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     fbo_sku: int
     fbs_sku: int
     id: int
@@ -136,6 +125,7 @@ class GetProductInfoResponseResult:
     visibility_details: GetProductInfoResponseVisibilityDetails
     visible: bool
     volume_weight: float
+    created_at: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
