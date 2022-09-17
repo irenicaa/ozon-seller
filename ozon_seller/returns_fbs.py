@@ -4,7 +4,7 @@ from typing import Generator, Optional
 
 from dataclasses_json import Undefined, config, dataclass_json
 
-from .common import credentials, request_api
+from .common import credentials, request_api, datetime_field
 
 
 def format_datetime(value):
@@ -17,8 +17,8 @@ def format_datetime(value):
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class FilterTimeRange:
-    time_from: datetime.datetime = field(metadata=config(encoder=format_datetime))
-    time_to: datetime.datetime = field(metadata=config(encoder=format_datetime))
+    time_from: datetime.datetime = datetime_field.datetime_field()
+    time_to: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
