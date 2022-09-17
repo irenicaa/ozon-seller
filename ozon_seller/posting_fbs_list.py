@@ -6,18 +6,7 @@ from dataclasses_json import CatchAll, Undefined, config, dataclass_json
 from marshmallow import fields
 
 from . import returns_fbs
-from .common import credentials, request_api
-
-
-def parse_datetime(value):
-    if value is None:
-        return None
-    elif isinstance(value, str):
-        return datetime.datetime.fromisoformat(value)
-    elif isinstance(value, datetime.datetime):
-        return value
-    else:
-        raise RuntimeError("unsopported time for a datetime field")
+from .common import credentials, request_api, datetime_field
 
 
 # Request
@@ -38,16 +27,10 @@ class GetPostingFBSListFilter:
     delivery_method_id: Optional[list[int]] = None
     order_id: Optional[int] = None
     provider_id: Optional[list[int]] = None
-    since: Optional[datetime.datetime] = field(
-        metadata=config(encoder=returns_fbs.format_datetime),
-        default=None,
-    )
-    to: Optional[datetime.datetime] = field(
-        metadata=config(encoder=returns_fbs.format_datetime),
-        default=None,
-    )
     status: Optional[str] = None
     warehouse_id: Optional[list[int]] = None
+    since: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
+    to: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -91,13 +74,8 @@ class GetPostingFBSListResponseProduct:
 @dataclass
 class GetPostingFBSListResponsePicking:
     amount: float
-    moment: datetime.datetime = field(
-        metadata=config(
-            decoder=datetime.datetime.fromisoformat,
-            mm_field=fields.DateTime(format="iso"),
-        ),
-    )
     tag: str
+    moment: datetime.datetime = datetime_field.datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -200,12 +178,6 @@ class GetPostingFBSListResponseBarcodes:
 @dataclass
 class GetPostingFBSListResponseAnalyticsData:
     city: str
-    delivery_date_begin: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     is_premium: bool
     payment_type_group_name: str
     region: str
@@ -213,6 +185,9 @@ class GetPostingFBSListResponseAnalyticsData:
     tpl_provider_id: int
     warehouse: str
     warehouse_id: int
+    delivery_date_begin: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -230,35 +205,26 @@ class GetPostingFBSListResponsePosting:
     barcodes: Optional[GetPostingFBSListResponseBarcodes]
     cancellation: Optional[GetPostingFBSListResponseCancellation]
     customer: Optional[GetPostingFBSListResponseCustomer]
-    delivering_date: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     delivery_method: Optional[GetPostingFBSListResponseDeliveryMethod]
     financial_data: Optional[GetPostingFBSListResponseFinancialData]
-    in_process_at: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     is_express: bool
     order_id: int
     order_number: str
     posting_number: str
     products: list[GetPostingFBSListResponseProduct]
     requirements: Optional[GetPostingFBSListResponseRequirements]
-    shipment_date: Optional[datetime.datetime] = field(
-        metadata=config(
-            decoder=parse_datetime,
-            mm_field=fields.DateTime(format="iso", allow_none=True),
-        ),
-    )
     status: str
     tpl_integration_type: str
     tracking_number: str
+    delivering_date: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
+    in_process_at: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
+    shipment_date: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
