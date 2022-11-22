@@ -8,7 +8,9 @@ from .common import credentials, request_api, datetime_field
 
 
 def format_datetime(value):
-    return value.astimezone(datetime.timezone.utc).isoformat(timespec="microseconds")
+    return value.astimezone(datetime.timezone.utc).isoformat(
+        timespec="microseconds"
+    )
 
 
 # Request

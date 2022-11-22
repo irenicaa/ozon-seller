@@ -40,7 +40,9 @@ class GetReturnsCompanyFBOResponseItem:
     return_reason_name: str
     sku: int
     status_name: str
-    accepted_from_customer_moment: datetime.datetime = datetime_field.datetime_field()
+    accepted_from_customer_moment: datetime.datetime = (
+        datetime_field.datetime_field()
+    )
     returned_to_ozon_moment: datetime.datetime = datetime_field.datetime_field()
 
 

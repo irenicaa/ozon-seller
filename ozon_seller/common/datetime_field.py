@@ -20,7 +20,9 @@ def _parse_datetime(
 
 
 def _format_datetime(value: datetime.datetime) -> str:
-    return value.astimezone(datetime.timezone.utc).isoformat(timespec="microseconds")
+    return value.astimezone(datetime.timezone.utc).isoformat(
+        timespec="microseconds"
+    )
 
 
 def _base_datetime_field(is_optional: bool) -> Optional[datetime.datetime]:
@@ -32,7 +34,9 @@ def _base_datetime_field(is_optional: bool) -> Optional[datetime.datetime]:
         metadata=dataclasses_json.config(
             decoder=_parse_datetime,
             encoder=_format_datetime,
-            mm_field=marshmallow.fields.DateTime(format="iso", allow_none=is_optional),
+            mm_field=marshmallow.fields.DateTime(
+                format="iso", allow_none=is_optional
+            ),
         ),
     )
 

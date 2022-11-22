@@ -21,7 +21,9 @@ class PostingAdditionalFields:
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListFilter:
-    since: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
+    since: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
     to: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
     status: Optional[str] = None
 
@@ -135,7 +137,9 @@ class GetPostingFBOListResponseResult:
     posting_number: str
     products: list[GetPostingFBOListResponseProduct]
     status: str
-    created_at: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
+    created_at: Optional[
+        datetime.datetime
+    ] = datetime_field.optional_datetime_field()
     in_process_at: Optional[
         datetime.datetime
     ] = datetime_field.optional_datetime_field()
