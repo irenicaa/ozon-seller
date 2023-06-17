@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "delivery_method_id": [],
+    "order_id": null,
+    "provider_id": [],
+    "status": null,
+    "warehouse_id": [],
+    "since": null,
+    "to": null
+  },
+  "dir": "ASC",
+  "limit": null,
+  "offset": null,
+  "with": {
+    "analytics_data": false,
+    "barcodes": false,
+    "financial_data": false,
+    "translit": false
+  }
+}

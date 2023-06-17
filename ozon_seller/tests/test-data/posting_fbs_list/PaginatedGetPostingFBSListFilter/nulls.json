@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "delivery_method_id": null,
+    "order_id": null,
+    "provider_id": null,
+    "status": null,
+    "warehouse_id": null,
+    "since": null,
+    "to": null
+  },
+  "dir": null,
+  "limit": null,
+  "offset": null,
+  "with": {
+    "analytics_data": null,
+    "barcodes": null,
+    "financial_data": null,
+    "translit": null
+  }
+}

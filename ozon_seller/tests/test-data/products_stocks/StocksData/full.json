@@ -1,0 +1,16 @@
+{
+  "stocks": [
+    {
+      "offer_id": "1.5",
+      "product_id": 112,
+      "stock": 123,
+      "warehouse_id": 142
+    },
+    {
+      "offer_id": "2.5",
+      "product_id": 212,
+      "stock": 223,
+      "warehouse_id": 242
+    }
+  ]
+}

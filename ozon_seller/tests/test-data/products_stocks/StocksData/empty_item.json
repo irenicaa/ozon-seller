@@ -1,0 +1,10 @@
+{
+  "stocks": [
+    {
+      "offer_id": null,
+      "product_id": null,
+      "stock": null,
+      "warehouse_id": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "packages": [
+    {
+      "products": [
+        {
+          "exemplar_info": [],
+          "product_id": null,
+          "quantity": null
+        },
+        {
+          "exemplar_info": [],
+          "product_id": null,
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "products": [
+        {
+          "exemplar_info": [],
+          "product_id": null,
+          "quantity": null
+        },
+        {
+          "exemplar_info": [],
+          "product_id": null,
+          "quantity": null
+        }
+      ]
+    }
+  ],
+  "posting_number": null,
+  "with": {
+    "additional_data": false
+  }
+}

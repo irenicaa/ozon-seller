@@ -1,0 +1,80 @@
+{
+  "packages": [
+    {
+      "products": [
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            },
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            }
+          ],
+          "product_id": null,
+          "quantity": null
+        },
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            },
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            }
+          ],
+          "product_id": null,
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "products": [
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            },
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            }
+          ],
+          "product_id": null,
+          "quantity": null
+        },
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            },
+            {
+              "mandatory_mark": null,
+              "gtd": null,
+              "is_gtd_absent": null
+            }
+          ],
+          "product_id": null,
+          "quantity": null
+        }
+      ]
+    }
+  ],
+  "posting_number": null,
+  "with": {
+    "additional_data": null
+  }
+}

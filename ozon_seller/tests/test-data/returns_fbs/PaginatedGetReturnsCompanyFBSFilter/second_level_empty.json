@@ -1,0 +1,13 @@
+{
+  "filter": {
+    "accepted_from_customer_moment": null,
+    "last_free_waiting_day": null,
+    "order_id": null,
+    "posting_number": [],
+    "product_name": "",
+    "product_offer_id": "",
+    "status": ""
+  },
+  "offset": 23,
+  "limit": 42
+}

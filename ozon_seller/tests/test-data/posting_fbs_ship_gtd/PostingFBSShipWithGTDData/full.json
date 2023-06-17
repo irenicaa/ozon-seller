@@ -1,0 +1,80 @@
+{
+  "packages": [
+    {
+      "products": [
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": "mandatory-mark-105",
+              "gtd": "gtd-105",
+              "is_gtd_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory-mark-112",
+              "gtd": "gtd-112",
+              "is_gtd_absent": false
+            }
+          ],
+          "product_id": 123,
+          "quantity": 142
+        },
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": "mandatory-mark-205",
+              "gtd": "gtd-205",
+              "is_gtd_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory-mark-212",
+              "gtd": "gtd-212",
+              "is_gtd_absent": false
+            }
+          ],
+          "product_id": 223,
+          "quantity": 242
+        }
+      ]
+    },
+    {
+      "products": [
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": "mandatory-mark-305",
+              "gtd": "gtd-305",
+              "is_gtd_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory-mark-312",
+              "gtd": "gtd-312",
+              "is_gtd_absent": false
+            }
+          ],
+          "product_id": 323,
+          "quantity": 342
+        },
+        {
+          "exemplar_info": [
+            {
+              "mandatory_mark": "mandatory-mark-405",
+              "gtd": "gtd-405",
+              "is_gtd_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory-mark-412",
+              "gtd": "gtd-412",
+              "is_gtd_absent": false
+            }
+          ],
+          "product_id": 423,
+          "quantity": 442
+        }
+      ]
+    }
+  ],
+  "posting_number": "500",
+  "with": {
+    "additional_data": true
+  }
+}

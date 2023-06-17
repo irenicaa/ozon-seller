@@ -1,0 +1,12 @@
+{
+  "prices": [
+    {
+      "auto_action_enabled": "UNKNOWN",
+      "min_price": null,
+      "offer_id": null,
+      "old_price": null,
+      "price": null,
+      "product_id": null
+    }
+  ]
+}

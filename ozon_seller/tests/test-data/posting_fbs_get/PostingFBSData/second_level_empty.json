@@ -1,0 +1,9 @@
+{
+  "posting_number": "23",
+  "with": {
+    "analytics_data": false,
+    "barcodes": false,
+    "financial_data": false,
+    "translit": false
+  }
+}

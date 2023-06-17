@@ -1,0 +1,15 @@
+{
+  "filter": {
+    "since": "2006-01-02T08:04:05.999999+00:00",
+    "to": "2006-01-02T10:04:05.999999+00:00",
+    "status": "status"
+  },
+  "dir": "DESC",
+  "translit": true,
+  "limit": 23,
+  "offset": 42,
+  "with": {
+    "analytics_data": true,
+    "financial_data": true
+  }
+}
