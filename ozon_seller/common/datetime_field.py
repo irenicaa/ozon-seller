@@ -7,7 +7,7 @@ import marshmallow.fields
 
 
 def _parse_datetime(
-    value: Union[None, str, datetime.datetime]
+    value: Union[None, str, datetime.datetime],
 ) -> Optional[datetime.datetime]:
     if value is None:
         return None
@@ -16,13 +16,21 @@ def _parse_datetime(
     elif isinstance(value, datetime.datetime):
         return value
     else:
-        raise RuntimeError("unsopported time for a datetime field")
+        raise RuntimeError(
+            f"unsupported type {type(value)!r} for a datetime parsing",
+        )
 
 
-def _format_datetime(value: datetime.datetime) -> str:
-    return value.astimezone(datetime.timezone.utc).isoformat(
-        timespec="microseconds"
-    )
+def _format_datetime(value: Optional[datetime.datetime]) -> Optional[str]:
+    if value is None:
+        return None
+    elif isinstance(value, datetime.datetime):
+        utc_value = value.astimezone(datetime.timezone.utc)
+        return utc_value.isoformat(timespec="microseconds")
+    else:
+        raise RuntimeError(
+            f"unsupported type {type(value)!r} for a datetime formatting",
+        )
 
 
 def _base_datetime_field(is_optional: bool) -> Optional[datetime.datetime]:
