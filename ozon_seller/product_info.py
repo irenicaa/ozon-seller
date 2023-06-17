@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-from dataclasses_json import CatchAll, Undefined, config, dataclass_json
+from dataclasses_json import (
+    CatchAll,
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from .common import credentials, request_api, datetime_field
@@ -10,9 +16,8 @@ from .common import credentials, request_api, datetime_field
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductData:
+class ProductData(DataClassJsonMixin):
     offer_id: Optional[str] = None
     product_id: Optional[int] = None
     sku: Optional[int] = None

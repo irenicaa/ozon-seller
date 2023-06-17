@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import CatchAll, Undefined, config, dataclass_json
+from dataclasses_json import (
+    CatchAll,
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from .common import credentials, request_api
@@ -10,9 +16,8 @@ from .common import credentials, request_api
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ItemPriceData:
+class ItemPriceData(DataClassJsonMixin):
     auto_action_enabled: Optional[str] = "UNKNOWN"
     min_price: Optional[str] = None
     offer_id: Optional[str] = None
@@ -21,9 +26,8 @@ class ItemPriceData:
     product_id: Optional[int] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PricesData:
+class PricesData(DataClassJsonMixin):
     prices: Optional[list[ItemPriceData]] = None
 
 

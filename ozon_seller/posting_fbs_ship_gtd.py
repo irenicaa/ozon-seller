@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import CatchAll, Undefined, config, dataclass_json
+from dataclasses_json import (
+    CatchAll,
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from .common import credentials, request_api
@@ -10,37 +16,32 @@ from .common import credentials, request_api
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSShipWithGTDAdditionalFields:
+class PostingFBSShipWithGTDAdditionalFields(DataClassJsonMixin):
     additional_data: Optional[bool] = False
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSShipWithGTDExemplarInfo:
+class PostingFBSShipWithGTDExemplarInfo(DataClassJsonMixin):
     mandatory_mark: Optional[str] = None
     gtd: Optional[str] = None
     is_gtd_absent: Optional[bool] = True
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSShipWithGTDProduct:
+class PostingFBSShipWithGTDProduct(DataClassJsonMixin):
     exemplar_info: Optional[list[PostingFBSShipWithGTDExemplarInfo]] = None
     product_id: Optional[int] = None
     quantity: Optional[int] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSShipWithGTDPackage:
+class PostingFBSShipWithGTDPackage(DataClassJsonMixin):
     products: Optional[list[PostingFBSShipWithGTDProduct]] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSShipWithGTDData:
+class PostingFBSShipWithGTDData(DataClassJsonMixin):
     packages: Optional[list[PostingFBSShipWithGTDPackage]] = None
     posting_number: Optional[str] = None
     with_: Optional[PostingFBSShipWithGTDAdditionalFields] = field(

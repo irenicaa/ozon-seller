@@ -1,16 +1,15 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json
+from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 
 from .common import credentials, request_api
 
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ChatStartData:
+class ChatStartData(DataClassJsonMixin):
     posting_number: Optional[str] = None
 
 

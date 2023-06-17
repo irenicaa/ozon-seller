@@ -2,7 +2,12 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, config, dataclass_json
+from dataclasses_json import (
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from .common import credentials, request_api, datetime_field
@@ -10,16 +15,14 @@ from .common import credentials, request_api, datetime_field
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBOFilter:
+class GetReturnsCompanyFBOFilter(DataClassJsonMixin):
     posting_number: Optional[str] = None
     status: Optional[list[str]] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PaginatedGetReturnsCompanyFBOFilter:
+class PaginatedGetReturnsCompanyFBOFilter(DataClassJsonMixin):
     filter: Optional[GetReturnsCompanyFBOFilter] = None
     offset: Optional[int] = None
     limit: Optional[int] = None

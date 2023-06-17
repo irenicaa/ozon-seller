@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import CatchAll, Undefined, config, dataclass_json
+from dataclasses_json import (
+    CatchAll,
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from . import returns_fbs
@@ -12,18 +18,16 @@ from .common import credentials, request_api, datetime_field
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingAdditionalFields:
+class PostingAdditionalFields(DataClassJsonMixin):
     analytics_data: Optional[bool] = False
     barcodes: Optional[bool] = False
     financial_data: Optional[bool] = False
     translit: Optional[bool] = False
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSData:
+class PostingFBSData(DataClassJsonMixin):
     posting_number: str
     with_: Optional[PostingAdditionalFields] = field(
         default=None,

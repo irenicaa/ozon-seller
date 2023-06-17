@@ -2,16 +2,15 @@ import datetime
 from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import Undefined, dataclass_json
+from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 
 from .common import credentials, request_api
 
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductData:
+class ProductData(DataClassJsonMixin):
     offer_id: Optional[str] = None
     product_id: Optional[int] = None
 

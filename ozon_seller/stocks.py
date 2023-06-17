@@ -1,24 +1,22 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json
+from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 
 from .common import credentials, request_api
 
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductFilter:
+class ProductFilter(DataClassJsonMixin):
     offer_id: Optional[list[str]] = None
     product_id: Optional[list[str]] = None
     visibility: Optional[list[str]] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PaginatedProductFilter:
+class PaginatedProductFilter(DataClassJsonMixin):
     filter: ProductFilter
     last_id: str
     limit: int

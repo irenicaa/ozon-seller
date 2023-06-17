@@ -2,30 +2,27 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, config, dataclass_json
+from dataclasses_json import (
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 
 from .common import credentials, request_api, datetime_field
-
-
-def format_datetime(value):
-    return value.astimezone(datetime.timezone.utc).isoformat(
-        timespec="microseconds"
-    )
 
 
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class FilterTimeRange:
+class FilterTimeRange(DataClassJsonMixin):
     time_from: datetime.datetime = datetime_field.datetime_field()
     time_to: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBSFilter:
+class GetReturnsCompanyFBSFilter(DataClassJsonMixin):
     accepted_from_customer_moment: Optional[list[FilterTimeRange]] = None
     last_free_waiting_day: Optional[list[FilterTimeRange]] = None
     order_id: Optional[int] = None
@@ -35,9 +32,8 @@ class GetReturnsCompanyFBSFilter:
     status: str = ""
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PaginatedGetReturnsCompanyFBSFilter:
+class PaginatedGetReturnsCompanyFBSFilter(DataClassJsonMixin):
     filter: GetReturnsCompanyFBSFilter
     offset: int
     limit: int

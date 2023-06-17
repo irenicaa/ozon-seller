@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json
+from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 from marshmallow import fields
 
 from .common import credentials, request_api
@@ -10,9 +10,8 @@ from .common import credentials, request_api
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFSBActData:
+class PostingFSBActData(DataClassJsonMixin):
     id: Optional[int] = None
 
 

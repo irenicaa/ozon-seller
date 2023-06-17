@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import CatchAll, Undefined, config, dataclass_json
+from dataclasses_json import (
+    CatchAll,
+    Undefined,
+    config,
+    dataclass_json,
+    DataClassJsonMixin,
+)
 from marshmallow import fields
 
 from . import returns_fbs
@@ -11,16 +17,14 @@ from .common import credentials, request_api, datetime_field
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingAdditionalFields:
+class PostingAdditionalFields(DataClassJsonMixin):
     analytics_data: Optional[bool] = False
     financial_data: Optional[bool] = False
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListFilter:
+class GetPostingFBOListFilter(DataClassJsonMixin):
     since: Optional[
         datetime.datetime
     ] = datetime_field.optional_datetime_field()
@@ -28,9 +32,8 @@ class GetPostingFBOListFilter:
     status: Optional[str] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PaginatedGetPostingFBOListFilter:
+class PaginatedGetPostingFBOListFilter(DataClassJsonMixin):
     filter: Optional[GetPostingFBOListFilter] = None
     dir: Optional[str] = "ASC"
     translit: Optional[bool] = False
