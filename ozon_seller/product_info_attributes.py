@@ -20,8 +20,8 @@ class PaginatedProductFilter(DataClassJsonMixin):
     filter: ProductFilter
     last_id: str
     limit: int
-    sort_by: str
-    sort_dit: str
+    sort_dir: Optional[str]
+    sort_by: Optional[str] = ""
 
 
 # Response
