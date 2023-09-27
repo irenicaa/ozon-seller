@@ -49,7 +49,6 @@ class GetProductAttributesImage:
     index: int
 
 
-
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductAttributesDictionaryValue:
@@ -67,12 +66,18 @@ class GetProductAttributesResponseAttribute:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
+class GetProductAttributesResponseComplexAttribute:
+    attributes: list[GetProductAttributesResponseAttribute]
+
+
+@dataclass_json(undefined=Undefined.EXCLUDE)
+@dataclass
 class GetProductAttributesResponseResult:
     attributes: list[GetProductAttributesResponseAttribute]
     barcode: str
     category_id: int
     color_image: str
-    complex_attributes: list[GetProductAttributesResponseAttribute]
+    complex_attributes: list[GetProductAttributesResponseComplexAttribute]
     depth: int
     dimension_unit: str
     height: int
