@@ -51,7 +51,7 @@ class PaginatedGetPostingFBOListFilter(DataClassJsonMixin):
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetPostingFBOListResponseProduct:
-    digital_code: str
+    digital_codes: list[str]
     name: str
     offer_id: str
     price: str
