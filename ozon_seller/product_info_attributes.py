@@ -12,6 +12,7 @@ from .common import credentials, request_api
 class ProductFilter(DataClassJsonMixin):
     offer_id: Optional[list[str]] = None
     product_id: Optional[list[str]] = None
+    sku: Optional[list[str]] = None
     visibility: Optional[list[str]] = None
 
 
@@ -31,20 +32,12 @@ class PaginatedProductFilter(DataClassJsonMixin):
 @dataclass
 class GetProductAttributesPdf:
     file_name: str
-    index: int
     name: str
+
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductAttributesImage360:
-    file_name: str
-    index: int
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclass
-class GetProductAttributesImage:
-    default: bool
     file_name: str
     index: int
 
@@ -58,16 +51,17 @@ class GetProductAttributesDictionaryValue:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesResponseAttribute:
-    attribute_id: int
-    complex_id: int
-    values: list[GetProductAttributesDictionaryValue]
+class GetProductModelInfoValue:
+    model_id: int
+    count: int
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesResponseComplexAttribute:
-    attributes: list[GetProductAttributesResponseAttribute]
+class GetProductAttributesResponseAttribute:
+    id: int
+    complex_id: int
+    values: list[GetProductAttributesDictionaryValue]
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -75,19 +69,22 @@ class GetProductAttributesResponseComplexAttribute:
 class GetProductAttributesResponseResult:
     attributes: list[GetProductAttributesResponseAttribute]
     barcode: str
-    category_id: int
+    barcodes: list[str]
+    description_category_id: int
     color_image: str
-    complex_attributes: list[GetProductAttributesResponseComplexAttribute]
+    complex_attributes: list[GetProductAttributesResponseAttribute]
     depth: int
     dimension_unit: str
     height: int
     id: int
-    image_group_id: str
-    images: list[GetProductAttributesImage]
-    images360: list[GetProductAttributesImage360]
+    images: list[str]
+    model_info: GetProductModelInfoValue
     name: str
     offer_id: str
     pdf_list: list[GetProductAttributesPdf]
+    primary_image: str
+    sku: int
+    type_id: int
     weight: int
     weight_unit: str
     width: int
@@ -100,13 +97,14 @@ class GetProductAttributesResponseResultWrapper:
     last_id: str
     total: int
 
+
 def get_product_attributes(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
 ) -> GetProductAttributesResponseResultWrapper:
     return request_api.request_api_json(
         "POST",
-        "/v3/products/info/attributes",
+        "/v4/product/info/attributes",
         credentials,
         data,
         response_cls=GetProductAttributesResponseResultWrapper,
