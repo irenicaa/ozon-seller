@@ -9,16 +9,22 @@ from .common import credentials, request_api
 
 
 @dataclass
+class ProductFilterWithQuant(DataClassJsonMixin):
+    created: Optional[bool] = None
+
+
+@dataclass
 class ProductFilter(DataClassJsonMixin):
     offer_id: Optional[list[str]] = None
     product_id: Optional[list[str]] = None
-    visibility: Optional[list[str]] = None
+    visibility: Optional[str] = None
+    with_quant: Optional[ProductFilterWithQuant] = None
 
 
 @dataclass
 class PaginatedProductFilter(DataClassJsonMixin):
     filter: ProductFilter
-    last_id: str
+    cursor: str
     limit: int
 
 
@@ -44,39 +50,33 @@ class GetProductInfoStocksResponseItem:
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class GetProductInfoStocksResponseResult:
+    cursor: str
     items: list[GetProductInfoStocksResponseItem]
-    last_id: str
     total: int
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclass
-class GetProductInfoStocksResponseResultWrapper:
-    result: GetProductInfoStocksResponseResult
 
 
 def get_product_info_stocks(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> GetProductInfoStocksResponseResultWrapper:
+) -> GetProductInfoStocksResponseResult:
     return request_api.request_api_json(
         "POST",
-        "/v3/product/info/stocks",
+        "/v4/product/info/stocks",
         credentials,
         data,
-        response_cls=GetProductInfoStocksResponseResultWrapper,
+        response_cls=GetProductInfoStocksResponseResult,
     )
 
 
 def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> Generator[GetProductInfoStocksResponseResultWrapper, None, None]:
+) -> Generator[GetProductInfoStocksResponseResult, None, None]:
     while True:
         stocks = get_product_info_stocks(credentials, data)
-        if stocks.result.items == []:
+        if stocks.cursor == "":
             break
 
         yield stocks
 
-        data.last_id = stocks.result.last_id
+        data.cursor = stocks.cursor
