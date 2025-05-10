@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from dataclasses_json import DataClassJsonMixin
-from typing import Any
 import datetime
 import unittest
 import pathlib
@@ -10,9 +9,11 @@ from .. import (
     actions_products,
     chat_send_message,
     chat_start,
+    fbs_act_get_postings,
     posting_fbo_list,
     posting_fbs_act_check_status,
     posting_fbs_act_create,
+    posting_fbs_act_get_barcode,
     posting_fbs_get,
     posting_fbs_list,
     posting_fbs_package_label,
@@ -21,6 +22,8 @@ from .. import (
     posting_fbs_ship_gtd,
     product_description,
     product_import_prices,
+    product_import_stocks,
+    product_info_attributes,
     product_info,
     products_stocks,
     returns_fbo,
@@ -51,6 +54,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             offset=4.2,
         ),
     ),
+
     # actions_products.PaginatedActionProducts
     _RequestsTestCase(
         kind="empty",
@@ -64,6 +68,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             offset=4.2,
         ),
     ),
+
     # chat_send_message.ChatMessageData
     _RequestsTestCase(
         kind="empty",
@@ -76,6 +81,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             text="test",
         ),
     ),
+
     # chat_start.ChatStartData
     _RequestsTestCase(
         kind="empty",
@@ -87,6 +93,19 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             posting_number="23",
         ),
     ),
+
+    # fbs_act_get_postings.PostingFBSActData
+    _RequestsTestCase(
+        kind="empty",
+        data=fbs_act_get_postings.PostingFBSActData(),
+    ),
+    _RequestsTestCase(
+        kind="full",
+        data=fbs_act_get_postings.PostingFBSActData(
+            id=23,
+        ),
+    ),
+
     # posting_fbo_list.PaginatedGetPostingFBOListFilter
     _RequestsTestCase(
         kind="top_level_empty",
@@ -133,6 +152,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ),
         ),
     ),
+
     # posting_fbs_act_check_status.PostingFSBActData
     _RequestsTestCase(
         kind="empty",
@@ -144,6 +164,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             id=23,
         ),
     ),
+
     # posting_fbs_act_create.PostingFSBDeliveryData
     _RequestsTestCase(
         kind="empty",
@@ -159,6 +180,15 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ),
         ),
     ),
+
+    # posting_fbs_act_get_barcode.FBSActData
+    _RequestsTestCase(
+        kind="full",
+        data=posting_fbs_act_get_barcode.FBSActData(
+            id=23,
+        ),
+    ),
+
     # posting_fbs_get.PostingFBSData
     _RequestsTestCase(
         kind="minimal",
@@ -185,6 +215,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ),
         ),
     ),
+
     # posting_fbs_list.PaginatedGetPostingFBSListFilter
     _RequestsTestCase(
         kind="top_level_empty",
@@ -248,6 +279,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ),
         ),
     ),
+
     # posting_fbs_package_label.FBSPackageData
     _RequestsTestCase(
         kind="empty_list",
@@ -261,6 +293,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             posting_number=["23", "42"],
         ),
     ),
+
     # posting_fbs_product_country_list.CountryFilter
     _RequestsTestCase(
         kind="empty",
@@ -272,6 +305,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             name_search="name",
         ),
     ),
+
     # posting_fbs_product_country_set.OderData
     _RequestsTestCase(
         kind="nulls",
@@ -289,6 +323,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             country_iso_code="US",
         ),
     ),
+
     # posting_fbs_ship_gtd.PostingFBSShipWithGTDData
     _RequestsTestCase(
         kind="top_level_empty",
@@ -553,6 +588,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ),
         ),
     ),
+
     # product_description.ProductData
     _RequestsTestCase(
         kind="empty",
@@ -565,6 +601,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             product_id=42,
         ),
     ),
+
     # product_import_prices.PricesData
     _RequestsTestCase(
         kind="empty",
@@ -617,6 +654,86 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ],
         ),
     ),
+
+    # product_import_stocks.ProductImportProductsStocks
+    _RequestsTestCase(
+        kind="second_level_empty_lists",
+        data=product_import_stocks.ProductImportProductsStocks(
+            stocks=[],
+        ),
+    ),
+    _RequestsTestCase(
+        kind="full",
+        data=product_import_stocks.ProductImportProductsStocks(
+            stocks=[
+                product_import_stocks.ProductsStocksList(
+                    offer_id="1.5",
+                    product_id=112,
+                    stock=123,
+                    warehouse_id=142,
+                ),
+                product_import_stocks.ProductsStocksList(
+                    offer_id="2.5",
+                    product_id=212,
+                    stock=223,
+                    warehouse_id=242,
+                ),
+            ],
+        ),
+    ),
+
+    # product_info_attributes.PaginatedProductFilter
+    _RequestsTestCase(
+        kind="minimal",
+        data=product_info_attributes.PaginatedProductFilter(
+            filter=product_info_attributes.ProductFilter(),
+            last_id="23",
+            limit=42,
+            sort_dir=None,
+            sort_by=None,
+        ),
+    ),
+    _RequestsTestCase(
+        kind="second_level_empty",
+        data=product_info_attributes.PaginatedProductFilter(
+            filter=product_info_attributes.ProductFilter(),
+            last_id="23",
+            limit=42,
+            sort_dir="sort-dir",
+            sort_by="sort-by",
+        ),
+    ),
+    _RequestsTestCase(
+        kind="second_level_empty_lists",
+        data=product_info_attributes.PaginatedProductFilter(
+            filter=product_info_attributes.ProductFilter(
+                offer_id=[],
+                product_id=[],
+                sku=[],
+                visibility=[],
+            ),
+            last_id="23",
+            limit=42,
+            sort_dir="sort-dir",
+            sort_by="sort-by",
+        ),
+    ),
+    _RequestsTestCase(
+        kind="full",
+        data=product_info_attributes.PaginatedProductFilter(
+            filter=product_info_attributes.ProductFilter(
+                offer_id=["105", "205"],
+                product_id=["112", "212"],
+                sku=["123", "223"],
+                visibility=["one", "two"],
+            ),
+            last_id="23",
+            limit=42,
+            sort_dir="sort-dir",
+            sort_by="sort-by",
+        ),
+    ),
+
     # product_info.ProductData
     _RequestsTestCase(
         kind="empty",
@@ -630,6 +747,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             sku=42,
         ),
     ),
+
     # products_stocks.StocksData
     _RequestsTestCase(
         kind="empty",
@@ -668,6 +786,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             ],
         ),
     ),
+
     # returns_fbo.PaginatedGetReturnsCompanyFBOFilter
     _RequestsTestCase(
         kind="top_level_empty",
@@ -698,6 +817,7 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             limit=42,
         ),
     ),
+
     # returns_fbs.PaginatedGetReturnsCompanyFBSFilter
     _RequestsTestCase(
         kind="second_level_empty",
@@ -768,12 +888,13 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             limit=42,
         ),
     ),
+
     # stocks.PaginatedProductFilter
     _RequestsTestCase(
         kind="second_level_empty",
         data=stocks.PaginatedProductFilter(
             filter=stocks.ProductFilter(),
-            last_id="23",
+            cursor="23",
             limit=42,
         ),
     ),
@@ -783,9 +904,10 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             filter=stocks.ProductFilter(
                 offer_id=[],
                 product_id=[],
-                visibility=[],
+                visibility="visibility",
+                with_quant=stocks.ProductFilterWithQuant(),
             ),
-            last_id="23",
+            cursor="23",
             limit=42,
         ),
     ),
@@ -795,9 +917,12 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
             filter=stocks.ProductFilter(
                 offer_id=["105", "205"],
                 product_id=["112", "212"],
-                visibility=["one", "two"],
+                visibility="visibility",
+                with_quant=stocks.ProductFilterWithQuant(
+                    created=True,
+                ),
             ),
-            last_id="23",
+            cursor="23",
             limit=42,
         ),
     ),

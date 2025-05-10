@@ -2,8 +2,9 @@
   "filter": {
     "offer_id": null,
     "product_id": null,
-    "visibility": null
+    "visibility": null,
+    "with_quant": null
   },
-  "last_id": "23",
+  "cursor": "23",
   "limit": 42
 }

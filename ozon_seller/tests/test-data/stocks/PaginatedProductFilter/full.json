@@ -8,11 +8,11 @@
       "112",
       "212"
     ],
-    "visibility": [
-      "one",
-      "two"
-    ]
+    "visibility": "visibility",
+    "with_quant": {
+      "created": true
+    }
   },
-  "last_id": "23",
+  "cursor": "23",
   "limit": 42
 }

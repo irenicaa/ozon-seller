@@ -2,8 +2,11 @@
   "filter": {
     "offer_id": [],
     "product_id": [],
-    "visibility": []
+    "visibility": "visibility",
+    "with_quant": {
+      "created": null
+    }
   },
-  "last_id": "23",
+  "cursor": "23",
   "limit": 42
 }

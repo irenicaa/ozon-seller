@@ -1,0 +1,12 @@
+{
+  "filter": {
+    "offer_id": null,
+    "product_id": null,
+    "sku": null,
+    "visibility": null
+  },
+  "last_id": "23",
+  "limit": 42,
+  "sort_dir": "sort-dir",
+  "sort_by": "sort-by"
+}
