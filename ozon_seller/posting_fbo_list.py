@@ -25,9 +25,8 @@ class PostingAdditionalFields(DataClassJsonMixin):
 
 @dataclass
 class GetPostingFBOListFilter(DataClassJsonMixin):
-    since: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
+    since: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
     to: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
     status: Optional[str] = None
 

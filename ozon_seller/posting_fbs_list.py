@@ -33,9 +33,8 @@ class GetPostingFBSListFilter(DataClassJsonMixin):
     provider_id: Optional[list[int]] = None
     status: Optional[str] = None
     warehouse_id: Optional[list[int]] = None
-    since: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
+    since: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
     to: Optional[datetime.datetime] = datetime_field.optional_datetime_field()
 
 

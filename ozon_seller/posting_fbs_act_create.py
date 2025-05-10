@@ -21,9 +21,8 @@ from .common import credentials, request_api, datetime_field
 class PostingFSBDeliveryData(DataClassJsonMixin):
     containers_count: Optional[int] = None
     delivery_method_id: Optional[int] = None
-    departure_date: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
+    departure_date: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
 
 
 # Response

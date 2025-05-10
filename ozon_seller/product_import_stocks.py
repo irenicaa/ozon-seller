@@ -1,25 +1,23 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json
+from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 
 from .common import credentials, request_api
 
 # Request
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductsStocksList:
+class ProductsStocksList(DataClassJsonMixin):
     offer_id: str
     product_id: int
     stock: int
     warehouse_id: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductImportProductsStocks:
+class ProductImportProductsStocks(DataClassJsonMixin):
     stocks: list[ProductsStocksList]
 
 
