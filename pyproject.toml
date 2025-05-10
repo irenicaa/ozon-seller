@@ -1,22 +1,18 @@
 [build-system]
-requires = [
-  "setuptools >= 65.1.0, < 69.0.0",
-  "wheel >= 0.37.1, < 0.38.0",
-]
+requires = ["setuptools >= 65.1.0, < 69.0.0", "wheel >= 0.37.1, < 0.38.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ozon_seller"
+name = "ozon-seller"
 description = "Ozon seller library"
-license = { text = "MIT" }
-authors = [
-  { name = "irenica", email = "root@irenica.pro" },
-]
+readme = "README.md"
+license = { text = "MIT License" }
+authors = [{ name = "irenica", email = "root@irenica.pro" }]
 requires-python = ">= 3.9.13, < 4.0.0"
 dependencies = [
-  "dataclasses_json >=0.5.7, <1.0.0",
-  "marshmallow >=3.16.0, <4.0.0",
-  "requests >=2.28.0, <3.0.0",
+  "dataclasses_json >= 0.5.7, < 1.0.0",
+  "marshmallow >= 3.16.0, < 4.0.0",
+  "requests >= 2.28.0, < 3.0.0",
 ]
 dynamic = ["version"]
 
@@ -50,6 +46,3 @@ strict_equality = true
 
 show_column_numbers = true
 show_error_codes = true
-
-[tool.black]
-line-length = 80
