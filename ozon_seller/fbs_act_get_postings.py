@@ -39,7 +39,6 @@ class PostingFBSActDataResponseResult:
     products: list[PostingFBSActDataResponseProducts]
 
 
-
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
 class PostingFBSActDataResponseResultWrapper:

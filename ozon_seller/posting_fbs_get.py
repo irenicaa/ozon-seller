@@ -216,9 +216,8 @@ class GetPostingFBSDatatResponseAnalyticsData:
     tpl_provider_id: int
     warehouse: str
     warehouse_id: int
-    delivery_date_begin: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
+    delivery_date_begin: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
@@ -259,15 +258,12 @@ class GetPostingFBSDataResponseResult:
     status: str
     tpl_integration_type: str
     tracking_number: str
-    delivering_date: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
-    in_process_at: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
-    shipment_date: Optional[
-        datetime.datetime
-    ] = datetime_field.optional_datetime_field()
+    delivering_date: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
+    in_process_at: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
+    shipment_date: Optional[datetime.datetime] = \
+        datetime_field.optional_datetime_field()
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
