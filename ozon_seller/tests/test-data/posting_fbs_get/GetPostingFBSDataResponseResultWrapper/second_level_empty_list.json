@@ -1,0 +1,28 @@
+{
+  "result": {
+    "additional_data": [],
+    "addressee": null,
+    "analytics_data": null,
+    "barcodes": null,
+    "cancellation": null,
+    "courier": null,
+    "customer": null,
+    "delivery_method": null,
+    "delivery_price": "100",
+    "financial_data": null,
+    "is_express": true,
+    "order_id": 105,
+    "order_number": "112",
+    "posting_number": "123",
+    "product_exemplars": null,
+    "products": [],
+    "provider_status": "provider status",
+    "requirements": null,
+    "status": "status",
+    "tpl_integration_type": "tpl integration type",
+    "tracking_number": "142",
+    "delivering_date": null,
+    "in_process_at": null,
+    "shipment_date": null
+  }
+}

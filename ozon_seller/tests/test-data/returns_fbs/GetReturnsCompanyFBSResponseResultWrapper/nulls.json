@@ -1,0 +1,61 @@
+{
+  "result": {
+    "returns": [
+      {
+        "accepted_from_customer_moment": null,
+        "clearing_id": null,
+        "commission": null,
+        "commission_percent": null,
+        "id": null,
+        "is_moving": null,
+        "is_opened": null,
+        "last_free_waiting_day": null,
+        "place_id": null,
+        "moving_to_place_name": null,
+        "picking_amount": null,
+        "posting_number": null,
+        "price": null,
+        "price_without_commission": null,
+        "product_id": null,
+        "product_name": null,
+        "quantity": null,
+        "return_date": null,
+        "return_reason_name": null,
+        "waiting_for_seller_date_time": null,
+        "returned_to_seller_date_time": null,
+        "waiting_for_seller_days": null,
+        "returns_keeping_cost": null,
+        "sku": null,
+        "status": null
+      },
+      {
+        "accepted_from_customer_moment": null,
+        "clearing_id": null,
+        "commission": null,
+        "commission_percent": null,
+        "id": null,
+        "is_moving": null,
+        "is_opened": null,
+        "last_free_waiting_day": null,
+        "place_id": null,
+        "moving_to_place_name": null,
+        "picking_amount": null,
+        "posting_number": null,
+        "price": null,
+        "price_without_commission": null,
+        "product_id": null,
+        "product_name": null,
+        "quantity": null,
+        "return_date": null,
+        "return_reason_name": null,
+        "waiting_for_seller_date_time": null,
+        "returned_to_seller_date_time": null,
+        "waiting_for_seller_days": null,
+        "returns_keeping_cost": null,
+        "sku": null,
+        "status": null
+      }
+    ],
+    "count": 100
+  }
+}

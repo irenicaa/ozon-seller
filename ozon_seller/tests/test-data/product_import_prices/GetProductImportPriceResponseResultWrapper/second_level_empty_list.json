@@ -1,0 +1,16 @@
+{
+  "result": [
+    {
+      "errors": [],
+      "offer_id": "123",
+      "product_id": 142,
+      "updated": true
+    },
+    {
+      "errors": [],
+      "offer_id": "223",
+      "product_id": 242,
+      "updated": true
+    }
+  ]
+}

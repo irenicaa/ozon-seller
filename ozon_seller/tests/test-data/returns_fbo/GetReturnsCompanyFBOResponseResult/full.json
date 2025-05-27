@@ -1,0 +1,31 @@
+{
+  "returns": [
+    {
+      "company_id": 105,
+      "current_place_name": "current place name #1",
+      "dst_place_name": "dst place name #1",
+      "id": 112,
+      "is_opened": true,
+      "posting_number": "123",
+      "return_reason_name": "return reason name #1",
+      "sku": 142,
+      "status_name": "status name #1",
+      "accepted_from_customer_moment": "2006-01-02T08:04:05.999999+00:00",
+      "returned_to_ozon_moment": "2006-01-02T10:04:05.999999+00:00"
+    },
+    {
+      "company_id": 205,
+      "current_place_name": "current place name #2",
+      "dst_place_name": "dst place name #2",
+      "id": 212,
+      "is_opened": true,
+      "posting_number": "223",
+      "return_reason_name": "return reason name #2",
+      "sku": 242,
+      "status_name": "status name #2",
+      "accepted_from_customer_moment": "2006-01-02T12:04:05.999999+00:00",
+      "returned_to_ozon_moment": "2006-01-02T14:04:05.999999+00:00"
+    }
+  ],
+  "count": 100
+}

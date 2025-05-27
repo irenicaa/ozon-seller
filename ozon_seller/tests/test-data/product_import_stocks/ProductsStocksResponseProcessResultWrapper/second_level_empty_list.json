@@ -1,0 +1,18 @@
+{
+  "result": [
+    {
+      "errors": [],
+      "offer_id": "112",
+      "product_id": 123,
+      "updated": false,
+      "warehouse_id": 142
+    },
+    {
+      "errors": [],
+      "offer_id": "212",
+      "product_id": 223,
+      "updated": true,
+      "warehouse_id": 242
+    }
+  ]
+}

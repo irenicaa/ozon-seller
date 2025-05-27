@@ -1,0 +1,143 @@
+{
+  "result": {
+    "additional_data": [
+      {
+        "key": "key #1",
+        "value": "value #1"
+      },
+      {
+        "key": "key #2",
+        "value": "value #2"
+      }
+    ],
+    "addressee": {
+      "name": "name #1",
+      "phone": "phone #1"
+    },
+    "analytics_data": {
+      "city": "city #1",
+      "is_premium": false,
+      "payment_type_group_name": "payment type group name",
+      "region": "region #1",
+      "tpl_provider": "tpl provider #1",
+      "tpl_provider_id": 1023,
+      "warehouse": "warehouse #1",
+      "warehouse_id": 1042,
+      "delivery_date_begin": null
+    },
+    "barcodes": {
+      "lower_barcode": "lower barcode",
+      "upper_barcode": "upper barcode"
+    },
+    "cancellation": {
+      "affect_cancellation_rating": false,
+      "cancel_reason": "cancel reason",
+      "cancel_reason_id": 2023,
+      "cancellation_initiator": "cancellation initiator",
+      "cancellation_type": "cancellation type",
+      "cancelled_after_ship": false
+    },
+    "courier": {
+      "car_model": "car model",
+      "car_number": "3023",
+      "name": "name #2",
+      "phone": "phone #2"
+    },
+    "customer": {
+      "address": {
+        "address_tail": "address tail",
+        "city": "city #2",
+        "comment": "comment",
+        "country": "country",
+        "district": "district",
+        "latitude": 1.01,
+        "longitude": 1.02,
+        "provider_pvz_code": "provider pvz code",
+        "pvz_code": 4023,
+        "region": "region #2",
+        "zip_code": "zip code"
+      },
+      "customer_email": "customer email",
+      "customer_id": 5023,
+      "name": "name #3",
+      "phone": "phone #3"
+    },
+    "delivery_method": {
+      "id": 6023,
+      "name": "name #4",
+      "tpl_provider": "tpl provider #2",
+      "tpl_provider_id": 7023,
+      "warehouse": "warehouse #2",
+      "warehouse_id": 8023
+    },
+    "delivery_price": "100",
+    "financial_data": {
+      "posting_services": {
+        "marketplace_service_item_deliv_to_customer": 1.03,
+        "marketplace_service_item_direct_flow_trans": 1.04,
+        "marketplace_service_item_dropoff_ff": 1.05,
+        "marketplace_service_item_dropoff_pvz": 1.06,
+        "marketplace_service_item_dropoff_sc": 1.07,
+        "marketplace_service_item_fulfillment": 1.08,
+        "marketplace_service_item_pickup": 1.09,
+        "marketplace_service_item_return_after_deliv_to_customer": 1.1,
+        "marketplace_service_item_return_flow_trans": 1.11,
+        "marketplace_service_item_return_not_deliv_to_customer": 1.12,
+        "marketplace_service_item_return_part_goods_customer": 1.13
+      },
+      "products": []
+    },
+    "is_express": true,
+    "order_id": 105,
+    "order_number": "112",
+    "posting_number": "123",
+    "product_exemplars": {
+      "products": []
+    },
+    "products": [
+      {
+        "dimensions": {
+          "height": "9005",
+          "length": "9012",
+          "weight": "9023",
+          "width": "9042"
+        },
+        "mandatory_mark": [],
+        "name": "name #5",
+        "offer_id": "10005",
+        "price": "10012",
+        "quantity": 10023,
+        "sku": 10042,
+        "currency_code": "USD"
+      },
+      {
+        "dimensions": {
+          "height": "11005",
+          "length": "11012",
+          "weight": "11023",
+          "width": "11042"
+        },
+        "mandatory_mark": [],
+        "name": "name #6",
+        "offer_id": "12005",
+        "price": "12012",
+        "quantity": 12023,
+        "sku": 12042,
+        "currency_code": "EUR"
+      }
+    ],
+    "provider_status": "provider status",
+    "requirements": {
+      "products_requiring_gtd": null,
+      "products_requiring_country": null,
+      "products_requiring_mandatory_mark": null,
+      "products_requiring_rnpt": null
+    },
+    "status": "status",
+    "tpl_integration_type": "tpl integration type",
+    "tracking_number": "142",
+    "delivering_date": "2006-01-02T15:04:05.999999+07:00",
+    "in_process_at": "2006-01-02T17:04:05.999999+07:00",
+    "shipment_date": "2006-01-02T19:04:05.999999+07:00"
+  }
+}

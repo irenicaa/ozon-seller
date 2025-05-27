@@ -1,0 +1,36 @@
+{
+  "result": [
+    {
+      "errors": [
+        {
+          "code": "code #1",
+          "message": "message #1"
+        },
+        {
+          "code": "code #2",
+          "message": "message #2"
+        }
+      ],
+      "offer_id": "112",
+      "product_id": 123,
+      "updated": false,
+      "warehouse_id": 142
+    },
+    {
+      "errors": [
+        {
+          "code": "code #3",
+          "message": "message #3"
+        },
+        {
+          "code": "code #4",
+          "message": "message #4"
+        }
+      ],
+      "offer_id": "212",
+      "product_id": 223,
+      "updated": true,
+      "warehouse_id": 242
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "result": [
+    {
+      "name": "name #1",
+      "country_iso_code": "US"
+    },
+    {
+      "name": "name #2",
+      "country_iso_code": "DE"
+    }
+  ]
+}

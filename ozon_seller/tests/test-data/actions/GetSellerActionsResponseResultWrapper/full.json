@@ -1,0 +1,40 @@
+{
+  "result": [
+    {
+      "id": 100.5,
+      "title": "title #1",
+      "action_type": "action type #1",
+      "description": "description #1",
+      "date_start": "2006-01-02T08:04:05.999999+00:00",
+      "date_end": "2006-01-02T10:04:05.999999+00:00",
+      "freeze_date": "2006-01-02T12:04:05.999999+00:00",
+      "potential_products_count": 101.2,
+      "participating_products_count": 102.3,
+      "is_participating": true,
+      "banned_products_count": 104.2,
+      "with_targeting": true,
+      "order_amount": 150.5,
+      "discount_type": "discount type #1",
+      "discount_value": 151.2,
+      "is_voucher_action": true
+    },
+    {
+      "id": 200.5,
+      "title": "title #2",
+      "action_type": "action type #2",
+      "description": "description #2",
+      "date_start": "2006-01-02T14:04:05.999999+00:00",
+      "date_end": "2006-01-02T16:04:05.999999+00:00",
+      "freeze_date": "2006-01-02T18:04:05.999999+00:00",
+      "potential_products_count": 201.2,
+      "participating_products_count": 202.3,
+      "is_participating": true,
+      "banned_products_count": 204.2,
+      "with_targeting": true,
+      "order_amount": 250.5,
+      "discount_type": "discount type #2",
+      "discount_value": 251.2,
+      "is_voucher_action": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "result": [
+    {
+      "id": 112,
+      "multi_box_qty": 123,
+      "posting_number": "142",
+      "status": "status #1",
+      "seller_error": "seller error #1",
+      "updated_at": "2006-01-02T17:04:05.999999+07:00",
+      "created_at": "2006-01-02T15:04:05.999999+07:00",
+      "products": []
+    },
+    {
+      "id": 212,
+      "multi_box_qty": 223,
+      "posting_number": "242",
+      "status": "status #2",
+      "seller_error": "seller error #2",
+      "updated_at": "2006-01-03T17:04:05.999999+07:00",
+      "created_at": "2006-01-03T15:04:05.999999+07:00",
+      "products": []
+    }
+  ]
+}

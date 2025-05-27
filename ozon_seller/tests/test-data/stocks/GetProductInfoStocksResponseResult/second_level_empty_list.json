@@ -1,0 +1,16 @@
+{
+  "cursor": "23",
+  "items": [
+    {
+      "offer_id": "123",
+      "product_id": 142,
+      "stocks": []
+    },
+    {
+      "offer_id": "223",
+      "product_id": 242,
+      "stocks": []
+    }
+  ],
+  "total": 42
+}

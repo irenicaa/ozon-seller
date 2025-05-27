@@ -1,0 +1,54 @@
+{
+  "result": [
+    {
+      "id": 112,
+      "multi_box_qty": 123,
+      "posting_number": "142",
+      "status": "status #1",
+      "seller_error": "seller error #1",
+      "updated_at": "2006-01-02T17:04:05.999999+07:00",
+      "created_at": "2006-01-02T15:04:05.999999+07:00",
+      "products": [
+        {
+          "name": "name #1",
+          "offer_id": "1005",
+          "price": "1012.5",
+          "quantity": 1023,
+          "sku": 1042
+        },
+        {
+          "name": "name #2",
+          "offer_id": "2005",
+          "price": "2012.5",
+          "quantity": 2023,
+          "sku": 2042
+        }
+      ]
+    },
+    {
+      "id": 212,
+      "multi_box_qty": 223,
+      "posting_number": "242",
+      "status": "status #2",
+      "seller_error": "seller error #2",
+      "updated_at": "2006-01-03T17:04:05.999999+07:00",
+      "created_at": "2006-01-03T15:04:05.999999+07:00",
+      "products": [
+        {
+          "name": "name #3",
+          "offer_id": "3005",
+          "price": "3012.5",
+          "quantity": 3023,
+          "sku": 3042
+        },
+        {
+          "name": "name #4",
+          "offer_id": "4005",
+          "price": "4012.5",
+          "quantity": 4023,
+          "sku": 4042
+        }
+      ]
+    }
+  ]
+}

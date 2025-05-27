@@ -1,0 +1,245 @@
+{
+  "result": {
+    "additional_data": [
+      {
+        "key": "key #1",
+        "value": "value #1"
+      },
+      {
+        "key": "key #2",
+        "value": "value #2"
+      }
+    ],
+    "addressee": {
+      "name": "name #1",
+      "phone": "phone #1"
+    },
+    "analytics_data": {
+      "city": "city #1",
+      "is_premium": true,
+      "payment_type_group_name": "payment type group name",
+      "region": "region #1",
+      "tpl_provider": "tpl provider #1",
+      "tpl_provider_id": 1023,
+      "warehouse": "warehouse #1",
+      "warehouse_id": 1042,
+      "delivery_date_begin": "2006-01-02T21:04:05.999999+07:00"
+    },
+    "barcodes": {
+      "lower_barcode": "lower barcode",
+      "upper_barcode": "upper barcode"
+    },
+    "cancellation": {
+      "affect_cancellation_rating": true,
+      "cancel_reason": "cancel reason",
+      "cancel_reason_id": 2023,
+      "cancellation_initiator": "cancellation initiator",
+      "cancellation_type": "cancellation type",
+      "cancelled_after_ship": true
+    },
+    "courier": {
+      "car_model": "car model",
+      "car_number": "3023",
+      "name": "name #2",
+      "phone": "phone #2"
+    },
+    "customer": {
+      "address": {
+        "address_tail": "address tail",
+        "city": "city #2",
+        "comment": "comment",
+        "country": "country",
+        "district": "district",
+        "latitude": 1.01,
+        "longitude": 1.02,
+        "provider_pvz_code": "provider pvz code",
+        "pvz_code": 4023,
+        "region": "region #2",
+        "zip_code": "zip code"
+      },
+      "customer_email": "customer email",
+      "customer_id": 5023,
+      "name": "name #3",
+      "phone": "phone #3"
+    },
+    "delivery_method": {
+      "id": 6023,
+      "name": "name #4",
+      "tpl_provider": "tpl provider #2",
+      "tpl_provider_id": 7023,
+      "warehouse": "warehouse #2",
+      "warehouse_id": 8023
+    },
+    "delivery_price": "100",
+    "financial_data": {
+      "posting_services": {
+        "marketplace_service_item_deliv_to_customer": 1.03,
+        "marketplace_service_item_direct_flow_trans": 1.04,
+        "marketplace_service_item_dropoff_ff": 1.05,
+        "marketplace_service_item_dropoff_pvz": 1.06,
+        "marketplace_service_item_dropoff_sc": 1.07,
+        "marketplace_service_item_fulfillment": 1.08,
+        "marketplace_service_item_pickup": 1.09,
+        "marketplace_service_item_return_after_deliv_to_customer": 1.1,
+        "marketplace_service_item_return_flow_trans": 1.11,
+        "marketplace_service_item_return_not_deliv_to_customer": 1.12,
+        "marketplace_service_item_return_part_goods_customer": 1.13
+      },
+      "products": [
+        {
+          "actions": ["action #1", "action #2"],
+          "client_price": "100005",
+          "commission_amount": 1.14,
+          "commission_percent": 23,
+          "item_services": {
+            "marketplace_service_item_deliv_to_customer": 10.01,
+            "marketplace_service_item_direct_flow_trans": 10.02,
+            "marketplace_service_item_dropoff_ff": 10.03,
+            "marketplace_service_item_dropoff_pvz": 10.04,
+            "marketplace_service_item_dropoff_sc": 10.05,
+            "marketplace_service_item_fulfillment": 10.06,
+            "marketplace_service_item_pickup": 10.07,
+            "marketplace_service_item_return_after_deliv_to_customer": 10.08,
+            "marketplace_service_item_return_flow_trans": 10.09,
+            "marketplace_service_item_return_not_deliv_to_customer": 10.1,
+            "marketplace_service_item_return_part_goods_customer": 10.11
+          },
+          "old_price": 1.15,
+          "payout": 1.16,
+          "picking": {
+            "amount": 10.12,
+            "tag": "tag #1",
+            "moment": "2006-01-02T23:04:05.999999+07:00"
+          },
+          "price": 1.17,
+          "product_id": 100012,
+          "quantity": 100023,
+          "total_discount_percent": 1.18,
+          "total_discount_value": 1.19
+        },
+        {
+          "actions": ["action #3", "action #4"],
+          "client_price": "200005",
+          "commission_amount": 1.2,
+          "commission_percent": 42,
+          "item_services": {
+            "marketplace_service_item_deliv_to_customer": 20.01,
+            "marketplace_service_item_direct_flow_trans": 20.02,
+            "marketplace_service_item_dropoff_ff": 20.03,
+            "marketplace_service_item_dropoff_pvz": 20.04,
+            "marketplace_service_item_dropoff_sc": 20.05,
+            "marketplace_service_item_fulfillment": 20.06,
+            "marketplace_service_item_pickup": 20.07,
+            "marketplace_service_item_return_after_deliv_to_customer": 20.08,
+            "marketplace_service_item_return_flow_trans": 20.09,
+            "marketplace_service_item_return_not_deliv_to_customer": 20.1,
+            "marketplace_service_item_return_part_goods_customer": 20.11
+          },
+          "old_price": 1.21,
+          "payout": 1.22,
+          "picking": {
+            "amount": 20.12,
+            "tag": "tag #2",
+            "moment": "2006-01-03T01:04:05.999999+07:00"
+          },
+          "price": 1.23,
+          "product_id": 200012,
+          "quantity": 200023,
+          "total_discount_percent": 1.24,
+          "total_discount_value": 1.25
+        }
+      ]
+    },
+    "is_express": true,
+    "order_id": 105,
+    "order_number": "112",
+    "posting_number": "123",
+    "product_exemplars": {
+      "products": [
+        {
+          "exemplars": [
+            {
+              "mandatory_mark": "mandatory mark #1",
+              "gtd": "gtd #1",
+              "is_gtd_absent": false,
+              "rnpt": "rnpt #1",
+              "is_rnpt_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory mark #2",
+              "gtd": "gtd #2",
+              "is_gtd_absent": true,
+              "rnpt": "rnpt #2",
+              "is_rnpt_absent": true
+            }
+          ],
+          "sku": 1000023
+        },
+        {
+          "exemplars": [
+            {
+              "mandatory_mark": "mandatory mark #3",
+              "gtd": "gtd #3",
+              "is_gtd_absent": false,
+              "rnpt": "rnpt #3",
+              "is_rnpt_absent": false
+            },
+            {
+              "mandatory_mark": "mandatory mark #4",
+              "gtd": "gtd #4",
+              "is_gtd_absent": true,
+              "rnpt": "rnpt #4",
+              "is_rnpt_absent": true
+            }
+          ],
+          "sku": 2000023
+        }
+      ]
+    },
+    "products": [
+      {
+        "dimensions": {
+          "height": "9005",
+          "length": "9012",
+          "weight": "9023",
+          "width": "9042"
+        },
+        "mandatory_mark": ["mandatory mark #1", "mandatory mark #2"],
+        "name": "name #5",
+        "offer_id": "10005",
+        "price": "10012",
+        "quantity": 10023,
+        "sku": 10042,
+        "currency_code": "USD"
+      },
+      {
+        "dimensions": {
+          "height": "11005",
+          "length": "11012",
+          "weight": "11023",
+          "width": "11042"
+        },
+        "mandatory_mark": ["mandatory mark #3", "mandatory mark #4"],
+        "name": "name #6",
+        "offer_id": "12005",
+        "price": "12012",
+        "quantity": 12023,
+        "sku": 12042,
+        "currency_code": "EUR"
+      }
+    ],
+    "provider_status": "provider status",
+    "requirements": {
+      "products_requiring_gtd": [10000001, 10000002],
+      "products_requiring_country": [10000003, 10000004],
+      "products_requiring_mandatory_mark": [10000005, 10000006],
+      "products_requiring_rnpt": [10000007, 10000008]
+    },
+    "status": "status",
+    "tpl_integration_type": "tpl integration type",
+    "tracking_number": "142",
+    "delivering_date": "2006-01-02T15:04:05.999999+07:00",
+    "in_process_at": "2006-01-02T17:04:05.999999+07:00",
+    "shipment_date": "2006-01-02T19:04:05.999999+07:00"
+  }
+}

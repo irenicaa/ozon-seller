@@ -1,0 +1,38 @@
+{
+  "cursor": "23",
+  "items": [
+    {
+      "offer_id": "123",
+      "product_id": 142,
+      "stocks": [
+        {
+          "present": 1023,
+          "reserved": 1042,
+          "type": "type #1"
+        },
+        {
+          "present": 2023,
+          "reserved": 2042,
+          "type": "type #2"
+        }
+      ]
+    },
+    {
+      "offer_id": "223",
+      "product_id": 242,
+      "stocks": [
+        {
+          "present": 3023,
+          "reserved": 3042,
+          "type": "type #3"
+        },
+        {
+          "present": 4023,
+          "reserved": 4042,
+          "type": "type #4"
+        }
+      ]
+    }
+  ],
+  "total": 42
+}
