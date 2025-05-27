@@ -14,15 +14,6 @@ class FBSActData(DataClassJsonMixin):
     id: int
 
 
-# Response
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclass
-class PostingFBSResponseResult:
-    content: bytes
-
-
 def get_posting_fbs_act_barcode(
     credentials: credentials.Credentials,
     data: FBSActData,
