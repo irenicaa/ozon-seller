@@ -4,6 +4,7 @@ import datetime
 import unittest
 import pathlib
 
+from . import common
 from .. import (
     actions_candidates,
     actions_products,
@@ -25,6 +26,7 @@ from .. import (
     product_import_stocks,
     product_info_attributes,
     product_info,
+    product_pictures_import,
     products_stocks,
     returns_fbo,
     returns_fbs,
@@ -38,8 +40,7 @@ class _RequestsTestCase:
     data: DataClassJsonMixin
 
 
-_TEST_DATA_DIRECTORY = "test-data"
-_TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(_TEST_DATA_DIRECTORY)
+_TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)
 _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
     # actions_candidates.PaginatedCandidatesForActions
     _RequestsTestCase(
@@ -748,6 +749,9 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
         ),
     ),
 
+    # product_pictures_import.ProductPictures
+    # TODO: add test cases for the `product_pictures_import.ProductPictures` class
+
     # products_stocks.StocksData
     _RequestsTestCase(
         kind="empty",
@@ -932,14 +936,14 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
 class TestRequests(unittest.TestCase):
     def test_requests(self) -> None:
         for test_case in _REQUESTS_TEST_CASES:
-            data_name = _get_full_qualified_name(test_case.data)
+            data_name = common.get_full_qualified_name(test_case.data)
             test_case_name = f"{data_name} [{test_case.kind}]"
 
             with self.subTest(test_case_name):
                 expected_json_filename = f"{test_case.kind}.json"
                 expected_json_path = _TEST_DATA_PATH.joinpath(
-                    _get_last_module(test_case.data),
-                    _get_qualified_name(test_case.data),
+                    common.get_last_module(test_case.data),
+                    common.get_qualified_name(test_case.data),
                     expected_json_filename,
                 )
 
@@ -949,15 +953,3 @@ class TestRequests(unittest.TestCase):
                 actual_json = test_case.data.to_json(indent=2)
 
                 self.assertMultiLineEqual(expected_json, actual_json)
-
-
-def _get_full_qualified_name(obj: object) -> str:
-    return f"{_get_last_module(obj)}.{_get_qualified_name(obj)}"
-
-
-def _get_last_module(obj: object) -> str:
-    return obj.__module__.split(".")[-1]
-
-
-def _get_qualified_name(obj: object) -> str:
-    return obj.__class__.__qualname__
