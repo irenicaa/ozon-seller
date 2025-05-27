@@ -1,5 +1,8 @@
 # ozon-seller
 
+[![lint](https://github.com/irenicaa/ozon-seller/actions/workflows/lint.yaml/badge.svg)](https://github.com/irenicaa/ozon-seller/actions/workflows/lint.yaml)
+[![test](https://github.com/irenicaa/ozon-seller/actions/workflows/test.yaml/badge.svg)](https://github.com/irenicaa/ozon-seller/actions/workflows/test.yaml)
+
 A library that implements a client for [Ozon Seller API](https://docs.ozon.ru/api/seller/en/).
 
 ## Features
