@@ -21,15 +21,6 @@ class FBSPackageData(DataClassJsonMixin):
     posting_number: list[str]
 
 
-# Response
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclass
-class PostingFBSResonseResult:
-    content: bytes
-
-
 def get_posting_fbs_package_label(
     credentials: credentials.Credentials,
     data: FBSPackageData,
