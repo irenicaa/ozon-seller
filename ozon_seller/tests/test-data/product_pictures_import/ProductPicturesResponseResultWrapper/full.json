@@ -1,7 +1,10 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "pictures": [
       {
+        "unexpected_key": "unexpected value",
         "is_360": false,
         "is_color": false,
         "is_primary": false,
@@ -10,6 +13,7 @@
         "url": "url #1"
       },
       {
+        "unexpected_key": "unexpected value",
         "is_360": true,
         "is_color": true,
         "is_primary": true,

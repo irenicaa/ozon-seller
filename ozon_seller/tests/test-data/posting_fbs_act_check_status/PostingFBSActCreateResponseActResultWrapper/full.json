@@ -1,14 +1,10 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "act_type": "act_type",
-    "added_to_act": [
-      "one",
-      "two"
-    ],
-    "removed_from_act": [
-      "three",
-      "four"
-    ],
+    "added_to_act": ["one", "two"],
+    "removed_from_act": ["three", "four"],
     "status": "status"
   }
 }

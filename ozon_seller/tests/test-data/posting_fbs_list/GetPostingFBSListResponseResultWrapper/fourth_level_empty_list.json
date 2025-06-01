@@ -1,12 +1,17 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "postings": [
       {
+        "unexpected_key": "unexpected value",
         "addressee": {
+          "unexpected_key": "unexpected value",
           "name": "name #11",
           "phone": "phone #11"
         },
         "analytics_data": {
+          "unexpected_key": "unexpected value",
           "city": "city #11",
           "is_premium": false,
           "payment_type_group_name": "payment type group name #11",
@@ -18,10 +23,12 @@
           "delivery_date_begin": null
         },
         "barcodes": {
+          "unexpected_key": "unexpected value",
           "lower_barcode": "lower barcode #11",
           "upper_barcode": "upper barcode #11"
         },
         "cancellation": {
+          "unexpected_key": "unexpected value",
           "affect_cancellation_rating": false,
           "cancel_reason": "cancel reason #11",
           "cancel_reason_id": 12023,
@@ -30,7 +37,9 @@
           "cancelled_after_ship": false
         },
         "customer": {
+          "unexpected_key": "unexpected value",
           "address": {
+            "unexpected_key": "unexpected value",
             "address_tail": "address tail #11",
             "city": "city #12",
             "comment": "comment #11",
@@ -49,6 +58,7 @@
           "phone": "phone #12"
         },
         "delivery_method": {
+          "unexpected_key": "unexpected value",
           "id": 14012,
           "name": "name #13",
           "tpl_provider": "tpl provider #12",
@@ -57,7 +67,9 @@
           "warehouse_id": 14042
         },
         "financial_data": {
+          "unexpected_key": "unexpected value",
           "posting_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 11.03,
             "marketplace_service_item_direct_flow_trans": 11.04,
             "marketplace_service_item_dropoff_ff": 11.05,
@@ -78,6 +90,7 @@
         "posting_number": "123",
         "products": [
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": [],
             "name": "name #14",
             "offer_id": "15005",
@@ -87,6 +100,7 @@
             "currency_code": "currency code #11"
           },
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": [],
             "name": "name #15",
             "offer_id": "16005",
@@ -97,6 +111,7 @@
           }
         ],
         "requirements": {
+          "unexpected_key": "unexpected value",
           "products_requiring_gtd": null,
           "products_requiring_country": null,
           "products_requiring_mandatory_mark": null,
@@ -110,11 +125,14 @@
         "shipment_date": "2006-01-02T19:04:05.999999+07:00"
       },
       {
+        "unexpected_key": "unexpected value",
         "addressee": {
+          "unexpected_key": "unexpected value",
           "name": "name #21",
           "phone": "phone #21"
         },
         "analytics_data": {
+          "unexpected_key": "unexpected value",
           "city": "city #21",
           "is_premium": true,
           "payment_type_group_name": "payment type group name #21",
@@ -126,10 +144,12 @@
           "delivery_date_begin": null
         },
         "barcodes": {
+          "unexpected_key": "unexpected value",
           "lower_barcode": "lower barcode #21",
           "upper_barcode": "upper barcode #21"
         },
         "cancellation": {
+          "unexpected_key": "unexpected value",
           "affect_cancellation_rating": true,
           "cancel_reason": "cancel reason #21",
           "cancel_reason_id": 22023,
@@ -138,7 +158,9 @@
           "cancelled_after_ship": true
         },
         "customer": {
+          "unexpected_key": "unexpected value",
           "address": {
+            "unexpected_key": "unexpected value",
             "address_tail": "address tail #21",
             "city": "city #22",
             "comment": "comment #21",
@@ -157,6 +179,7 @@
           "phone": "phone #22"
         },
         "delivery_method": {
+          "unexpected_key": "unexpected value",
           "id": 24012,
           "name": "name #23",
           "tpl_provider": "tpl provider #22",
@@ -165,7 +188,9 @@
           "warehouse_id": 24042
         },
         "financial_data": {
+          "unexpected_key": "unexpected value",
           "posting_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 21.03,
             "marketplace_service_item_direct_flow_trans": 21.04,
             "marketplace_service_item_dropoff_ff": 21.05,
@@ -186,6 +211,7 @@
         "posting_number": "223",
         "products": [
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": [],
             "name": "name #24",
             "offer_id": "25005",
@@ -195,6 +221,7 @@
             "currency_code": "currency code #21"
           },
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": [],
             "name": "name #25",
             "offer_id": "26005",
@@ -205,6 +232,7 @@
           }
         ],
         "requirements": {
+          "unexpected_key": "unexpected value",
           "products_requiring_gtd": null,
           "products_requiring_country": null,
           "products_requiring_mandatory_mark": null,

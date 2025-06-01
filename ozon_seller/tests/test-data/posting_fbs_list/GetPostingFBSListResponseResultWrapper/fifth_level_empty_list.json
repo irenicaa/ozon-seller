@@ -1,12 +1,17 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "postings": [
       {
+        "unexpected_key": "unexpected value",
         "addressee": {
+          "unexpected_key": "unexpected value",
           "name": "name #11",
           "phone": "phone #11"
         },
         "analytics_data": {
+          "unexpected_key": "unexpected value",
           "city": "city #11",
           "is_premium": false,
           "payment_type_group_name": "payment type group name #11",
@@ -18,10 +23,12 @@
           "delivery_date_begin": "2006-01-03T01:04:05.999999+07:00"
         },
         "barcodes": {
+          "unexpected_key": "unexpected value",
           "lower_barcode": "lower barcode #11",
           "upper_barcode": "upper barcode #11"
         },
         "cancellation": {
+          "unexpected_key": "unexpected value",
           "affect_cancellation_rating": false,
           "cancel_reason": "cancel reason #11",
           "cancel_reason_id": 12023,
@@ -30,7 +37,9 @@
           "cancelled_after_ship": false
         },
         "customer": {
+          "unexpected_key": "unexpected value",
           "address": {
+            "unexpected_key": "unexpected value",
             "address_tail": "address tail #11",
             "city": "city #12",
             "comment": "comment #11",
@@ -49,6 +58,7 @@
           "phone": "phone #12"
         },
         "delivery_method": {
+          "unexpected_key": "unexpected value",
           "id": 14012,
           "name": "name #13",
           "tpl_provider": "tpl provider #12",
@@ -57,7 +67,9 @@
           "warehouse_id": 14042
         },
         "financial_data": {
+          "unexpected_key": "unexpected value",
           "posting_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 11.03,
             "marketplace_service_item_direct_flow_trans": 11.04,
             "marketplace_service_item_dropoff_ff": 11.05,
@@ -72,11 +84,13 @@
           },
           "products": [
             {
+              "unexpected_key": "unexpected value",
               "actions": [],
               "client_price": "17005",
               "commission_amount": 11.14,
               "commission_percent": 17012,
               "item_services": {
+                "unexpected_key": "unexpected value",
                 "marketplace_service_item_deliv_to_customer": 11.2,
                 "marketplace_service_item_direct_flow_trans": 11.21,
                 "marketplace_service_item_dropoff_ff": 11.22,
@@ -92,6 +106,7 @@
               "old_price": 11.15,
               "payout": 11.16,
               "picking": {
+                "unexpected_key": "unexpected value",
                 "amount": 11.31,
                 "tag": "tag #11",
                 "moment": "2006-01-02T21:04:05.999999+07:00"
@@ -103,11 +118,13 @@
               "total_discount_value": 11.19
             },
             {
+              "unexpected_key": "unexpected value",
               "actions": [],
               "client_price": "18005",
               "commission_amount": 11.32,
               "commission_percent": 18012,
               "item_services": {
+                "unexpected_key": "unexpected value",
                 "marketplace_service_item_deliv_to_customer": 11.38,
                 "marketplace_service_item_direct_flow_trans": 11.39,
                 "marketplace_service_item_dropoff_ff": 11.4,
@@ -123,6 +140,7 @@
               "old_price": 11.33,
               "payout": 11.34,
               "picking": {
+                "unexpected_key": "unexpected value",
                 "amount": 11.49,
                 "tag": "tag #12",
                 "moment": "2006-01-02T23:04:05.999999+07:00"
@@ -141,6 +159,7 @@
         "posting_number": "123",
         "products": [
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": ["mandatory mark #1", "mandatory mark #2"],
             "name": "name #14",
             "offer_id": "15005",
@@ -150,6 +169,7 @@
             "currency_code": "currency code #11"
           },
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": ["mandatory mark #3", "mandatory mark #4"],
             "name": "name #15",
             "offer_id": "16005",
@@ -160,6 +180,7 @@
           }
         ],
         "requirements": {
+          "unexpected_key": "unexpected value",
           "products_requiring_gtd": [],
           "products_requiring_country": [],
           "products_requiring_mandatory_mark": [],
@@ -173,11 +194,14 @@
         "shipment_date": "2006-01-02T19:04:05.999999+07:00"
       },
       {
+        "unexpected_key": "unexpected value",
         "addressee": {
+          "unexpected_key": "unexpected value",
           "name": "name #21",
           "phone": "phone #21"
         },
         "analytics_data": {
+          "unexpected_key": "unexpected value",
           "city": "city #21",
           "is_premium": true,
           "payment_type_group_name": "payment type group name #21",
@@ -189,10 +213,12 @@
           "delivery_date_begin": "2006-01-04T01:04:05.999999+07:00"
         },
         "barcodes": {
+          "unexpected_key": "unexpected value",
           "lower_barcode": "lower barcode #21",
           "upper_barcode": "upper barcode #21"
         },
         "cancellation": {
+          "unexpected_key": "unexpected value",
           "affect_cancellation_rating": true,
           "cancel_reason": "cancel reason #21",
           "cancel_reason_id": 22023,
@@ -201,7 +227,9 @@
           "cancelled_after_ship": true
         },
         "customer": {
+          "unexpected_key": "unexpected value",
           "address": {
+            "unexpected_key": "unexpected value",
             "address_tail": "address tail #21",
             "city": "city #22",
             "comment": "comment #21",
@@ -220,6 +248,7 @@
           "phone": "phone #22"
         },
         "delivery_method": {
+          "unexpected_key": "unexpected value",
           "id": 24012,
           "name": "name #23",
           "tpl_provider": "tpl provider #22",
@@ -228,7 +257,9 @@
           "warehouse_id": 24042
         },
         "financial_data": {
+          "unexpected_key": "unexpected value",
           "posting_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 21.03,
             "marketplace_service_item_direct_flow_trans": 21.04,
             "marketplace_service_item_dropoff_ff": 21.05,
@@ -243,11 +274,13 @@
           },
           "products": [
             {
+              "unexpected_key": "unexpected value",
               "actions": [],
               "client_price": "27005",
               "commission_amount": 21.14,
               "commission_percent": 27012,
               "item_services": {
+                "unexpected_key": "unexpected value",
                 "marketplace_service_item_deliv_to_customer": 21.2,
                 "marketplace_service_item_direct_flow_trans": 21.21,
                 "marketplace_service_item_dropoff_ff": 21.22,
@@ -263,6 +296,7 @@
               "old_price": 21.15,
               "payout": 21.16,
               "picking": {
+                "unexpected_key": "unexpected value",
                 "amount": 21.31,
                 "tag": "tag #21",
                 "moment": "2006-01-03T21:04:05.999999+07:00"
@@ -274,11 +308,13 @@
               "total_discount_value": 21.19
             },
             {
+              "unexpected_key": "unexpected value",
               "actions": [],
               "client_price": "28005",
               "commission_amount": 21.32,
               "commission_percent": 28012,
               "item_services": {
+                "unexpected_key": "unexpected value",
                 "marketplace_service_item_deliv_to_customer": 21.38,
                 "marketplace_service_item_direct_flow_trans": 21.39,
                 "marketplace_service_item_dropoff_ff": 21.4,
@@ -294,6 +330,7 @@
               "old_price": 21.33,
               "payout": 21.34,
               "picking": {
+                "unexpected_key": "unexpected value",
                 "amount": 21.49,
                 "tag": "tag #22",
                 "moment": "2006-01-03T23:04:05.999999+07:00"
@@ -312,6 +349,7 @@
         "posting_number": "223",
         "products": [
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": ["mandatory mark #5", "mandatory mark #6"],
             "name": "name #24",
             "offer_id": "25005",
@@ -321,6 +359,7 @@
             "currency_code": "currency code #21"
           },
           {
+            "unexpected_key": "unexpected value",
             "mandatory_mark": ["mandatory mark #7", "mandatory mark #8"],
             "name": "name #25",
             "offer_id": "26005",
@@ -331,6 +370,7 @@
           }
         ],
         "requirements": {
+          "unexpected_key": "unexpected value",
           "products_requiring_gtd": [],
           "products_requiring_country": [],
           "products_requiring_mandatory_mark": [],

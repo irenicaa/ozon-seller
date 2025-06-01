@@ -1,7 +1,10 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "products": [
       {
+        "unexpected_key": "unexpected value",
         "id": 105,
         "price": 101.2,
         "action_price": 102.3,
@@ -11,6 +14,7 @@
         "stock": 151.2
       },
       {
+        "unexpected_key": "unexpected value",
         "id": 205,
         "price": 201.2,
         "action_price": 202.3,

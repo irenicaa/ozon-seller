@@ -1,6 +1,8 @@
 {
+  "unexpected_key": "unexpected value",
   "returns": [
     {
+      "unexpected_key": "unexpected value",
       "company_id": 105,
       "current_place_name": "current place name #1",
       "dst_place_name": "dst place name #1",
@@ -14,6 +16,7 @@
       "returned_to_ozon_moment": "2006-01-02T10:04:05.999999+00:00"
     },
     {
+      "unexpected_key": "unexpected value",
       "company_id": 205,
       "current_place_name": "current place name #2",
       "dst_place_name": "dst place name #2",

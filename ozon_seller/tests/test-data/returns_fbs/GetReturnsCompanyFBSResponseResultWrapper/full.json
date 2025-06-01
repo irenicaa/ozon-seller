@@ -1,7 +1,10 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "returns": [
       {
+        "unexpected_key": "unexpected value",
         "accepted_from_customer_moment": "accepted from customer moment #1",
         "clearing_id": 101,
         "commission": 102.5,
@@ -29,6 +32,7 @@
         "status": "status #1"
       },
       {
+        "unexpected_key": "unexpected value",
         "accepted_from_customer_moment": "accepted from customer moment #2",
         "clearing_id": 201,
         "commission": 202.5,

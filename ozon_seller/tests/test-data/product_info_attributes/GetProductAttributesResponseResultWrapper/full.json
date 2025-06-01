@@ -1,30 +1,38 @@
 {
+  "unexpected_key": "unexpected value",
   "result": [
     {
+      "unexpected_key": "unexpected value",
       "attributes": [
         {
+          "unexpected_key": "unexpected value",
           "id": 100023,
           "complex_id": 100042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 1000023,
               "value": "value #11"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 2000023,
               "value": "value #12"
             }
           ]
         },
         {
+          "unexpected_key": "unexpected value",
           "id": 200023,
           "complex_id": 200042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 3000023,
               "value": "value #13"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 4000023,
               "value": "value #14"
             }
@@ -37,28 +45,34 @@
       "color_image": "color image #11",
       "complex_attributes": [
         {
+          "unexpected_key": "unexpected value",
           "id": 300023,
           "complex_id": 300042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 5000023,
               "value": "value #15"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 6000023,
               "value": "value #16"
             }
           ]
         },
         {
+          "unexpected_key": "unexpected value",
           "id": 400023,
           "complex_id": 400042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 7000023,
               "value": "value #17"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 8000023,
               "value": "value #18"
             }
@@ -71,6 +85,7 @@
       "id": 1042,
       "images": ["image #1", "image #2"],
       "model_info": {
+        "unexpected_key": "unexpected value",
         "model_id": 10023,
         "count": 10042
       },
@@ -78,10 +93,12 @@
       "offer_id": "2005",
       "pdf_list": [
         {
+          "unexpected_key": "unexpected value",
           "file_name": "file name #11",
           "name": "name #12"
         },
         {
+          "unexpected_key": "unexpected value",
           "file_name": "file name #12",
           "name": "name #13"
         }
@@ -94,30 +111,37 @@
       "width": 3005
     },
     {
+      "unexpected_key": "unexpected value",
       "attributes": [
         {
+          "unexpected_key": "unexpected value",
           "id": 500023,
           "complex_id": 500042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 9000023,
               "value": "value #21"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 10000023,
               "value": "value #22"
             }
           ]
         },
         {
+          "unexpected_key": "unexpected value",
           "id": 600023,
           "complex_id": 600042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 11000023,
               "value": "value #23"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 12000023,
               "value": "value #24"
             }
@@ -130,28 +154,34 @@
       "color_image": "color image #21",
       "complex_attributes": [
         {
+          "unexpected_key": "unexpected value",
           "id": 700023,
           "complex_id": 700042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 13000023,
               "value": "value #25"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 14000023,
               "value": "value #26"
             }
           ]
         },
         {
+          "unexpected_key": "unexpected value",
           "id": 800023,
           "complex_id": 800042,
           "values": [
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 15000023,
               "value": "value #27"
             },
             {
+              "unexpected_key": "unexpected value",
               "dictionary_value_id": 16000023,
               "value": "value #28"
             }
@@ -164,6 +194,7 @@
       "id": 4042,
       "images": ["image #3", "image #4"],
       "model_info": {
+        "unexpected_key": "unexpected value",
         "model_id": 20023,
         "count": 20042
       },
@@ -171,10 +202,12 @@
       "offer_id": "5005",
       "pdf_list": [
         {
+          "unexpected_key": "unexpected value",
           "file_name": "file name #21",
           "name": "name #22"
         },
         {
+          "unexpected_key": "unexpected value",
           "file_name": "file name #22",
           "name": "name #23"
         }

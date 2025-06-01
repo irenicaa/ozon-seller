@@ -1,12 +1,15 @@
 {
+  "unexpected_key": "unexpected value",
   "result": [
     {
+      "unexpected_key": "unexpected value",
       "errors": [],
       "offer_id": "123",
       "product_id": 142,
       "updated": true
     },
     {
+      "unexpected_key": "unexpected value",
       "errors": [],
       "offer_id": "223",
       "product_id": 242,

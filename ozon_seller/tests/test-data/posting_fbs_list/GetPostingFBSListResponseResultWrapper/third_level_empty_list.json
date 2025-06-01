@@ -1,7 +1,10 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "postings": [
       {
+        "unexpected_key": "unexpected value",
         "addressee": null,
         "analytics_data": null,
         "barcodes": null,
@@ -23,6 +26,7 @@
         "shipment_date": null
       },
       {
+        "unexpected_key": "unexpected value",
         "addressee": null,
         "analytics_data": null,
         "barcodes": null,

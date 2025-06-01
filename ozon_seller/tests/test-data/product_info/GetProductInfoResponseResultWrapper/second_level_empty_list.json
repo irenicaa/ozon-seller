@@ -1,5 +1,7 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "barcode": "barcode",
     "buybox_price": "1.01",
     "category_id": 105,
@@ -24,6 +26,7 @@
     "price_index": "212",
     "recommended_price": "1.08",
     "status": {
+      "unexpected_key": "unexpected value",
       "state": "state",
       "state_failed": "state failed",
       "moderate_status": "moderate status",
@@ -39,12 +42,14 @@
     },
     "sources": [],
     "stocks": {
+      "unexpected_key": "unexpected value",
       "coming": 223,
       "present": 242,
       "reserved": 305
     },
     "vat": "vat",
     "visibility_details": {
+      "unexpected_key": "unexpected value",
       "active_product": false,
       "has_price": false,
       "has_stock": false

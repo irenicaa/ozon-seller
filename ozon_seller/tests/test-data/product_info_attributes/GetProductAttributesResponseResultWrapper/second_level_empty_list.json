@@ -1,6 +1,8 @@
 {
+  "unexpected_key": "unexpected value",
   "result": [
     {
+      "unexpected_key": "unexpected value",
       "attributes": [],
       "barcode": "barcode #11",
       "barcodes": [],
@@ -13,6 +15,7 @@
       "id": 1042,
       "images": [],
       "model_info": {
+        "unexpected_key": "unexpected value",
         "model_id": 10023,
         "count": 10042
       },
@@ -27,6 +30,7 @@
       "width": 3005
     },
     {
+      "unexpected_key": "unexpected value",
       "attributes": [],
       "barcode": "barcode #21",
       "barcodes": [],
@@ -39,6 +43,7 @@
       "id": 4042,
       "images": [],
       "model_info": {
+        "unexpected_key": "unexpected value",
         "model_id": 20023,
         "count": 20042
       },

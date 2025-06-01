@@ -1,20 +1,26 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "additional_data": [
       {
+        "unexpected_key": "unexpected value",
         "key": "key #1",
         "value": "value #1"
       },
       {
+        "unexpected_key": "unexpected value",
         "key": "key #2",
         "value": "value #2"
       }
     ],
     "addressee": {
+      "unexpected_key": "unexpected value",
       "name": "name #1",
       "phone": "phone #1"
     },
     "analytics_data": {
+      "unexpected_key": "unexpected value",
       "city": "city #1",
       "is_premium": true,
       "payment_type_group_name": "payment type group name",
@@ -26,10 +32,12 @@
       "delivery_date_begin": "2006-01-02T21:04:05.999999+07:00"
     },
     "barcodes": {
+      "unexpected_key": "unexpected value",
       "lower_barcode": "lower barcode",
       "upper_barcode": "upper barcode"
     },
     "cancellation": {
+      "unexpected_key": "unexpected value",
       "affect_cancellation_rating": true,
       "cancel_reason": "cancel reason",
       "cancel_reason_id": 2023,
@@ -38,13 +46,16 @@
       "cancelled_after_ship": true
     },
     "courier": {
+      "unexpected_key": "unexpected value",
       "car_model": "car model",
       "car_number": "3023",
       "name": "name #2",
       "phone": "phone #2"
     },
     "customer": {
+      "unexpected_key": "unexpected value",
       "address": {
+        "unexpected_key": "unexpected value",
         "address_tail": "address tail",
         "city": "city #2",
         "comment": "comment",
@@ -63,6 +74,7 @@
       "phone": "phone #3"
     },
     "delivery_method": {
+      "unexpected_key": "unexpected value",
       "id": 6023,
       "name": "name #4",
       "tpl_provider": "tpl provider #2",
@@ -72,7 +84,9 @@
     },
     "delivery_price": "100",
     "financial_data": {
+      "unexpected_key": "unexpected value",
       "posting_services": {
+        "unexpected_key": "unexpected value",
         "marketplace_service_item_deliv_to_customer": 1.03,
         "marketplace_service_item_direct_flow_trans": 1.04,
         "marketplace_service_item_dropoff_ff": 1.05,
@@ -87,11 +101,13 @@
       },
       "products": [
         {
+          "unexpected_key": "unexpected value",
           "actions": ["action #1", "action #2"],
           "client_price": "100005",
           "commission_amount": 1.14,
           "commission_percent": 23,
           "item_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 10.01,
             "marketplace_service_item_direct_flow_trans": 10.02,
             "marketplace_service_item_dropoff_ff": 10.03,
@@ -107,6 +123,7 @@
           "old_price": 1.15,
           "payout": 1.16,
           "picking": {
+            "unexpected_key": "unexpected value",
             "amount": 10.12,
             "tag": "tag #1",
             "moment": "2006-01-02T23:04:05.999999+07:00"
@@ -118,11 +135,13 @@
           "total_discount_value": 1.19
         },
         {
+          "unexpected_key": "unexpected value",
           "actions": ["action #3", "action #4"],
           "client_price": "200005",
           "commission_amount": 1.2,
           "commission_percent": 42,
           "item_services": {
+            "unexpected_key": "unexpected value",
             "marketplace_service_item_deliv_to_customer": 20.01,
             "marketplace_service_item_direct_flow_trans": 20.02,
             "marketplace_service_item_dropoff_ff": 20.03,
@@ -138,6 +157,7 @@
           "old_price": 1.21,
           "payout": 1.22,
           "picking": {
+            "unexpected_key": "unexpected value",
             "amount": 20.12,
             "tag": "tag #2",
             "moment": "2006-01-03T01:04:05.999999+07:00"
@@ -155,10 +175,13 @@
     "order_number": "112",
     "posting_number": "123",
     "product_exemplars": {
+      "unexpected_key": "unexpected value",
       "products": [
         {
+          "unexpected_key": "unexpected value",
           "exemplars": [
             {
+              "unexpected_key": "unexpected value",
               "mandatory_mark": "mandatory mark #1",
               "gtd": "gtd #1",
               "is_gtd_absent": false,
@@ -166,6 +189,7 @@
               "is_rnpt_absent": false
             },
             {
+              "unexpected_key": "unexpected value",
               "mandatory_mark": "mandatory mark #2",
               "gtd": "gtd #2",
               "is_gtd_absent": true,
@@ -176,8 +200,10 @@
           "sku": 1000023
         },
         {
+          "unexpected_key": "unexpected value",
           "exemplars": [
             {
+              "unexpected_key": "unexpected value",
               "mandatory_mark": "mandatory mark #3",
               "gtd": "gtd #3",
               "is_gtd_absent": false,
@@ -185,6 +211,7 @@
               "is_rnpt_absent": false
             },
             {
+              "unexpected_key": "unexpected value",
               "mandatory_mark": "mandatory mark #4",
               "gtd": "gtd #4",
               "is_gtd_absent": true,
@@ -198,7 +225,9 @@
     },
     "products": [
       {
+        "unexpected_key": "unexpected value",
         "dimensions": {
+          "unexpected_key": "unexpected value",
           "height": "9005",
           "length": "9012",
           "weight": "9023",
@@ -213,7 +242,9 @@
         "currency_code": "USD"
       },
       {
+        "unexpected_key": "unexpected value",
         "dimensions": {
+          "unexpected_key": "unexpected value",
           "height": "11005",
           "length": "11012",
           "weight": "11023",
@@ -230,6 +261,7 @@
     ],
     "provider_status": "provider status",
     "requirements": {
+      "unexpected_key": "unexpected value",
       "products_requiring_gtd": [10000001, 10000002],
       "products_requiring_country": [10000003, 10000004],
       "products_requiring_mandatory_mark": [10000005, 10000006],

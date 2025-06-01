@@ -1,12 +1,15 @@
 {
+  "unexpected_key": "unexpected value",
   "cursor": "23",
   "items": [
     {
+      "unexpected_key": "unexpected value",
       "offer_id": "123",
       "product_id": 142,
       "stocks": []
     },
     {
+      "unexpected_key": "unexpected value",
       "offer_id": "223",
       "product_id": 242,
       "stocks": []

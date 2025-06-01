@@ -1,4 +1,5 @@
 {
+  "unexpected_key": "unexpected value",
   "product_id": 23,
   "is_gtd_needed": true
 }

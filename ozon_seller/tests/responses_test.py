@@ -40,7 +40,6 @@ class _ResponseTestCase:
 
 
 _TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)
-# TODO: add unnecessary fields to all the test cases to check `Undefined.EXCLUDE`
 _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
     # actions_candidates.GetActionsCandidatesResponseResultWrapper
     _ResponseTestCase(
@@ -3815,6 +3814,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
                             optional_description_elements=\
                                 product_info.GetProductInfoResponseOptionalDescriptionElements(
                                     properties={
+                                        "unexpected_key": "unexpected value",
                                         "key #1": "value #1",
                                         "key #2": "value #2",
                                     },
@@ -3831,6 +3831,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
                             optional_description_elements=\
                                 product_info.GetProductInfoResponseOptionalDescriptionElements(
                                     properties={
+                                        "unexpected_key": "unexpected value",
                                         "key #3": "value #3",
                                         "key #4": "value #4",
                                     },

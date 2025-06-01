@@ -1,11 +1,14 @@
 {
+  "unexpected_key": "unexpected value",
   "result": {
+    "unexpected_key": "unexpected value",
     "barcode": "barcode",
     "buybox_price": "1.01",
     "category_id": 105,
     "color_image": "color image",
     "commissions": [
       {
+        "unexpected_key": "unexpected value",
         "delivery_amount": 1.1,
         "min_value": 1.11,
         "percent": 1.12,
@@ -14,6 +17,7 @@
         "value": 1.14
       },
       {
+        "unexpected_key": "unexpected value",
         "delivery_amount": 1.15,
         "min_value": 1.16,
         "percent": 1.17,
@@ -41,6 +45,7 @@
     "price_index": "212",
     "recommended_price": "1.08",
     "status": {
+      "unexpected_key": "unexpected value",
       "state": "state",
       "state_failed": "state failed",
       "moderate_status": "moderate status",
@@ -53,6 +58,7 @@
       "state_tooltip": "state tooltip",
       "item_errors": [
         {
+          "unexpected_key": "unexpected value",
           "code": "code #1",
           "state": "state #1",
           "level": "level #1",
@@ -63,6 +69,7 @@
           "optional_description_elements": {}
         },
         {
+          "unexpected_key": "unexpected value",
           "code": "code #2",
           "state": "state #2",
           "level": "level #2",
@@ -77,23 +84,27 @@
     },
     "sources": [
       {
+        "unexpected_key": "unexpected value",
         "is_enabled": false,
         "sku": 342,
         "source": "source #1"
       },
       {
+        "unexpected_key": "unexpected value",
         "is_enabled": true,
         "sku": 405,
         "source": "source #2"
       }
     ],
     "stocks": {
+      "unexpected_key": "unexpected value",
       "coming": 223,
       "present": 242,
       "reserved": 305
     },
     "vat": "vat",
     "visibility_details": {
+      "unexpected_key": "unexpected value",
       "active_product": true,
       "has_price": true,
       "has_stock": true
