@@ -1,0 +1,49 @@
+{
+  "result": {
+    "postings": [
+      {
+        "addressee": null,
+        "analytics_data": null,
+        "barcodes": null,
+        "cancellation": null,
+        "customer": null,
+        "delivery_method": null,
+        "financial_data": null,
+        "is_express": false,
+        "order_id": 105,
+        "order_number": "112",
+        "posting_number": "123",
+        "products": [],
+        "requirements": null,
+        "status": "status #1",
+        "tpl_integration_type": "tpl integration type #1",
+        "tracking_number": "142",
+        "delivering_date": null,
+        "in_process_at": null,
+        "shipment_date": null
+      },
+      {
+        "addressee": null,
+        "analytics_data": null,
+        "barcodes": null,
+        "cancellation": null,
+        "customer": null,
+        "delivery_method": null,
+        "financial_data": null,
+        "is_express": true,
+        "order_id": 205,
+        "order_number": "212",
+        "posting_number": "223",
+        "products": [],
+        "requirements": null,
+        "status": "status #2",
+        "tpl_integration_type": "tpl integration type #2",
+        "tracking_number": "242",
+        "delivering_date": null,
+        "in_process_at": null,
+        "shipment_date": null
+      }
+    ],
+    "has_next": true
+  }
+}

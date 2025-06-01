@@ -1,0 +1,192 @@
+{
+  "result": [
+    {
+      "attributes": [
+        {
+          "id": 100023,
+          "complex_id": 100042,
+          "values": [
+            {
+              "dictionary_value_id": 1000023,
+              "value": "value #11"
+            },
+            {
+              "dictionary_value_id": 2000023,
+              "value": "value #12"
+            }
+          ]
+        },
+        {
+          "id": 200023,
+          "complex_id": 200042,
+          "values": [
+            {
+              "dictionary_value_id": 3000023,
+              "value": "value #13"
+            },
+            {
+              "dictionary_value_id": 4000023,
+              "value": "value #14"
+            }
+          ]
+        }
+      ],
+      "barcode": "barcode #11",
+      "barcodes": ["barcode #1", "barcode #2"],
+      "description_category_id": 1005,
+      "color_image": "color image #11",
+      "complex_attributes": [
+        {
+          "id": 300023,
+          "complex_id": 300042,
+          "values": [
+            {
+              "dictionary_value_id": 5000023,
+              "value": "value #15"
+            },
+            {
+              "dictionary_value_id": 6000023,
+              "value": "value #16"
+            }
+          ]
+        },
+        {
+          "id": 400023,
+          "complex_id": 400042,
+          "values": [
+            {
+              "dictionary_value_id": 7000023,
+              "value": "value #17"
+            },
+            {
+              "dictionary_value_id": 8000023,
+              "value": "value #18"
+            }
+          ]
+        }
+      ],
+      "depth": 1012,
+      "dimension_unit": "dimension unit #11",
+      "height": 1023,
+      "id": 1042,
+      "images": ["image #1", "image #2"],
+      "model_info": {
+        "model_id": 10023,
+        "count": 10042
+      },
+      "name": "name #11",
+      "offer_id": "2005",
+      "pdf_list": [
+        {
+          "file_name": "file name #11",
+          "name": "name #12"
+        },
+        {
+          "file_name": "file name #12",
+          "name": "name #13"
+        }
+      ],
+      "primary_image": "primary image #11",
+      "sku": 2012,
+      "type_id": 2023,
+      "weight": 2042,
+      "weight_unit": "weight unit #11",
+      "width": 3005
+    },
+    {
+      "attributes": [
+        {
+          "id": 500023,
+          "complex_id": 500042,
+          "values": [
+            {
+              "dictionary_value_id": 9000023,
+              "value": "value #21"
+            },
+            {
+              "dictionary_value_id": 10000023,
+              "value": "value #22"
+            }
+          ]
+        },
+        {
+          "id": 600023,
+          "complex_id": 600042,
+          "values": [
+            {
+              "dictionary_value_id": 11000023,
+              "value": "value #23"
+            },
+            {
+              "dictionary_value_id": 12000023,
+              "value": "value #24"
+            }
+          ]
+        }
+      ],
+      "barcode": "barcode #21",
+      "barcodes": ["barcode #3", "barcode #4"],
+      "description_category_id": 4005,
+      "color_image": "color image #21",
+      "complex_attributes": [
+        {
+          "id": 700023,
+          "complex_id": 700042,
+          "values": [
+            {
+              "dictionary_value_id": 13000023,
+              "value": "value #25"
+            },
+            {
+              "dictionary_value_id": 14000023,
+              "value": "value #26"
+            }
+          ]
+        },
+        {
+          "id": 800023,
+          "complex_id": 800042,
+          "values": [
+            {
+              "dictionary_value_id": 15000023,
+              "value": "value #27"
+            },
+            {
+              "dictionary_value_id": 16000023,
+              "value": "value #28"
+            }
+          ]
+        }
+      ],
+      "depth": 4012,
+      "dimension_unit": "dimension unit #21",
+      "height": 4023,
+      "id": 4042,
+      "images": ["image #3", "image #4"],
+      "model_info": {
+        "model_id": 20023,
+        "count": 20042
+      },
+      "name": "name #21",
+      "offer_id": "5005",
+      "pdf_list": [
+        {
+          "file_name": "file name #21",
+          "name": "name #22"
+        },
+        {
+          "file_name": "file name #22",
+          "name": "name #23"
+        }
+      ],
+      "primary_image": "primary image #21",
+      "sku": 5012,
+      "type_id": 5023,
+      "weight": 5042,
+      "weight_unit": "weight unit #21",
+      "width": 6005
+    }
+  ],
+  "last_id": "123",
+  "total": 142
+}

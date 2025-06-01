@@ -1,0 +1,58 @@
+{
+  "result": [
+    {
+      "attributes": [],
+      "barcode": "barcode #11",
+      "barcodes": [],
+      "description_category_id": 1005,
+      "color_image": "color image #11",
+      "complex_attributes": [],
+      "depth": 1012,
+      "dimension_unit": "dimension unit #11",
+      "height": 1023,
+      "id": 1042,
+      "images": [],
+      "model_info": {
+        "model_id": 10023,
+        "count": 10042
+      },
+      "name": "name #11",
+      "offer_id": "2005",
+      "pdf_list": [],
+      "primary_image": "primary image #11",
+      "sku": 2012,
+      "type_id": 2023,
+      "weight": 2042,
+      "weight_unit": "weight unit #11",
+      "width": 3005
+    },
+    {
+      "attributes": [],
+      "barcode": "barcode #21",
+      "barcodes": [],
+      "description_category_id": 4005,
+      "color_image": "color image #21",
+      "complex_attributes": [],
+      "depth": 4012,
+      "dimension_unit": "dimension unit #21",
+      "height": 4023,
+      "id": 4042,
+      "images": [],
+      "model_info": {
+        "model_id": 20023,
+        "count": 20042
+      },
+      "name": "name #21",
+      "offer_id": "5005",
+      "pdf_list": [],
+      "primary_image": "primary image #21",
+      "sku": 5012,
+      "type_id": 5023,
+      "weight": 5042,
+      "weight_unit": "weight unit #21",
+      "width": 6005
+    }
+  ],
+  "last_id": "123",
+  "total": 142
+}

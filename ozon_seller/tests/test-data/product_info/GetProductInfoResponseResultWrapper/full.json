@@ -1,0 +1,111 @@
+{
+  "result": {
+    "barcode": "barcode",
+    "buybox_price": "1.01",
+    "category_id": 105,
+    "color_image": "color image",
+    "commissions": [
+      {
+        "delivery_amount": 1.1,
+        "min_value": 1.11,
+        "percent": 1.12,
+        "return_amount": 1.13,
+        "sale_schema": "sale schema #1",
+        "value": 1.14
+      },
+      {
+        "delivery_amount": 1.15,
+        "min_value": 1.16,
+        "percent": 1.17,
+        "return_amount": 1.18,
+        "sale_schema": "sale schema #2",
+        "value": 1.19
+      }
+    ],
+    "fbo_sku": 112,
+    "fbs_sku": 123,
+    "id": 142,
+    "images": ["image #1", "image #2"],
+    "primary_image": "primary image",
+    "images360": ["image 360 #1", "image 360 #2"],
+    "is_prepayment": true,
+    "is_prepayment_allowed": true,
+    "marketing_price": "1.02",
+    "min_ozon_price": "1.03",
+    "min_price": "1.04",
+    "name": "name",
+    "offer_id": "205",
+    "old_price": "1.05",
+    "premium_price": "1.06",
+    "price": "1.07",
+    "price_index": "212",
+    "recommended_price": "1.08",
+    "status": {
+      "state": "state",
+      "state_failed": "state failed",
+      "moderate_status": "moderate status",
+      "decline_reasons": ["decline reason #1", "decline reason #2"],
+      "validation_state": "validation state",
+      "state_name": "state name",
+      "state_description": "state description",
+      "is_failed": true,
+      "is_created": true,
+      "state_tooltip": "state tooltip",
+      "item_errors": [
+        {
+          "code": "code #1",
+          "state": "state #1",
+          "level": "level #1",
+          "description": "description #1",
+          "field": "field #1",
+          "attribute_id": "312",
+          "attribute_name": "attribute name #1",
+          "optional_description_elements": {
+            "key #1": "value #1",
+            "key #2": "value #2"
+          }
+        },
+        {
+          "code": "code #2",
+          "state": "state #2",
+          "level": "level #2",
+          "description": "description #2",
+          "field": "field #2",
+          "attribute_id": "323",
+          "attribute_name": "attribute name #2",
+          "optional_description_elements": {
+            "key #3": "value #3",
+            "key #4": "value #4"
+          }
+        }
+      ],
+      "state_updated_at": "2006-01-02T17:04:05.999999+07:00"
+    },
+    "sources": [
+      {
+        "is_enabled": false,
+        "sku": 342,
+        "source": "source #1"
+      },
+      {
+        "is_enabled": true,
+        "sku": 405,
+        "source": "source #2"
+      }
+    ],
+    "stocks": {
+      "coming": 223,
+      "present": 242,
+      "reserved": 305
+    },
+    "vat": "vat",
+    "visibility_details": {
+      "active_product": true,
+      "has_price": true,
+      "has_stock": true
+    },
+    "visible": true,
+    "volume_weight": 1.09,
+    "created_at": "2006-01-02T15:04:05.999999+07:00"
+  }
+}

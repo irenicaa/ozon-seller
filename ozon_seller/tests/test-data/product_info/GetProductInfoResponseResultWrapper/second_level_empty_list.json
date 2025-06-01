@@ -1,0 +1,56 @@
+{
+  "result": {
+    "barcode": "barcode",
+    "buybox_price": "1.01",
+    "category_id": 105,
+    "color_image": "color image",
+    "commissions": [],
+    "fbo_sku": 112,
+    "fbs_sku": 123,
+    "id": 142,
+    "images": [],
+    "primary_image": "primary image",
+    "images360": [],
+    "is_prepayment": false,
+    "is_prepayment_allowed": false,
+    "marketing_price": "1.02",
+    "min_ozon_price": "1.03",
+    "min_price": "1.04",
+    "name": "name",
+    "offer_id": "205",
+    "old_price": "1.05",
+    "premium_price": "1.06",
+    "price": "1.07",
+    "price_index": "212",
+    "recommended_price": "1.08",
+    "status": {
+      "state": "state",
+      "state_failed": "state failed",
+      "moderate_status": "moderate status",
+      "decline_reasons": [],
+      "validation_state": "validation state",
+      "state_name": "state name",
+      "state_description": "state description",
+      "is_failed": false,
+      "is_created": false,
+      "state_tooltip": "state tooltip",
+      "item_errors": [],
+      "state_updated_at": "2006-01-02T17:04:05.999999+07:00"
+    },
+    "sources": [],
+    "stocks": {
+      "coming": 223,
+      "present": 242,
+      "reserved": 305
+    },
+    "vat": "vat",
+    "visibility_details": {
+      "active_product": false,
+      "has_price": false,
+      "has_stock": false
+    },
+    "visible": false,
+    "volume_weight": 1.09,
+    "created_at": "2006-01-02T15:04:05.999999+07:00"
+  }
+}
