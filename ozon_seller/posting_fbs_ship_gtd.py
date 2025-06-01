@@ -1,9 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import config
-
-from .common import credentials, request_api
+from .common import credentials, request_api, renamed_field
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -38,10 +36,11 @@ class PostingFBSShipWithGTDPackage(DataClassJsonMixin):
 class PostingFBSShipWithGTDData(DataClassJsonMixin):
     packages: Optional[list[PostingFBSShipWithGTDPackage]] = None
     posting_number: Optional[str] = None
-    with_: Optional[PostingFBSShipWithGTDAdditionalFields] = field(
-        default=None,
-        metadata=config(field_name="with"),
-    )
+    with_: Optional[PostingFBSShipWithGTDAdditionalFields] = \
+        renamed_field.optional_renamed_field(
+            PostingFBSShipWithGTDAdditionalFields,
+            "with",
+        )
 
 
 # Response

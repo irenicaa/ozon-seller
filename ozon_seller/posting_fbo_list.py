@@ -1,10 +1,8 @@
 import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import config
-
-from .common import credentials, request_api, datetime_field
+from .common import credentials, request_api, datetime_field, renamed_field
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -32,10 +30,8 @@ class PaginatedGetPostingFBOListFilter(DataClassJsonMixin):
     translit: Optional[bool] = False
     limit: Optional[int] = None
     offset: Optional[int] = None
-    with_: Optional[PostingAdditionalFields] = field(
-        default=None,
-        metadata=config(field_name="with"),
-    )
+    with_: Optional[PostingAdditionalFields] = \
+        renamed_field.optional_renamed_field(PostingAdditionalFields, "with")
 
 
 # Response

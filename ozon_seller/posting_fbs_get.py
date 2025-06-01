@@ -1,10 +1,8 @@
 import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import config
-
-from .common import credentials, request_api, datetime_field
+from .common import credentials, request_api, datetime_field, renamed_field
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -22,10 +20,8 @@ class PostingAdditionalFields(DataClassJsonMixin):
 @dataclass
 class PostingFBSData(DataClassJsonMixin):
     posting_number: str
-    with_: Optional[PostingAdditionalFields] = field(
-        default=None,
-        metadata=config(field_name="with"),
-    )
+    with_: Optional[PostingAdditionalFields] = \
+        renamed_field.optional_renamed_field(PostingAdditionalFields, "with")
 
 
 # Response
