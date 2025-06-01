@@ -43,7 +43,8 @@ def _base_datetime_field(is_optional: bool) -> Optional[datetime.datetime]:
             decoder=_parse_datetime,
             encoder=_format_datetime,
             mm_field=marshmallow.fields.DateTime(
-                format="iso", allow_none=is_optional
+                format="iso",
+                allow_none=is_optional,
             ),
         ),
     )
@@ -52,6 +53,7 @@ def _base_datetime_field(is_optional: bool) -> Optional[datetime.datetime]:
 def datetime_field() -> datetime.datetime:
     field = _base_datetime_field(is_optional=False)
     assert field is not None
+
     return field
 
 

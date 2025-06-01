@@ -23,9 +23,12 @@ def request_api_raw(
         data=data,
     )
     if response.status_code < 200 or response.status_code >= 300:
-        # use the response text both as an error message and as an error response data
+        # use the response text both as an error message
+        # and as an error response data
         raise http_error.HTTPError(
-            response.text, response.status_code, response.text
+            response.text,
+            response.status_code,
+            response.text,
         )
 
     return response
