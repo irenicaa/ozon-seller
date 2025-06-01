@@ -15,6 +15,9 @@ def request_api_raw(
     credentials: credentials.Credentials,
     data: Optional[str],
 ) -> requests.models.Response:
+    if not endpoint.startswith("/"):
+        raise ValueError("the endpoint should start with a slash")
+
     session = requests.Session()
     response = session.request(
         method,
