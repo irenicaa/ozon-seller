@@ -1,0 +1,12 @@
+{
+  "color_image": "color image",
+  "images": [
+    "image #1",
+    "image #2"
+  ],
+  "images360": [
+    "images 360 #1",
+    "images 360 #2"
+  ],
+  "product_id": 23
+}

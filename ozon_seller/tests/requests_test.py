@@ -750,7 +750,28 @@ _REQUESTS_TEST_CASES: list[_RequestsTestCase] = [
     ),
 
     # product_pictures_import.ProductPictures
-    # TODO: add test cases for the `product_pictures_import.ProductPictures` class
+    _RequestsTestCase(
+        kind="empty",
+        data=product_pictures_import.ProductPictures(),
+    ),
+    _RequestsTestCase(
+        kind="empty_list",
+        data=product_pictures_import.ProductPictures(
+            color_image="color image",
+            images=[],
+            images360=[],
+            product_id=23,
+        ),
+    ),
+    _RequestsTestCase(
+        kind="full",
+        data=product_pictures_import.ProductPictures(
+            color_image="color image",
+            images=["image #1", "image #2"],
+            images360=["images 360 #1", "images 360 #2"],
+            product_id=23,
+        ),
+    ),
 
     # products_stocks.StocksData
     _RequestsTestCase(

@@ -3874,7 +3874,39 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
     ),
 
     # product_pictures_import.ProductPicturesResponseResultWrapper
-    # TODO: add test cases for the `product_pictures_import.ProductPicturesResponseResultWrapper` class
+    _ResponseTestCase(
+        kind="second_level_empty_list",
+        expected_data=product_pictures_import.ProductPicturesResponseResultWrapper(
+            result=product_pictures_import.ProductPicturesResponseResult(
+                pictures=[],
+            ),
+        ),
+    ),
+    _ResponseTestCase(
+        kind="full",
+        expected_data=product_pictures_import.ProductPicturesResponseResultWrapper(
+            result=product_pictures_import.ProductPicturesResponseResult(
+                pictures=[
+                    product_pictures_import.ProductPicturesResponseResultPictures(
+                        is_360=False,
+                        is_color=False,
+                        is_primary=False,
+                        product_id=23,
+                        state="state #1",
+                        url="url #1",
+                    ),
+                    product_pictures_import.ProductPicturesResponseResultPictures(
+                        is_360=True,
+                        is_color=True,
+                        is_primary=True,
+                        product_id=42,
+                        state="state #2",
+                        url="url #2",
+                    ),
+                ],
+            ),
+        ),
+    ),
 
     # products_stocks.SetProductStocksResponseResultWrapper
     _ResponseTestCase(

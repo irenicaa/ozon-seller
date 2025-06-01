@@ -1,0 +1,22 @@
+{
+  "result": {
+    "pictures": [
+      {
+        "is_360": false,
+        "is_color": false,
+        "is_primary": false,
+        "product_id": 23,
+        "state": "state #1",
+        "url": "url #1"
+      },
+      {
+        "is_360": true,
+        "is_color": true,
+        "is_primary": true,
+        "product_id": 42,
+        "state": "state #2",
+        "url": "url #2"
+      }
+    ]
+  }
+}
