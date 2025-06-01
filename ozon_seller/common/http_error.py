@@ -1,5 +1,6 @@
 from typing import Generic, TypeVar
 
+
 T = TypeVar("T")
 
 
@@ -9,8 +10,8 @@ class HTTPError(RuntimeError, Generic[T]):
         message: str,
         status: int,
         response_data: T,
-        *args,
-    ):
+        *args: object,
+    ) -> None:
         super().__init__(message, status, response_data, *args)
 
         self.message = message

@@ -1,10 +1,12 @@
-from typing import Optional, TypeVar
+from typing import Optional, TypeVar, cast
 
 import requests
 
 from . import credentials, error_response, http_error
+from .data_class_json_mixin import DataClassJsonMixin
 
-T = TypeVar("T")
+
+T = TypeVar("T", bound=DataClassJsonMixin)
 
 
 def request_api_raw(
@@ -33,10 +35,10 @@ def request_api_json(
     method: str,
     endpoint: str,
     credentials: credentials.Credentials,
-    data: Optional[object],
+    data: Optional[DataClassJsonMixin],
     *,
     response_cls: type[T],
-    error_cls: object = error_response.ErrorResponse,
+    error_cls: type[DataClassJsonMixin] = error_response.ErrorResponse,
 ) -> T:
     try:
         response = request_api_raw(
@@ -45,7 +47,7 @@ def request_api_json(
             credentials,
             data.to_json() if data is not None else None,
         )
-        return response_cls.schema().loads(response.text)
-    except http_error.HTTPError as error:
+        return cast(T, response_cls.schema().loads(response.text))
+    except http_error.HTTPError[str] as error:
         response_data = error_cls.schema().loads(error.response_data)
         raise http_error.HTTPError(error.message, error.status, response_data)
