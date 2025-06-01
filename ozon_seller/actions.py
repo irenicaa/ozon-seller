@@ -1,15 +1,14 @@
 from dataclasses import dataclass
 
-from dataclasses_json import Undefined, dataclass_json
-
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetSellerActionsResponseResult:
+class GetSellerActionsResponseResult(DataClassJsonMixin):
     id: float
     title: str
     action_type: str
@@ -28,9 +27,8 @@ class GetSellerActionsResponseResult:
     is_voucher_action: bool
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetSellerActionsResponseResultWrapper:
+class GetSellerActionsResponseResultWrapper(DataClassJsonMixin):
     result: list[GetSellerActionsResponseResult]
 
 

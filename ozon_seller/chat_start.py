@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -16,15 +16,13 @@ class ChatStartData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetChatStartResponseResult:
+class GetChatStartResponseResult(DataClassJsonMixin):
     chat_id: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetChatStartResponseResultWrapper:
+class GetChatStartResponseResultWrapper(DataClassJsonMixin):
     result: GetChatStartResponseResult
 
 

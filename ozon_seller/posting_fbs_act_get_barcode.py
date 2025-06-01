@@ -1,10 +1,8 @@
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-from marshmallow import fields
+from dataclasses import dataclass
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 

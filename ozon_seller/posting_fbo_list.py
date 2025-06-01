@@ -2,17 +2,11 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses_json import config
 
-from . import returns_fbs
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -47,9 +41,8 @@ class PaginatedGetPostingFBOListFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseProduct:
+class GetPostingFBOListResponseProduct(DataClassJsonMixin):
     digital_codes: list[str]
     name: str
     offer_id: str
@@ -58,17 +51,15 @@ class GetPostingFBOListResponseProduct:
     sku: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponsePicking:
+class GetPostingFBOListResponsePicking(DataClassJsonMixin):
     amount: float
     tag: str
     moment: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseFinancialDataServices:
+class GetPostingFBOListResponseFinancialDataServices(DataClassJsonMixin):
     marketplace_service_item_deliv_to_customer: float
     marketplace_service_item_direct_flow_trans: float
     marketplace_service_item_dropoff_ff: float
@@ -82,9 +73,8 @@ class GetPostingFBOListResponseFinancialDataServices:
     marketplace_service_item_return_part_goods_customer: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseFinancialDataProduct:
+class GetPostingFBOListResponseFinancialDataProduct(DataClassJsonMixin):
     actions: list[str]
     client_price: str
     commission_amount: float
@@ -100,16 +90,14 @@ class GetPostingFBOListResponseFinancialDataProduct:
     total_discount_value: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseFinancialData:
+class GetPostingFBOListResponseFinancialData(DataClassJsonMixin):
     posting_services: GetPostingFBOListResponseFinancialDataServices
     products: list[GetPostingFBOListResponseFinancialDataProduct]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseAnalyticsData:
+class GetPostingFBOListResponseAnalyticsData(DataClassJsonMixin):
     city: str
     delivery_type: str
     is_legal: bool
@@ -120,16 +108,14 @@ class GetPostingFBOListResponseAnalyticsData:
     warehouse_name: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOAdditionalDataItem:
+class GetPostingFBOAdditionalDataItem(DataClassJsonMixin):
     key: str
     value: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseResult:
+class GetPostingFBOListResponseResult(DataClassJsonMixin):
     additional_data: list[GetPostingFBOAdditionalDataItem]
     analytics_data: Optional[GetPostingFBOListResponseAnalyticsData]
     cancel_reason_id: int
@@ -145,9 +131,8 @@ class GetPostingFBOListResponseResult:
         datetime_field.optional_datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBOListResponseResultWrapper:
+class GetPostingFBOListResponseResultWrapper(DataClassJsonMixin):
     result: list[GetPostingFBOListResponseResult]
 
 

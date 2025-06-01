@@ -1,10 +1,9 @@
-import datetime
 from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -18,18 +17,16 @@ class ProductData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoDescriptionResponseResult:
+class GetProductInfoDescriptionResponseResult(DataClassJsonMixin):
     description: str
     id: int
     name: str
     offer_id: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoDescriptionResponseResultWrapper:
+class GetProductInfoDescriptionResponseResultWrapper(DataClassJsonMixin):
     result: GetProductInfoDescriptionResponseResult
 
 

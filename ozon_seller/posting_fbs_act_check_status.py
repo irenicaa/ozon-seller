@@ -1,11 +1,9 @@
-import datetime
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-from marshmallow import fields
+from dataclasses import dataclass
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -18,18 +16,16 @@ class PostingFSBActData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActCheckStatusResponseResult:
+class PostingFBSActCheckStatusResponseResult(DataClassJsonMixin):
     act_type: str
     added_to_act: list[str]
     removed_from_act: list[str]
     status: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActCreateResponseActResultWrapper:
+class PostingFBSActCreateResponseActResultWrapper(DataClassJsonMixin):
     result: PostingFBSActCheckStatusResponseResult
 
 

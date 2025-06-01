@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -19,9 +19,8 @@ class ProductPictures(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductPicturesResponseResultPictures:
+class ProductPicturesResponseResultPictures(DataClassJsonMixin):
     is_360: bool
     is_color: bool
     is_primary: bool
@@ -30,15 +29,13 @@ class ProductPicturesResponseResultPictures:
     url: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductPicturesResponseResult:
+class ProductPicturesResponseResult(DataClassJsonMixin):
     pictures: list[ProductPicturesResponseResultPictures]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductPicturesResponseResultWrapper:
+class ProductPicturesResponseResultWrapper(DataClassJsonMixin):
     result: ProductPicturesResponseResult
 
 

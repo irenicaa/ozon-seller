@@ -1,17 +1,12 @@
 import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses_json import CatchAll, Undefined, dataclass_json
 
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -32,9 +27,8 @@ class GetProductInfoResponseOptionalDescriptionElements:
     properties: CatchAll
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseItemError:
+class GetProductInfoResponseItemError(DataClassJsonMixin):
     code: str
     state: str
     level: str
@@ -45,33 +39,29 @@ class GetProductInfoResponseItemError:
     optional_description_elements: GetProductInfoResponseOptionalDescriptionElements
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseVisibilityDetails:
+class GetProductInfoResponseVisibilityDetails(DataClassJsonMixin):
     active_product: bool
     has_price: bool
     has_stock: bool
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseStocks:
+class GetProductInfoResponseStocks(DataClassJsonMixin):
     coming: int
     present: int
     reserved: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseSource:
+class GetProductInfoResponseSource(DataClassJsonMixin):
     is_enabled: bool
     sku: int
     source: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseStatus:
+class GetProductInfoResponseStatus(DataClassJsonMixin):
     state: str
     state_failed: str
     moderate_status: str
@@ -86,9 +76,8 @@ class GetProductInfoResponseStatus:
     state_updated_at: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseCommissions:
+class GetProductInfoResponseCommissions(DataClassJsonMixin):
     delivery_amount: float
     min_value: float
     percent: float
@@ -97,9 +86,8 @@ class GetProductInfoResponseCommissions:
     value: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseResult:
+class GetProductInfoResponseResult(DataClassJsonMixin):
     barcode: str
     buybox_price: str
     category_id: int
@@ -133,9 +121,8 @@ class GetProductInfoResponseResult:
     created_at: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoResponseResultWrapper:
+class GetProductInfoResponseResultWrapper(DataClassJsonMixin):
     result: GetProductInfoResponseResult
 
 

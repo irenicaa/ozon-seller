@@ -1,17 +1,11 @@
-import datetime
 from dataclasses import dataclass, field
-from typing import Generator, Optional
+from typing import Optional
 
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses_json import config
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -53,9 +47,8 @@ class PostingFBSShipWithGTDData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class CreatePostingFBSShipWithGTDResponseResultWrapper:
+class CreatePostingFBSShipWithGTDResponseResultWrapper(DataClassJsonMixin):
     result: list[str]
 
 

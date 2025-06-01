@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -18,9 +18,8 @@ class PaginatedActionProducts(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetSellerProductResponseProducts:
+class GetSellerProductResponseProducts(DataClassJsonMixin):
     id: int
     price: float
     action_price: float
@@ -30,16 +29,14 @@ class GetSellerProductResponseProducts:
     stock: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetSellerProductResponseResult:
+class GetSellerProductResponseResult(DataClassJsonMixin):
     products: list[GetSellerProductResponseProducts]
     total: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetSellerProductResponseResultWrapper:
+class GetSellerProductResponseResultWrapper(DataClassJsonMixin):
     result: GetSellerProductResponseResult
 
 

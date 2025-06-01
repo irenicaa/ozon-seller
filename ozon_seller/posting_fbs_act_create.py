@@ -1,17 +1,9 @@
 import datetime
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses import dataclass
+from typing import Optional
 
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
 
 
 # Request
@@ -28,15 +20,13 @@ class PostingFSBDeliveryData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActCreateResponseActResult:
+class PostingFBSActCreateResponseActResult(DataClassJsonMixin):
     id: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActCreateResponseActResultWrapper:
+class PostingFBSActCreateResponseActResultWrapper(DataClassJsonMixin):
     result: PostingFBSActCreateResponseActResult
 
 

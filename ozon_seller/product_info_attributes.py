@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -28,45 +28,33 @@ class PaginatedProductFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesPdf:
+class GetProductAttributesPdf(DataClassJsonMixin):
     file_name: str
     name: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesImage360:
-    file_name: str
-    index: int
-
-
-@dataclass_json(undefined=Undefined.EXCLUDE)
-@dataclass
-class GetProductAttributesDictionaryValue:
+class GetProductAttributesDictionaryValue(DataClassJsonMixin):
     dictionary_value_id: int
     value: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductModelInfoValue:
+class GetProductModelInfoValue(DataClassJsonMixin):
     model_id: int
     count: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesResponseAttribute:
+class GetProductAttributesResponseAttribute(DataClassJsonMixin):
     id: int
     complex_id: int
     values: list[GetProductAttributesDictionaryValue]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesResponseResult:
+class GetProductAttributesResponseResult(DataClassJsonMixin):
     attributes: list[GetProductAttributesResponseAttribute]
     barcode: str
     barcodes: list[str]
@@ -90,9 +78,8 @@ class GetProductAttributesResponseResult:
     width: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductAttributesResponseResultWrapper:
+class GetProductAttributesResponseResultWrapper(DataClassJsonMixin):
     result: list[GetProductAttributesResponseResult]
     last_id: str
     total: int

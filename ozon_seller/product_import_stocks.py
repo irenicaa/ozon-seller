@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -24,16 +23,14 @@ class ProductImportProductsStocks(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductImportProductsStocksResponseError:
+class ProductImportProductsStocksResponseError(DataClassJsonMixin):
     code: str
     message: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductsStocksResponseProcessResult:
+class ProductsStocksResponseProcessResult(DataClassJsonMixin):
     errors: list[ProductImportProductsStocksResponseError]
     offer_id: str
     product_id: int
@@ -41,9 +38,8 @@ class ProductsStocksResponseProcessResult:
     warehouse_id: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ProductsStocksResponseProcessResultWrapper:
+class ProductsStocksResponseProcessResultWrapper(DataClassJsonMixin):
     result: list[ProductsStocksResponseProcessResult]
 
 

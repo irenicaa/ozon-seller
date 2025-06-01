@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Optional
 
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
+from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
 
-from .common import credentials, request_api, datetime_field
 
 # Request
 
@@ -16,9 +16,8 @@ class PostingFBSActData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActDataResponseProducts:
+class PostingFBSActDataResponseProducts(DataClassJsonMixin):
     name: str
     offer_id: str
     price: str
@@ -26,9 +25,8 @@ class PostingFBSActDataResponseProducts:
     sku: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActDataResponseResult:
+class PostingFBSActDataResponseResult(DataClassJsonMixin):
     id: int
     multi_box_qty: int
     posting_number: str
@@ -39,9 +37,8 @@ class PostingFBSActDataResponseResult:
     products: list[PostingFBSActDataResponseProducts]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class PostingFBSActDataResponseResultWrapper:
+class PostingFBSActDataResponseResultWrapper(DataClassJsonMixin):
     result: list[PostingFBSActDataResponseResult]
 
 

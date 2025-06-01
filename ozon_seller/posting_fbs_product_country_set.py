@@ -1,10 +1,9 @@
-import datetime
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
+from dataclasses import dataclass
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -17,10 +16,10 @@ class OderData(DataClassJsonMixin):
 
 
 # Response
-# TODO: example
-@dataclass_json(undefined=Undefined.EXCLUDE)
+
+
 @dataclass
-class GetCountrySetFBSResponseResult:
+class GetCountrySetFBSResponseResult(DataClassJsonMixin):
     product_id: int
     is_gtd_needed: bool
 

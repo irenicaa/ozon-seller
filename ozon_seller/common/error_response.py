@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
-from dataclasses_json import Undefined, config, dataclass_json
+from dataclasses_json import config
+
+from .data_class_json_mixin import DataClassJsonMixin
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ErrorResponseDetail:
+class ErrorResponseDetail(DataClassJsonMixin):
     type_url: Optional[int] = field(
         default=None,
         metadata=config(field_name="typeUrl"),
@@ -14,9 +15,8 @@ class ErrorResponseDetail:
     value: Optional[str] = None
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class ErrorResponse:
+class ErrorResponse(DataClassJsonMixin):
     code: Optional[int]
     message: Optional[str]
     details: Optional[list[ErrorResponseDetail]]

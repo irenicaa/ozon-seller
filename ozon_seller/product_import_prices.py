@@ -1,17 +1,9 @@
-import datetime
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses import dataclass
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -34,25 +26,22 @@ class PricesData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductImportPriceResponseError:
+class GetProductImportPriceResponseError(DataClassJsonMixin):
     code: str
     message: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductImportPriceResponseResult:
+class GetProductImportPriceResponseResult(DataClassJsonMixin):
     errors: list[GetProductImportPriceResponseError]
     offer_id: str
     product_id: int
     updated: bool
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductImportPriceResponseResultWrapper:
+class GetProductImportPriceResponseResultWrapper(DataClassJsonMixin):
     result: list[GetProductImportPriceResponseResult]
 
 

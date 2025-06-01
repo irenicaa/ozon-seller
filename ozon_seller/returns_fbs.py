@@ -2,14 +2,8 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import (
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
 
 
 # Request
@@ -42,9 +36,8 @@ class PaginatedGetReturnsCompanyFBSFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBSResponseItem:
+class GetReturnsCompanyFBSResponseItem(DataClassJsonMixin):
     accepted_from_customer_moment: Optional[str]
     clearing_id: Optional[int]
     commission: Optional[float]
@@ -72,16 +65,14 @@ class GetReturnsCompanyFBSResponseItem:
     status: Optional[str]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBSResponseResult:
+class GetReturnsCompanyFBSResponseResult(DataClassJsonMixin):
     returns: list[GetReturnsCompanyFBSResponseItem]
     count: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBSResponseResultWrapper:
+class GetReturnsCompanyFBSResponseResultWrapper(DataClassJsonMixin):
     result: GetReturnsCompanyFBSResponseResult
 
 

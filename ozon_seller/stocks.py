@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -31,25 +31,22 @@ class PaginatedProductFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoStocksResponseStock:
+class GetProductInfoStocksResponseStock(DataClassJsonMixin):
     present: int
     reserved: int
     type: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoStocksResponseItem:
+class GetProductInfoStocksResponseItem(DataClassJsonMixin):
     offer_id: str
     product_id: int
     stocks: list[GetProductInfoStocksResponseStock]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetProductInfoStocksResponseResult:
+class GetProductInfoStocksResponseResult(DataClassJsonMixin):
     cursor: str
     items: list[GetProductInfoStocksResponseItem]
     total: int

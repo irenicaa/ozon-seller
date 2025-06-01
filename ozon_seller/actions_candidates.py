@@ -1,10 +1,9 @@
-import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Generator, Optional
-from dataclasses_json import Undefined, dataclass_json, DataClassJsonMixin
-from marshmallow import fields
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -19,9 +18,8 @@ class PaginatedCandidatesForActions(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetActionsCandidatesResponseProducts:
+class GetActionsCandidatesResponseProducts(DataClassJsonMixin):
     id: float
     price: float
     action_price: float
@@ -31,16 +29,14 @@ class GetActionsCandidatesResponseProducts:
     stock: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetActionsCandidatesResponseResult:
+class GetActionsCandidatesResponseResult(DataClassJsonMixin):
     products: list[GetActionsCandidatesResponseProducts]
     total: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetActionsCandidatesResponseResultWrapper:
+class GetActionsCandidatesResponseResultWrapper(DataClassJsonMixin):
     result: GetActionsCandidatesResponseResult
 
 

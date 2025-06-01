@@ -1,17 +1,9 @@
-import datetime
-from dataclasses import dataclass, field
-from typing import Generator, Optional
-
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses import dataclass
+from typing import Optional
 
 from .common import credentials, request_api
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -24,16 +16,14 @@ class CountryFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSProductCountryListResponseResult:
+class GetPostingFBSProductCountryListResponseResult(DataClassJsonMixin):
     name: str
     country_iso_code: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSProductCountryListResponseResultWrapper:
+class GetPostingFBSProductCountryListResponseResultWrapper(DataClassJsonMixin):
     result: list[GetPostingFBSProductCountryListResponseResult]
 
 

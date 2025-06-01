@@ -1,16 +1,10 @@
 import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Generator, Optional
 
-from dataclasses_json import (
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
-
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
+
 
 # Request
 
@@ -31,9 +25,8 @@ class PaginatedGetReturnsCompanyFBOFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBOResponseItem:
+class GetReturnsCompanyFBOResponseItem(DataClassJsonMixin):
     company_id: int
     current_place_name: str
     dst_place_name: str
@@ -48,9 +41,8 @@ class GetReturnsCompanyFBOResponseItem:
     returned_to_ozon_moment: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetReturnsCompanyFBOResponseResult:
+class GetReturnsCompanyFBOResponseResult(DataClassJsonMixin):
     returns: list[GetReturnsCompanyFBOResponseItem]
     count: int
 

@@ -2,17 +2,10 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Generator, Optional
 
-from dataclasses_json import (
-    CatchAll,
-    Undefined,
-    config,
-    dataclass_json,
-    DataClassJsonMixin,
-)
-from marshmallow import fields
+from dataclasses_json import config
 
-from . import returns_fbs
 from .common import credentials, request_api, datetime_field
+from .common.data_class_json_mixin import DataClassJsonMixin
 
 
 # Request
@@ -53,18 +46,16 @@ class PaginatedGetPostingFBSListFilter(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseRequirements:
+class GetPostingFBSListResponseRequirements(DataClassJsonMixin):
     products_requiring_gtd: Optional[list[int]]
     products_requiring_country: Optional[list[int]]
     products_requiring_mandatory_mark: Optional[list[int]]
     products_requiring_rnpt: Optional[list[int]]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseProduct:
+class GetPostingFBSListResponseProduct(DataClassJsonMixin):
     mandatory_mark: list[str]
     name: str
     offer_id: str
@@ -74,17 +65,15 @@ class GetPostingFBSListResponseProduct:
     currency_code: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponsePicking:
+class GetPostingFBSListResponsePicking(DataClassJsonMixin):
     amount: float
     tag: str
     moment: datetime.datetime = datetime_field.datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseFinancialDataServices:
+class GetPostingFBSListResponseFinancialDataServices(DataClassJsonMixin):
     marketplace_service_item_deliv_to_customer: float
     marketplace_service_item_direct_flow_trans: float
     marketplace_service_item_dropoff_ff: float
@@ -98,9 +87,8 @@ class GetPostingFBSListResponseFinancialDataServices:
     marketplace_service_item_return_part_goods_customer: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseFinancialDataProduct:
+class GetPostingFBSListResponseFinancialDataProduct(DataClassJsonMixin):
     actions: list[str]
     client_price: str
     commission_amount: float
@@ -116,16 +104,14 @@ class GetPostingFBSListResponseFinancialDataProduct:
     total_discount_value: float
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseFinancialData:
+class GetPostingFBSListResponseFinancialData(DataClassJsonMixin):
     posting_services: GetPostingFBSListResponseFinancialDataServices
     products: list[GetPostingFBSListResponseFinancialDataProduct]
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseDeliveryMethod:
+class GetPostingFBSListResponseDeliveryMethod(DataClassJsonMixin):
     id: int
     name: str
     tpl_provider: str
@@ -134,9 +120,8 @@ class GetPostingFBSListResponseDeliveryMethod:
     warehouse_id: int
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseAddress:
+class GetPostingFBSListResponseAddress(DataClassJsonMixin):
     address_tail: str
     city: str
     comment: str
@@ -150,9 +135,8 @@ class GetPostingFBSListResponseAddress:
     zip_code: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseCustomer:
+class GetPostingFBSListResponseCustomer(DataClassJsonMixin):
     address: GetPostingFBSListResponseAddress
     customer_email: str
     customer_id: int
@@ -160,9 +144,8 @@ class GetPostingFBSListResponseCustomer:
     phone: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseCancellation:
+class GetPostingFBSListResponseCancellation(DataClassJsonMixin):
     affect_cancellation_rating: bool
     cancel_reason: str
     cancel_reason_id: int
@@ -171,16 +154,14 @@ class GetPostingFBSListResponseCancellation:
     cancelled_after_ship: bool
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseBarcodes:
+class GetPostingFBSListResponseBarcodes(DataClassJsonMixin):
     lower_barcode: str
     upper_barcode: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseAnalyticsData:
+class GetPostingFBSListResponseAnalyticsData(DataClassJsonMixin):
     city: str
     is_premium: bool
     payment_type_group_name: str
@@ -193,16 +174,14 @@ class GetPostingFBSListResponseAnalyticsData:
         datetime_field.optional_datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseAddressee:
+class GetPostingFBSListResponseAddressee(DataClassJsonMixin):
     name: str
     phone: str
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponsePosting:
+class GetPostingFBSListResponsePosting(DataClassJsonMixin):
     addressee: Optional[GetPostingFBSListResponseAddressee]
     analytics_data: Optional[GetPostingFBSListResponseAnalyticsData]
     barcodes: Optional[GetPostingFBSListResponseBarcodes]
@@ -227,16 +206,14 @@ class GetPostingFBSListResponsePosting:
         datetime_field.optional_datetime_field()
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseResult:
+class GetPostingFBSListResponseResult(DataClassJsonMixin):
     postings: list[GetPostingFBSListResponsePosting]
     has_next: bool
 
 
-@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclass
-class GetPostingFBSListResponseResultWrapper:
+class GetPostingFBSListResponseResultWrapper(DataClassJsonMixin):
     result: GetPostingFBSListResponseResult
 
 
