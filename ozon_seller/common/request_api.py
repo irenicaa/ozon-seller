@@ -54,6 +54,6 @@ def request_api_json(
             data.to_json() if data is not None else None,
         )
         return cast(T, response_cls.schema().loads(response.text))
-    except http_error.HTTPError[str] as error:
+    except http_error.HTTPError as error:
         response_data = error_cls.schema().loads(error.response_data)
-        raise http_error.HTTPError(error.message, error.status, response_data)
+        raise http_error.HTTPError(error.message, error.status, response_data) from None
