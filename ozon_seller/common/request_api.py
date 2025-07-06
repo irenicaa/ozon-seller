@@ -9,6 +9,9 @@ from .data_class_json_mixin import DataClassJsonMixin
 T = TypeVar("T", bound=DataClassJsonMixin)
 
 
+_API_BASE_URL = "https://api-seller.ozon.ru"
+
+
 def request_api_raw(
     method: str,
     endpoint: str,
@@ -21,7 +24,7 @@ def request_api_raw(
     session = requests.Session()
     response = session.request(
         method,
-        "https://api-seller.ozon.ru" + endpoint,
+        _API_BASE_URL + endpoint,
         headers=credentials.to_headers(),
         data=data,
     )
