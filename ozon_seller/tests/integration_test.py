@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import Union, Callable, Any, Optional
 import datetime
 import unittest
-import pathlib
 
-from . import common
+from . import qualified_name
+from . import load_test_case
 from .test_server_endpoint import TestServerEndpoint
 from .test_server import TestServer
 from ..common import data_class_json_mixin
@@ -54,7 +54,6 @@ class _IntegrationTestCase: # type: ignore[misc]
     response_cls: Optional[type[data_class_json_mixin.DataClassJsonMixin]]
 
 
-_TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)
 _TEST_EXPECTED_CREDENTIALS = credentials.Credentials(client_id="client-id", api_key="api-key")
 _TEST_TEXT_RESPONSE_DATA = "text-response-data"
 _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
@@ -680,14 +679,14 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
 class TestIntegration(unittest.TestCase):
     def test_integration(self) -> None:
         for test_case in _INTEGRATION_TEST_CASES:
-            requester_name = common.get_last_module(test_case.requester)
+            requester_name = qualified_name.get_last_module(test_case.requester)
             test_case_name = f"{requester_name} [{test_case.kind}]"
 
             with self.subTest(test_case_name):
-                request_module = common.get_last_module(test_case.request_data) \
+                request_module = qualified_name.get_last_module(test_case.request_data) \
                     if test_case.request_data is not None \
                     else None
-                response_module = common.get_last_module(test_case.response_cls) \
+                response_module = qualified_name.get_last_module(test_case.response_cls) \
                     if test_case.response_cls is not None \
                     else None
                 if (
@@ -700,32 +699,17 @@ class TestIntegration(unittest.TestCase):
                             f"{request_module} and {response_module}, respectively",
                     )
 
-                expected_request_json = None
-                if test_case.request_data is not None:
-                    expected_request_json_filename = "full.json"
-                    expected_request_json_path = _TEST_DATA_PATH.joinpath(
-                        common.get_last_module(test_case.request_data),
-                        common.get_qualified_name(test_case.request_data),
-                        expected_request_json_filename,
-                    )
-
-                    with open(expected_request_json_path) as expected_request_json_file:
-                        expected_request_json = expected_request_json_file.read().strip()
+                expected_request_json = load_test_case.load_test_case(
+                    "full",
+                    test_case.request_data,
+                ) \
+                    if test_case.request_data is not None \
+                    else None
 
                 expected_response: Any
                 if test_case.response_cls is not None:
                     response_type = "application/json"
-
-                    response_json_filename = "full.json"
-                    response_json_path = _TEST_DATA_PATH.joinpath(
-                        common.get_last_module(test_case.response_cls),
-                        common.get_qualified_name(test_case.response_cls),
-                        response_json_filename,
-                    )
-
-                    with open(response_json_path) as response_json_file:
-                        response_data = response_json_file.read().strip()
-
+                    response_data = load_test_case.load_test_case("full", test_case.response_cls)
                     expected_response = test_case.response_cls.schema().loads(response_data)
                 else:
                     response_type = "text/plain"

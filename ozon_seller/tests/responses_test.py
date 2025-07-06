@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-import pathlib
 import unittest
 import datetime
 
-from . import common
+from . import qualified_name
+from . import load_test_case
 from ..common import data_class_json_mixin
 from .. import (
     actions_candidates,
@@ -39,7 +39,6 @@ class _ResponseTestCase:
     expected_data: data_class_json_mixin.DataClassJsonMixin
 
 
-_TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)
 _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
     # actions_candidates.GetActionsCandidatesResponseResultWrapper
     _ResponseTestCase(
@@ -4201,19 +4200,11 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 class TestResponses(unittest.TestCase):
     def test_responses(self) -> None:
         for test_case in _RESPONSES_TEST_CASES:
-            data_name = common.get_full_qualified_name(test_case.expected_data)
+            data_name = qualified_name.get_full_qualified_name(test_case.expected_data)
             test_case_name = f"{data_name} [{test_case.kind}]"
 
             with self.subTest(test_case_name):
-                input_json_filename = f"{test_case.kind}.json"
-                input_json_path = _TEST_DATA_PATH.joinpath(
-                    common.get_last_module(test_case.expected_data),
-                    common.get_qualified_name(test_case.expected_data),
-                    input_json_filename,
-                )
-
-                with open(input_json_path) as input_json_file:
-                    input_json = input_json_file.read().strip()
+                input_json = load_test_case.load_test_case(test_case.kind, test_case.expected_data)
 
                 data_cls = test_case.expected_data.__class__
                 actual_data = data_cls.schema().loads(input_json)
