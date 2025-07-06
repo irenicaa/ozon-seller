@@ -1,7 +1,5 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
-
-from dataclasses_json import config
 
 from .data_class_json_mixin import DataClassJsonMixin
 from .renamed_field import optional_renamed_field

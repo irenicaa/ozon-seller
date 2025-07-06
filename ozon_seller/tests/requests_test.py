@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from dataclasses_json import DataClassJsonMixin
 import datetime
 import unittest
 import pathlib
 
 from . import common
+from ..common import data_class_json_mixin
 from .. import (
     actions_candidates,
     actions_products,
@@ -37,7 +37,7 @@ from .. import (
 @dataclass
 class _RequestsTestCase:
     kind: str
-    data: DataClassJsonMixin
+    data: data_class_json_mixin.DataClassJsonMixin
 
 
 _TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)

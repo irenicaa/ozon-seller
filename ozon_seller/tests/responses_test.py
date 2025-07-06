@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from dataclasses_json import DataClassJsonMixin
 import pathlib
 import unittest
 import datetime
 
 from . import common
+from ..common import data_class_json_mixin
 from .. import (
     actions_candidates,
     actions_products,
@@ -36,7 +36,7 @@ from .. import (
 @dataclass
 class _ResponseTestCase:
     kind: str
-    expected_data: DataClassJsonMixin
+    expected_data: data_class_json_mixin.DataClassJsonMixin
 
 
 _TEST_DATA_PATH = pathlib.Path(__file__).parent.joinpath(common.TEST_DATA_DIRECTORY)
@@ -4216,6 +4216,6 @@ class TestResponses(unittest.TestCase):
                     input_json = input_json_file.read().strip()
 
                 data_cls = test_case.expected_data.__class__
-                actual_data = data_cls.schema().loads(input_json, many=None)
+                actual_data = data_cls.schema().loads(input_json)
 
                 self.assertEqual(test_case.expected_data, actual_data)
