@@ -3,6 +3,7 @@ from typing import Union, Callable, Any, Optional
 import datetime
 import unittest
 
+from . import common
 from . import qualified_name
 from . import load_test_case
 from .test_server_endpoint import TestServerEndpoint
@@ -700,7 +701,7 @@ class TestIntegration(unittest.TestCase):
                     )
 
                 expected_request_json = load_test_case.load_test_case(
-                    "full",
+                    common.FULL_TEST_CASE_KIND,
                     test_case.request_data,
                 ) \
                     if test_case.request_data is not None \
@@ -709,7 +710,10 @@ class TestIntegration(unittest.TestCase):
                 expected_response: Any
                 if test_case.response_cls is not None:
                     response_type = "application/json"
-                    response_data = load_test_case.load_test_case("full", test_case.response_cls)
+                    response_data = load_test_case.load_test_case(
+                        common.FULL_TEST_CASE_KIND,
+                        test_case.response_cls,
+                    )
                     expected_response = test_case.response_cls.schema().loads(response_data)
                 else:
                     response_type = "text/plain"

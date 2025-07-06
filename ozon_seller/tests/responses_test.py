@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import unittest
 import datetime
 
+from . import common
 from . import qualified_name
 from . import load_test_case
 from ..common import data_class_json_mixin
@@ -51,7 +52,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=actions_candidates.GetActionsCandidatesResponseResultWrapper(
             result=actions_candidates.GetActionsCandidatesResponseResult(
                 products=[
@@ -90,7 +91,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=actions_products.GetSellerProductResponseResultWrapper(
             result=actions_products.GetSellerProductResponseResult(
                 products=[
@@ -126,7 +127,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=actions.GetSellerActionsResponseResultWrapper(
             result=[
                 actions.GetSellerActionsResponseResult(
@@ -171,7 +172,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 
     # chat_send_message.GetChatStartResponseResult
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=chat_send_message.GetChatStartResponseResult(
             result="result",
         ),
@@ -179,7 +180,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 
     # chat_start.GetChatStartResponseResultWrapper
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=chat_start.GetChatStartResponseResultWrapper(
             result=chat_start.GetChatStartResponseResult(
                 chat_id="23",
@@ -222,7 +223,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=fbs_act_get_postings.PostingFBSActDataResponseResultWrapper(
             result=[
                 fbs_act_get_postings.PostingFBSActDataResponseResult(
@@ -744,7 +745,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbo_list.GetPostingFBOListResponseResultWrapper(
             result=[
                 posting_fbo_list.GetPostingFBOListResponseResult(
@@ -1038,7 +1039,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_act_check_status.PostingFBSActCreateResponseActResultWrapper(
             result=posting_fbs_act_check_status.PostingFBSActCheckStatusResponseResult(
                 act_type="act_type",
@@ -1051,7 +1052,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 
     # posting_fbs_act_create.PostingFBSActCreateResponseActResultWrapper
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_act_create.PostingFBSActCreateResponseActResultWrapper(
             result=posting_fbs_act_create.PostingFBSActCreateResponseActResult(
                 id=23,
@@ -1657,7 +1658,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_get.GetPostingFBSDataResponseResultWrapper(
             result=posting_fbs_get.GetPostingFBSDataResponseResult(
                 additional_data=[
@@ -2602,7 +2603,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_list.GetPostingFBSListResponseResultWrapper(
             result=posting_fbs_list.GetPostingFBSListResponseResult(
                 postings=[
@@ -2992,7 +2993,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_product_country_list.GetPostingFBSProductCountryListResponseResultWrapper(
             result=[
                 posting_fbs_product_country_list.GetPostingFBSProductCountryListResponseResult(
@@ -3009,7 +3010,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 
     # posting_fbs_product_country_set.GetCountrySetFBSResponseResult
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_product_country_set.GetCountrySetFBSResponseResult(
             product_id=23,
             is_gtd_needed=True,
@@ -3024,7 +3025,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=posting_fbs_ship_gtd.CreatePostingFBSShipWithGTDResponseResultWrapper(
             result=["one", "two"],
         ),
@@ -3032,7 +3033,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 
     # product_description.GetProductInfoDescriptionResponseResultWrapper
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_description.GetProductInfoDescriptionResponseResultWrapper(
             result=product_description.GetProductInfoDescriptionResponseResult(
                 description="description",
@@ -3070,7 +3071,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_import_prices.GetProductImportPriceResponseResultWrapper(
             result=[
                 product_import_prices.GetProductImportPriceResponseResult(
@@ -3136,7 +3137,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_import_stocks.ProductsStocksResponseProcessResultWrapper(
             result=[
                 product_import_stocks.ProductsStocksResponseProcessResult(
@@ -3369,7 +3370,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_info_attributes.GetProductAttributesResponseResultWrapper(
             result=[
                 product_info_attributes.GetProductAttributesResponseResult(
@@ -3747,7 +3748,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_info.GetProductInfoResponseResultWrapper(
             result=product_info.GetProductInfoResponseResult(
                 barcode="barcode",
@@ -3883,7 +3884,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=product_pictures_import.ProductPicturesResponseResultWrapper(
             result=product_pictures_import.ProductPicturesResponseResult(
                 pictures=[
@@ -3916,7 +3917,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=products_stocks.SetProductStocksResponseResultWrapper(
             result=[
                 products_stocks.SetProductStocksResponseResult(
@@ -3944,7 +3945,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=returns_fbo.GetReturnsCompanyFBOResponseResult(
             returns=[
                 returns_fbo.GetReturnsCompanyFBOResponseItem(
@@ -4061,7 +4062,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=returns_fbs.GetReturnsCompanyFBSResponseResultWrapper(
             result=returns_fbs.GetReturnsCompanyFBSResponseResult(
                 returns=[
@@ -4154,7 +4155,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
         ),
     ),
     _ResponseTestCase(
-        kind="full",
+        kind=common.FULL_TEST_CASE_KIND,
         expected_data=stocks.GetProductInfoStocksResponseResult(
             cursor="23",
             items=[

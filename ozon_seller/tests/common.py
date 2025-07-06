@@ -1,0 +1,1 @@
+FULL_TEST_CASE_KIND = "full"
