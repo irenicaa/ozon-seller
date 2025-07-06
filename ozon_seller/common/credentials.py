@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 
 
+CLIENT_ID_HEADER_KEY = "Client-Id"
+API_KEY_HEADER_KEY = "Api-Key"
+
+
 @dataclass
 class Credentials:
     client_id: str
@@ -8,6 +12,6 @@ class Credentials:
 
     def to_headers(self) -> dict[str, str]:
         return {
-            "Client-Id": self.client_id,
-            "Api-Key": self.api_key,
+            CLIENT_ID_HEADER_KEY: self.client_id,
+            API_KEY_HEADER_KEY: self.api_key,
         }
