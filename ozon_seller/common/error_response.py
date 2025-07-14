@@ -7,7 +7,7 @@ from .renamed_field import optional_renamed_field
 
 @dataclass
 class ErrorResponseDetail(DataClassJsonMixin):
-    type_url: Optional[int] = optional_renamed_field(int, "typeUrl")
+    type_url: Optional[str] = optional_renamed_field(str, "typeUrl")
     value: Optional[str] = None
 
 
