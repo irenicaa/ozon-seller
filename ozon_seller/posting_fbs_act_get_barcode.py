@@ -16,10 +16,9 @@ def get_posting_fbs_act_barcode(
     credentials: credentials.Credentials,
     data: FBSActData,
 ) -> bytes:
-    response = request_api.request_api_raw(
+    return request_api.request_api_content(
         "POST",
         "/v2/posting/fbs/act/get-barcode",
         credentials,
-        data.to_json(),
+        data,
     )
-    return response.content

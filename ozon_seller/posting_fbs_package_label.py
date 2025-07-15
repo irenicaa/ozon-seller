@@ -16,10 +16,9 @@ def get_posting_fbs_package_label(
     credentials: credentials.Credentials,
     data: FBSPackageData,
 ) -> bytes:
-    response = request_api.request_api_raw(
+    return request_api.request_api_content(
         "POST",
         "/v2/posting/fbs/package-label",
         credentials,
-        data.to_json(),
+        data,
     )
-    return response.content

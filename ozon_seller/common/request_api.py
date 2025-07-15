@@ -40,6 +40,23 @@ def request_api_raw(
     return response
 
 
+def request_api_content(
+    method: str,
+    endpoint: str,
+    credentials: credentials.Credentials,
+    data: Optional[DataClassJsonMixin],
+    *,
+    error_cls: type[DataClassJsonMixin] = error_response.ErrorResponse,
+) -> bytes:
+    try:
+        raw_data = data.to_json() if data is not None else None
+        response = request_api_raw(method, endpoint, credentials, raw_data)
+        return response.content
+    except http_error.HTTPError as error:
+        response_data = error_cls.schema().loads(error.response_data)
+        raise http_error.HTTPError(error.message, error.status, response_data) from None
+
+
 def request_api_json(
     method: str,
     endpoint: str,
@@ -49,14 +66,5 @@ def request_api_json(
     response_cls: type[T],
     error_cls: type[DataClassJsonMixin] = error_response.ErrorResponse,
 ) -> T:
-    try:
-        response = request_api_raw(
-            method,
-            endpoint,
-            credentials,
-            data.to_json() if data is not None else None,
-        )
-        return cast(T, response_cls.schema().loads(response.text))
-    except http_error.HTTPError as error:
-        response_data = error_cls.schema().loads(error.response_data)
-        raise http_error.HTTPError(error.message, error.status, response_data) from None
+    content = request_api_content(method, endpoint, credentials, data, error_cls=error_cls)
+    return cast(T, response_cls.schema().loads(content))

@@ -14,6 +14,7 @@ from ..common import data_class_json_mixin
 from ..common import credentials
 from ..common import request_api
 from ..common import http_error
+from ..common import error_response
 from .. import (
     actions_candidates,
     actions_products,
@@ -56,7 +57,7 @@ class _IntegrationTestCase: # type: ignore[misc]
     expected_method: str
     expected_endpoint: str
     response_cls: Optional[type[data_class_json_mixin.DataClassJsonMixin]] = None
-    expected_exception: Optional[http_error.HTTPError[Any]] = None
+    expected_exception: Optional[http_error.HTTPError[error_response.ErrorResponse]] = None
 
 
 _TEST_EXPECTED_CREDENTIALS = credentials.Credentials(client_id="client-id", api_key="api-key")
@@ -355,11 +356,7 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         ),
         expected_method="POST",
         expected_endpoint="/v2/posting/fbs/act/get-barcode",
-        expected_exception=http_error.HTTPError(
-            message=_TEST_ERROR_RESPONSE.to_json(),
-            status=_TEST_ERROR_RESPONSE.code if _TEST_ERROR_RESPONSE.code is not None else 500,
-            response_data=_TEST_ERROR_RESPONSE.to_json(),
-        ),
+        expected_exception=_TEST_HTTP_ERROR,
     ),
 
     # posting_fbs_get
@@ -485,11 +482,7 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         ),
         expected_method="POST",
         expected_endpoint="/v2/posting/fbs/package-label",
-        expected_exception=http_error.HTTPError(
-            message=_TEST_ERROR_RESPONSE.to_json(),
-            status=_TEST_ERROR_RESPONSE.code if _TEST_ERROR_RESPONSE.code is not None else 500,
-            response_data=_TEST_ERROR_RESPONSE.to_json(),
-        ),
+        expected_exception=_TEST_HTTP_ERROR,
     ),
 
     # posting_fbs_list
