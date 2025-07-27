@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api, datetime_field, renamed_field
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -148,12 +148,15 @@ def get_posting_fbo_list(
 def get_posting_fbo_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBOListFilter,
-) -> Generator[GetPostingFBOListResponseResultWrapper, None, None]:
+) -> Iterator[GetPostingFBOListResponseResultWrapper]:
     while True:
         list = get_posting_fbo_list(credentials, data)
-        if list.result == []:
+        if len(list.result) == 0:
             break
 
         yield list
 
-        data.offset += data.limit
+        if data.offset is not None:
+            data.offset += len(list.result)
+        else:
+            data.offset = len(list.result)

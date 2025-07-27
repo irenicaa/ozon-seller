@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -101,10 +101,10 @@ def get_product_attributes(
 def get_product_attributes_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> Generator[GetProductAttributesResponseResultWrapper, None, None]:
+) -> Iterator[GetProductAttributesResponseResultWrapper]:
     while True:
         attributes = get_product_attributes(credentials, data)
-        if attributes.result == []:
+        if len(attributes.result) == 0:
             break
 
         yield attributes

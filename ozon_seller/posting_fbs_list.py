@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api, datetime_field, renamed_field
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -229,12 +229,15 @@ def get_posting_fbs_list(
 def get_posting_fbs_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBSListFilter,
-) -> Generator[GetPostingFBSListResponseResultWrapper, None, None]:
+) -> Iterator[GetPostingFBSListResponseResultWrapper]:
     while True:
         stocks = get_posting_fbs_list(credentials, data)
-        if stocks.result.postings == []:
+        if len(stocks.result.postings) == 0:
             break
 
         yield stocks
 
-        data.offset += data.limit
+        if data.offset is not None:
+            data.offset += len(stocks.result.postings)
+        else:
+            data.offset = len(stocks.result.postings)

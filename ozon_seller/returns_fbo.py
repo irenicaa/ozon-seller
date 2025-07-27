@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api, datetime_field
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -63,12 +63,15 @@ def get_returns_company_fbo(
 def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBOFilter,
-) -> Generator[GetReturnsCompanyFBOResponseResult, None, None]:
+) -> Iterator[GetReturnsCompanyFBOResponseResult]:
     while True:
         returns = get_returns_company_fbo(credentials, data)
-        if returns.returns == []:
+        if len(returns.returns) == 0:
             break
 
         yield returns
 
-        data.offset += data.limit
+        if data.offset is not None:
+            data.offset += len(returns.returns)
+        else:
+            data.offset = len(returns.returns)

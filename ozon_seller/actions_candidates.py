@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -56,12 +56,15 @@ def get_actions_candidates(
 def get_actions_candidates_iterative(
     credentials: credentials.Credentials,
     data: PaginatedCandidatesForActions,
-) -> Generator[GetActionsCandidatesResponseResultWrapper, None, None]:
+) -> Iterator[GetActionsCandidatesResponseResultWrapper]:
     while True:
         products = get_actions_candidates(credentials, data)
-        if products.result.products == []:
+        if len(products.result.products) == 0:
             break
 
         yield products
 
-        data.offset += data.limit
+        if data.offset is not None:
+            data.offset += len(products.result.products)
+        else:
+            data.offset = len(products.result.products)

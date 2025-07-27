@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Generator, Optional
+from typing import Iterator, Optional
 
 from .common import credentials, request_api
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -68,10 +68,10 @@ def get_product_info_stocks(
 def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> Generator[GetProductInfoStocksResponseResult, None, None]:
+) -> Iterator[GetProductInfoStocksResponseResult]:
     while True:
         stocks = get_product_info_stocks(credentials, data)
-        if stocks.cursor == "":
+        if len(stocks.items) == 0:
             break
 
         yield stocks
