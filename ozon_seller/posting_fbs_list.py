@@ -236,16 +236,8 @@ def get_posting_fbs_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBSListFilter,
 ) -> Iterator[GetPostingFBSListResponseResultWrapper]:
-    def _shift_request(
-        response: GetPostingFBSListResponseResultWrapper,
-    ) -> None:
-        nonlocal data
-
-        previous_offset = data.offset if data.offset is not None else 0
-        data.offset = previous_offset + len(response.result.postings)
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_offset(
+        request=data,
         requester=lambda: get_posting_fbs_list(credentials, data),
         get_response_length=lambda response: len(response.result.postings),
-        shift_request=_shift_request,
     )

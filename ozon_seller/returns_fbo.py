@@ -64,14 +64,8 @@ def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBOFilter,
 ) -> Iterator[GetReturnsCompanyFBOResponseResult]:
-    def _shift_request(response: GetReturnsCompanyFBOResponseResult) -> None:
-        nonlocal data
-
-        previous_offset = data.offset if data.offset is not None else 0
-        data.offset = previous_offset + len(response.returns)
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_offset(
+        request=data,
         requester=lambda: get_returns_company_fbo(credentials, data),
         get_response_length=lambda response: len(response.returns),
-        shift_request=_shift_request,
     )

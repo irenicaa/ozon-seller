@@ -93,15 +93,8 @@ def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
 ) -> Iterator[GetReturnsCompanyFBSResponseResultWrapper]:
-    def _shift_request(
-        response: GetReturnsCompanyFBSResponseResultWrapper,
-    ) -> None:
-        nonlocal data
-
-        data.offset += len(response.result.returns)
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_offset(
+        request=data,
         requester=lambda: get_returns_company_fbs(credentials, data),
         get_response_length=lambda response: len(response.result.returns),
-        shift_request=_shift_request,
     )

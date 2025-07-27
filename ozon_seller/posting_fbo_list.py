@@ -155,16 +155,8 @@ def get_posting_fbo_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBOListFilter,
 ) -> Iterator[GetPostingFBOListResponseResultWrapper]:
-    def _shift_request(
-        response: GetPostingFBOListResponseResultWrapper,
-    ) -> None:
-        nonlocal data
-
-        previous_offset = data.offset if data.offset is not None else 0
-        data.offset = previous_offset + len(response.result)
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_offset(
+        request=data,
         requester=lambda: get_posting_fbo_list(credentials, data),
         get_response_length=lambda response: len(response.result),
-        shift_request=_shift_request,
     )

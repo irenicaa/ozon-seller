@@ -57,16 +57,8 @@ def get_actions_candidates_iterative(
     credentials: credentials.Credentials,
     data: PaginatedCandidatesForActions,
 ) -> Iterator[GetActionsCandidatesResponseResultWrapper]:
-    def _shift_request(
-        response: GetActionsCandidatesResponseResultWrapper,
-    ) -> None:
-        nonlocal data
-
-        previous_offset = data.offset if data.offset is not None else 0
-        data.offset = previous_offset + len(response.result.products)
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_offset(
+        request=data,
         requester=lambda: get_actions_candidates(credentials, data),
         get_response_length=lambda response: len(response.result.products),
-        shift_request=_shift_request,
     )
