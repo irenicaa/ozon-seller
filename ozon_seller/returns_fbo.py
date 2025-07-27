@@ -63,9 +63,9 @@ def get_returns_company_fbo(
 def get_returns_company_fbo_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBOFilter,
-) -> Iterator[GetReturnsCompanyFBOResponseResult]:
+) -> Iterator[GetReturnsCompanyFBOResponseItem]:
     return make_iterative.make_iterative_via_offset(
         request=data,
         requester=lambda: get_returns_company_fbo(credentials, data),
-        get_response_length=lambda response: len(response.returns),
+        extract_response_items=lambda response: response.returns,
     )

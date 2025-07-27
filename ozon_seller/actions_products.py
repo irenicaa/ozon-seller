@@ -56,9 +56,9 @@ def get_action_products(
 def get_action_products_iterative(
     credentials: credentials.Credentials,
     data: PaginatedActionProducts,
-) -> Iterator[GetSellerProductResponseResultWrapper]:
+) -> Iterator[GetSellerProductResponseProducts]:
     return make_iterative.make_iterative_via_offset(
         request=data,
         requester=lambda: get_action_products(credentials, data),
-        get_response_length=lambda response: len(response.result.products),
+        extract_response_items=lambda response: response.result.products,
     )

@@ -101,10 +101,10 @@ def get_product_attributes(
 def get_product_attributes_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> Iterator[GetProductAttributesResponseResultWrapper]:
+) -> Iterator[GetProductAttributesResponseResult]:
     return make_iterative.make_iterative_via_cursor(
         request=data,
         requester=lambda: get_product_attributes(credentials, data),
-        get_response_length=lambda response: len(response.result),
+        extract_response_items=lambda response: response.result,
         cursor_attribute_name="last_id",
     )

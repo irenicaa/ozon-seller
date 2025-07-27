@@ -68,9 +68,9 @@ def get_product_info_stocks(
 def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
-) -> Iterator[GetProductInfoStocksResponseResult]:
+) -> Iterator[GetProductInfoStocksResponseItem]:
     return make_iterative.make_iterative_via_cursor(
         request=data,
         requester=lambda: get_product_info_stocks(credentials, data),
-        get_response_length=lambda response: len(response.items),
+        extract_response_items=lambda response: response.items,
     )

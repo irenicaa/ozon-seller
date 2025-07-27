@@ -92,9 +92,9 @@ def get_returns_company_fbs(
 def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
-) -> Iterator[GetReturnsCompanyFBSResponseResultWrapper]:
+) -> Iterator[GetReturnsCompanyFBSResponseItem]:
     return make_iterative.make_iterative_via_offset(
         request=data,
         requester=lambda: get_returns_company_fbs(credentials, data),
-        get_response_length=lambda response: len(response.result.returns),
+        extract_response_items=lambda response: response.result.returns,
     )

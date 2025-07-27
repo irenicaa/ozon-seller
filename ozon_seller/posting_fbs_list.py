@@ -235,9 +235,9 @@ def get_posting_fbs_list(
 def get_posting_fbs_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBSListFilter,
-) -> Iterator[GetPostingFBSListResponseResultWrapper]:
+) -> Iterator[GetPostingFBSListResponsePosting]:
     return make_iterative.make_iterative_via_offset(
         request=data,
         requester=lambda: get_posting_fbs_list(credentials, data),
-        get_response_length=lambda response: len(response.result.postings),
+        extract_response_items=lambda response: response.result.postings,
     )
