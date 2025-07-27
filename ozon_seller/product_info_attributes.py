@@ -102,15 +102,9 @@ def get_product_attributes_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
 ) -> Iterator[GetProductAttributesResponseResultWrapper]:
-    def _shift_request(
-        response: GetProductAttributesResponseResultWrapper,
-    ) -> None:
-        nonlocal data
-
-        data.last_id = response.last_id
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_cursor(
+        request=data,
         requester=lambda: get_product_attributes(credentials, data),
         get_response_length=lambda response: len(response.result),
-        shift_request=_shift_request,
+        cursor_attribute_name="last_id",
     )

@@ -69,13 +69,8 @@ def get_product_info_stocks_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
 ) -> Iterator[GetProductInfoStocksResponseResult]:
-    def _shift_request(response: GetProductInfoStocksResponseResult) -> None:
-        nonlocal data
-
-        data.cursor = response.cursor
-
-    return make_iterative.make_iterative(
+    return make_iterative.make_iterative_via_cursor(
+        request=data,
         requester=lambda: get_product_info_stocks(credentials, data),
         get_response_length=lambda response: len(response.items),
-        shift_request=_shift_request,
     )

@@ -41,3 +41,22 @@ def make_iterative_via_offset(
         get_response_length=get_response_length,
         shift_request=_shift_request,
     )
+
+
+def make_iterative_via_cursor(
+    request: U,
+    requester: Callable[[], T],
+    get_response_length: Callable[[T], int],
+    cursor_attribute_name: str = "cursor",
+) -> Iterator[T]:
+    def _shift_request(response: T) -> None:
+        nonlocal request
+
+        next_cursor = getattr(response, cursor_attribute_name)
+        setattr(request, cursor_attribute_name, next_cursor)
+
+    return make_iterative(
+        requester=requester,
+        get_response_length=get_response_length,
+        shift_request=_shift_request,
+    )
