@@ -2,7 +2,13 @@ import datetime
 from dataclasses import dataclass
 from typing import Iterator, Optional
 
-from .common import credentials, request_api, datetime_field, renamed_field
+from .common import (
+    credentials,
+    request_api,
+    datetime_field,
+    renamed_field,
+    make_iterative,
+)
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -230,14 +236,16 @@ def get_posting_fbs_list_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetPostingFBSListFilter,
 ) -> Iterator[GetPostingFBSListResponseResultWrapper]:
-    while True:
-        stocks = get_posting_fbs_list(credentials, data)
-        if len(stocks.result.postings) == 0:
-            break
+    def _shift_request(
+        response: GetPostingFBSListResponseResultWrapper,
+    ) -> None:
+        nonlocal data
 
-        yield stocks
+        previous_offset = data.offset if data.offset is not None else 0
+        data.offset = previous_offset + len(response.result.postings)
 
-        if data.offset is not None:
-            data.offset += len(stocks.result.postings)
-        else:
-            data.offset = len(stocks.result.postings)
+    return make_iterative.make_iterative(
+        requester=lambda: get_posting_fbs_list(credentials, data),
+        get_response_length=lambda response: len(response.result.postings),
+        shift_request=_shift_request,
+    )

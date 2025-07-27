@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Iterator, Optional
 
-from .common import credentials, request_api
+from .common import credentials, request_api, make_iterative
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -102,11 +102,15 @@ def get_product_attributes_iterative(
     credentials: credentials.Credentials,
     data: PaginatedProductFilter,
 ) -> Iterator[GetProductAttributesResponseResultWrapper]:
-    while True:
-        attributes = get_product_attributes(credentials, data)
-        if len(attributes.result) == 0:
-            break
+    def _shift_request(
+        response: GetProductAttributesResponseResultWrapper,
+    ) -> None:
+        nonlocal data
 
-        yield attributes
+        data.last_id = response.last_id
 
-        data.last_id = attributes.last_id
+    return make_iterative.make_iterative(
+        requester=lambda: get_product_attributes(credentials, data),
+        get_response_length=lambda response: len(response.result),
+        shift_request=_shift_request,
+    )

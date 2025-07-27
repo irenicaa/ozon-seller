@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Iterator, Optional
 
-from .common import credentials, request_api, datetime_field
+from .common import credentials, request_api, datetime_field, make_iterative
 from .common.data_class_json_mixin import DataClassJsonMixin
 
 
@@ -93,11 +93,15 @@ def get_returns_company_fbs_iterative(
     credentials: credentials.Credentials,
     data: PaginatedGetReturnsCompanyFBSFilter,
 ) -> Iterator[GetReturnsCompanyFBSResponseResultWrapper]:
-    while True:
-        returns = get_returns_company_fbs(credentials, data)
-        if len(returns.result.returns) == 0:
-            break
+    def _shift_request(
+        response: GetReturnsCompanyFBSResponseResultWrapper,
+    ) -> None:
+        nonlocal data
 
-        yield returns
+        data.offset += len(response.result.returns)
 
-        data.offset += len(returns.result.returns)
+    return make_iterative.make_iterative(
+        requester=lambda: get_returns_company_fbs(credentials, data),
+        get_response_length=lambda response: len(response.result.returns),
+        shift_request=_shift_request,
+    )
