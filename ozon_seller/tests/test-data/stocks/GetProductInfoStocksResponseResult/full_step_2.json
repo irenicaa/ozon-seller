@@ -1,0 +1,45 @@
+{
+  "unexpected_key": "unexpected value",
+  "cursor": "4",
+  "items": [
+    {
+      "unexpected_key": "unexpected value",
+      "offer_id": "323",
+      "product_id": 342,
+      "stocks": [
+        {
+          "unexpected_key": "unexpected value",
+          "present": 5023,
+          "reserved": 5042,
+          "type": "type #5"
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "present": 6023,
+          "reserved": 6042,
+          "type": "type #6"
+        }
+      ]
+    },
+    {
+      "unexpected_key": "unexpected value",
+      "offer_id": "423",
+      "product_id": 442,
+      "stocks": [
+        {
+          "unexpected_key": "unexpected value",
+          "present": 7023,
+          "reserved": 7042,
+          "type": "type #7"
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "present": 8023,
+          "reserved": 8042,
+          "type": "type #8"
+        }
+      ]
+    }
+  ],
+  "total": 4
+}

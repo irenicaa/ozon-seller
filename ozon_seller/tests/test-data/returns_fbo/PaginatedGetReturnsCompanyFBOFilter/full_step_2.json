@@ -1,0 +1,11 @@
+{
+  "filter": {
+    "posting_number": "12",
+    "status": [
+      "one",
+      "two"
+    ]
+  },
+  "offset": 2,
+  "limit": 2
+}

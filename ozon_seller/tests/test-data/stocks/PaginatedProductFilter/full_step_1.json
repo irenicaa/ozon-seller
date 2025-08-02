@@ -1,0 +1,18 @@
+{
+  "filter": {
+    "offer_id": [
+      "105",
+      "205"
+    ],
+    "product_id": [
+      "112",
+      "212"
+    ],
+    "visibility": "visibility",
+    "with_quant": {
+      "created": true
+    }
+  },
+  "cursor": "",
+  "limit": 2
+}

@@ -1,0 +1,34 @@
+{
+  "filter": {
+    "accepted_from_customer_moment": [
+      {
+        "time_from": "2006-01-02T08:04:05.999999+00:00",
+        "time_to": "2006-01-02T10:04:05.999999+00:00"
+      },
+      {
+        "time_from": "2006-01-03T08:04:05.999999+00:00",
+        "time_to": "2006-01-03T10:04:05.999999+00:00"
+      }
+    ],
+    "last_free_waiting_day": [
+      {
+        "time_from": "2006-01-04T08:04:05.999999+00:00",
+        "time_to": "2006-01-04T10:04:05.999999+00:00"
+      },
+      {
+        "time_from": "2006-01-05T08:04:05.999999+00:00",
+        "time_to": "2006-01-05T10:04:05.999999+00:00"
+      }
+    ],
+    "order_id": 5,
+    "posting_number": [
+      "123",
+      "142"
+    ],
+    "product_name": "product_name",
+    "product_offer_id": "12",
+    "status": "status"
+  },
+  "offset": 4,
+  "limit": 2
+}

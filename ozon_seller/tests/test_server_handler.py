@@ -9,21 +9,27 @@ from ..common import error_response
 
 
 class TestServerHandler(BaseHTTPRequestHandler):
-    endpoint: TestServerEndpoint
+    _endpoints: list[TestServerEndpoint]
 
     @staticmethod
-    def create(endpoint: TestServerEndpoint) -> type[TestServerHandler]:
+    def create(endpoints: list[TestServerEndpoint]) -> type[TestServerHandler]:
         class _CustomTestServerHandler(TestServerHandler):
             pass
 
-        _CustomTestServerHandler.endpoint = endpoint
+        _CustomTestServerHandler._endpoints = endpoints
 
         return _CustomTestServerHandler
 
     def do_REQUEST(self) -> None:
+        try:
+            current_endpoint = self._endpoints.pop(0)
+        except IndexError:
+            self._write_error_response(create_error_response(http.HTTPStatus.INTERNAL_SERVER_ERROR))
+            return
+
         if (
-            self.command != self.endpoint.expected_method
-            or self.path != self.endpoint.expected_endpoint
+            self.command != current_endpoint.expected_method
+            or self.path != current_endpoint.expected_endpoint
         ):
             self._write_error_response(create_error_response(http.HTTPStatus.NOT_FOUND))
             return
@@ -32,24 +38,24 @@ class TestServerHandler(BaseHTTPRequestHandler):
             client_id=self.headers.get(credentials.CLIENT_ID_HEADER_KEY, ""),
             api_key=self.headers.get(credentials.API_KEY_HEADER_KEY, ""),
         )
-        if actual_credentials != self.endpoint.expected_credentials:
+        if actual_credentials != current_endpoint.expected_credentials:
             self._write_error_response(create_error_response(http.HTTPStatus.UNAUTHORIZED))
             return
 
-        if self.endpoint.expected_request_json is not None:
+        if current_endpoint.expected_request_json is not None:
             actual_request_length = int(self.headers.get("Content-Length", 0))
             actual_request_json = self.rfile.read(actual_request_length)
             if not _are_equal_as_json(
                 actual_request_json,
-                self.endpoint.expected_request_json.encode("utf-8"),
+                current_endpoint.expected_request_json.encode("utf-8"),
             ):
                 self._write_error_response(create_error_response(http.HTTPStatus.BAD_REQUEST))
                 return
 
         self._write_response(
             status_code=200,
-            response_type=self.endpoint.provided_response_type,
-            response_data=self.endpoint.provided_response_data,
+            response_type=current_endpoint.provided_response_type,
+            response_data=current_endpoint.provided_response_data,
         )
 
     # proxy all the methods to `do_REQUEST()`

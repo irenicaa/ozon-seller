@@ -1,0 +1,225 @@
+{
+  "unexpected_key": "unexpected value",
+  "result": [
+    {
+      "unexpected_key": "unexpected value",
+      "attributes": [
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200100023,
+          "complex_id": 200100042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2001000023,
+              "value": "value #20011"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2002000023,
+              "value": "value #20012"
+            }
+          ]
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200200023,
+          "complex_id": 200200042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2003000023,
+              "value": "value #20013"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2004000023,
+              "value": "value #20014"
+            }
+          ]
+        }
+      ],
+      "barcode": "barcode #20011",
+      "barcodes": ["barcode #2001", "barcode #2002"],
+      "description_category_id": 2001005,
+      "color_image": "color image #20011",
+      "complex_attributes": [
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200300023,
+          "complex_id": 200300042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2005000023,
+              "value": "value #20015"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2006000023,
+              "value": "value #20016"
+            }
+          ]
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200400023,
+          "complex_id": 200400042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2007000023,
+              "value": "value #20017"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2008000023,
+              "value": "value #20018"
+            }
+          ]
+        }
+      ],
+      "depth": 2001012,
+      "dimension_unit": "dimension unit #20011",
+      "height": 2001023,
+      "id": 2001042,
+      "images": ["image #2001", "image #2002"],
+      "model_info": {
+        "unexpected_key": "unexpected value",
+        "model_id": 20010023,
+        "count": 20010042
+      },
+      "name": "name #20011",
+      "offer_id": "2002005",
+      "pdf_list": [
+        {
+          "unexpected_key": "unexpected value",
+          "file_name": "file name #20011",
+          "name": "name #20012"
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "file_name": "file name #20012",
+          "name": "name #20013"
+        }
+      ],
+      "primary_image": "primary image #20011",
+      "sku": 2002012,
+      "type_id": 2002023,
+      "weight": 2002042,
+      "weight_unit": "weight unit #20011",
+      "width": 2003005
+    },
+    {
+      "unexpected_key": "unexpected value",
+      "attributes": [
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200500023,
+          "complex_id": 200500042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 2009000023,
+              "value": "value #20021"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20010000023,
+              "value": "value #20022"
+            }
+          ]
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200600023,
+          "complex_id": 200600042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20011000023,
+              "value": "value #20023"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20012000023,
+              "value": "value #20024"
+            }
+          ]
+        }
+      ],
+      "barcode": "barcode #20021",
+      "barcodes": ["barcode #2003", "barcode #2004"],
+      "description_category_id": 2004005,
+      "color_image": "color image #20021",
+      "complex_attributes": [
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200700023,
+          "complex_id": 200700042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20013000023,
+              "value": "value #20025"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20014000023,
+              "value": "value #20026"
+            }
+          ]
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "id": 200800023,
+          "complex_id": 200800042,
+          "values": [
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20015000023,
+              "value": "value #20027"
+            },
+            {
+              "unexpected_key": "unexpected value",
+              "dictionary_value_id": 20016000023,
+              "value": "value #20028"
+            }
+          ]
+        }
+      ],
+      "depth": 2004012,
+      "dimension_unit": "dimension unit #20021",
+      "height": 2004023,
+      "id": 2004042,
+      "images": ["image #2003", "image #2004"],
+      "model_info": {
+        "unexpected_key": "unexpected value",
+        "model_id": 20020023,
+        "count": 20020042
+      },
+      "name": "name #20021",
+      "offer_id": "2005005",
+      "pdf_list": [
+        {
+          "unexpected_key": "unexpected value",
+          "file_name": "file name #20021",
+          "name": "name #20022"
+        },
+        {
+          "unexpected_key": "unexpected value",
+          "file_name": "file name #20022",
+          "name": "name #20023"
+        }
+      ],
+      "primary_image": "primary image #20021",
+      "sku": 2005012,
+      "type_id": 2005023,
+      "weight": 2005042,
+      "weight_unit": "weight unit #20021",
+      "width": 2006005
+    }
+  ],
+  "last_id": "4",
+  "total": 4
+}

@@ -10,8 +10,8 @@ from .test_server_handler import TestServerHandler
 
 
 class TestServer:
-    def __init__(self, endpoint: TestServerEndpoint) -> None:
-        self.endpoint = endpoint
+    def __init__(self, endpoints: list[TestServerEndpoint]) -> None:
+        self._endpoints = endpoints
 
     def __enter__(self) -> TestServer:
         self.start()
@@ -32,7 +32,7 @@ class TestServer:
     def start(self) -> None:
         self._server = ThreadingHTTPServer(
             server_address=("localhost", _find_available_port()),
-            RequestHandlerClass=TestServerHandler.create(self.endpoint),
+            RequestHandlerClass=TestServerHandler.create(self._endpoints),
         )
 
         self._thread = threading.Thread(target=self._server.serve_forever, daemon=True)

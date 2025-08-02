@@ -1,0 +1,29 @@
+{
+  "filter": {
+    "delivery_method_id": [
+      123,
+      142
+    ],
+    "order_id": 12,
+    "provider_id": [
+      223,
+      242
+    ],
+    "status": "status",
+    "warehouse_id": [
+      323,
+      342
+    ],
+    "since": "2006-01-02T08:04:05.999999+00:00",
+    "to": "2006-01-02T10:04:05.999999+00:00"
+  },
+  "dir": "DESC",
+  "limit": 2,
+  "offset": 4,
+  "with": {
+    "analytics_data": true,
+    "barcodes": true,
+    "financial_data": true,
+    "translit": true
+  }
+}

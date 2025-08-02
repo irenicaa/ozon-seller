@@ -1,0 +1,29 @@
+{
+  "unexpected_key": "unexpected value",
+  "result": {
+    "unexpected_key": "unexpected value",
+    "products": [
+      {
+        "unexpected_key": "unexpected value",
+        "id": 300.5,
+        "price": 301.2,
+        "action_price": 302.3,
+        "max_action_price": 304.2,
+        "add_mode": "add mode #3",
+        "min_stock": 350.5,
+        "stock": 351.2
+      },
+      {
+        "unexpected_key": "unexpected value",
+        "id": 400.5,
+        "price": 401.2,
+        "action_price": 402.3,
+        "max_action_price": 404.2,
+        "add_mode": "add mode #4",
+        "min_stock": 450.5,
+        "stock": 451.2
+      }
+    ],
+    "total": 4
+  }
+}
