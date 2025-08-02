@@ -3448,13 +3448,9 @@ class TestIntegration(unittest.TestCase):
                         with self.assertRaises(http_error.HTTPError) as actual_exception_catcher:
                             test_case.call_requester()
 
-                        expected_exception, actual_exception = \
-                            test_case.expected_exception, actual_exception_catcher.exception
-                        self.assertEqual(expected_exception.message, actual_exception.message)
-                        self.assertEqual(expected_exception.status, actual_exception.status)
                         self.assertEqual(
-                            expected_exception.response_data,
-                            actual_exception.response_data,
+                            test_case.expected_exception,
+                            actual_exception_catcher.exception,
                         )
                     else:
                         actual_response = test_case.call_requester()

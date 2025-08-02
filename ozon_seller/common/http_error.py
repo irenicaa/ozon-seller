@@ -17,3 +17,13 @@ class HTTPError(RuntimeError, Generic[T]):
         self.message = message
         self.status = status
         self.response_data = response_data
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, HTTPError):
+            return NotImplemented
+
+        return (
+            self.message == other.message
+            and self.status == other.status
+            and self.response_data == other.response_data
+        )
