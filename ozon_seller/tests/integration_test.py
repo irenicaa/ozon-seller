@@ -1,21 +1,14 @@
-from dataclasses import dataclass
-from typing import Union, Callable, Any, Optional
-from collections.abc import Iterator
 import datetime
 import unittest
 import http
 
 from . import common
 from . import qualified_name
-from . import load_test_case
-from .test_server_endpoint import TestServerEndpoint
 from .test_server_handler import create_error_response
 from .test_server import TestServer
-from ..common import data_class_json_mixin
-from ..common import credentials
+from .integration_test_case import IntegrationTestCase
 from ..common import request_api
 from ..common import http_error
-from ..common import error_response
 from .. import (
     actions_candidates, # + iterative
     actions_products, # + iterative
@@ -46,41 +39,18 @@ from .. import (
 )
 
 
-@dataclass
-class _IntegrationTestCase: # type: ignore[misc]
-    kind: str
-    requester: Union[
-        Callable[[credentials.Credentials, Any], Any],
-        Callable[[credentials.Credentials], Any],
-    ]
-    request_credentials: credentials.Credentials
-    request_data: Optional[data_class_json_mixin.DataClassJsonMixin]
-    expected_method: str
-    expected_endpoint: str
-    response_cls: Optional[type[data_class_json_mixin.DataClassJsonMixin]] = None
-    step_count: int = 1
-    expected_response_items: Optional[list[data_class_json_mixin.DataClassJsonMixin]] = None
-    expected_exception: Optional[http_error.HTTPError[error_response.ErrorResponse]] = None
-
-
-_TEST_EXPECTED_CREDENTIALS = credentials.Credentials(client_id="client-id", api_key="api-key")
-_TEST_INVALID_CREDENTIALS = credentials.Credentials(
-    client_id="invalid-client-id",
-    api_key="invalid-api-key",
-)
 _TEST_ERROR_RESPONSE = create_error_response(http.HTTPStatus.UNAUTHORIZED)
 _TEST_HTTP_ERROR = http_error.HTTPError(
     message=_TEST_ERROR_RESPONSE.to_json(),
     status=_TEST_ERROR_RESPONSE.code if _TEST_ERROR_RESPONSE.code is not None else 500,
     response_data=_TEST_ERROR_RESPONSE,
 )
-_TEST_TEXT_RESPONSE_DATA = "text-response-data"
-_INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
+_INTEGRATION_TEST_CASES: list[IntegrationTestCase] = [
     # actions_candidates
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=actions_candidates.get_actions_candidates,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=actions_candidates.PaginatedCandidatesForActions(
             action_id=1.2,
             limit=2.3,
@@ -90,10 +60,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/actions/candidates",
         response_cls=actions_candidates.GetActionsCandidatesResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=actions_candidates.get_actions_candidates_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=actions_candidates.PaginatedCandidatesForActions(
             action_id=1.2,
             limit=2.0,
@@ -142,10 +112,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=actions_candidates.get_actions_candidates,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=actions_candidates.PaginatedCandidatesForActions(
             action_id=1.2,
             limit=2.3,
@@ -157,10 +127,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # actions_products
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=actions_products.get_action_products,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=actions_products.PaginatedActionProducts(
             action_id=1.2,
             limit=2.3,
@@ -170,10 +140,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/actions/products",
         response_cls=actions_products.GetSellerProductResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=actions_products.get_action_products_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=actions_products.PaginatedActionProducts(
             action_id=1.2,
             limit=2.0,
@@ -222,10 +192,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=actions_products.get_action_products,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=actions_products.PaginatedActionProducts(
             action_id=1.2,
             limit=2.3,
@@ -237,19 +207,19 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # actions
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=actions.get_actions,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=None,
         expected_method="GET",
         expected_endpoint="/v1/actions",
         response_cls=actions.GetSellerActionsResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=actions.get_actions,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=None,
         expected_method="GET",
         expected_endpoint="/v1/actions",
@@ -257,10 +227,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # chat_send_message
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=chat_send_message.send_message,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=chat_send_message.ChatMessageData(
             chat_id="23",
             text="test",
@@ -269,10 +239,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/chat/send/message",
         response_cls=chat_send_message.GetChatStartResponseResult,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=chat_send_message.send_message,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=chat_send_message.ChatMessageData(
             chat_id="23",
             text="test",
@@ -283,10 +253,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # chat_start
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=chat_start.get_chat_id,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=chat_start.ChatStartData(
             posting_number="23",
         ),
@@ -294,10 +264,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/chat/start",
         response_cls=chat_start.GetChatStartResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=chat_start.get_chat_id,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=chat_start.ChatStartData(
             posting_number="23",
         ),
@@ -307,10 +277,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # fbs_act_get_postings
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=fbs_act_get_postings.get_posting_fbs_act_data,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=fbs_act_get_postings.PostingFBSActData(
             id=23,
         ),
@@ -318,10 +288,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/act/get-postings",
         response_cls=fbs_act_get_postings.PostingFBSActDataResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=fbs_act_get_postings.get_posting_fbs_act_data,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=fbs_act_get_postings.PostingFBSActData(
             id=23,
         ),
@@ -331,10 +301,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbo_list
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbo_list.get_posting_fbo_list,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbo_list.PaginatedGetPostingFBOListFilter(
             filter=posting_fbo_list.GetPostingFBOListFilter(
                 since=datetime.datetime.fromisoformat(
@@ -358,10 +328,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbo/list",
         response_cls=posting_fbo_list.GetPostingFBOListResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=posting_fbo_list.get_posting_fbo_list_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbo_list.PaginatedGetPostingFBOListFilter(
             filter=posting_fbo_list.GetPostingFBOListFilter(
                 since=datetime.datetime.fromisoformat(
@@ -936,10 +906,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbo_list.get_posting_fbo_list,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbo_list.PaginatedGetPostingFBOListFilter(
             filter=posting_fbo_list.GetPostingFBOListFilter(
                 since=datetime.datetime.fromisoformat(
@@ -965,10 +935,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_act_check_status
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_act_check_status.create_posting_fbs_act,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_act_check_status.PostingFSBActData(
             id=23,
         ),
@@ -976,10 +946,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/act/check-status",
         response_cls=posting_fbs_act_check_status.PostingFBSActCreateResponseActResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_act_check_status.create_posting_fbs_act,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_act_check_status.PostingFSBActData(
             id=23,
         ),
@@ -989,10 +959,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_act_create
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_act_create.create_posting_fbs_act,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_act_create.PostingFSBDeliveryData(
             containers_count=23,
             delivery_method_id=42,
@@ -1004,10 +974,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/act/create",
         response_cls=posting_fbs_act_create.PostingFBSActCreateResponseActResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_act_create.create_posting_fbs_act,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_act_create.PostingFSBDeliveryData(
             containers_count=23,
             delivery_method_id=42,
@@ -1021,10 +991,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_act_get_barcode
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_act_get_barcode.get_posting_fbs_act_barcode,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_act_get_barcode.FBSActData(
             id=23,
         ),
@@ -1032,10 +1002,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/act/get-barcode",
         response_cls=None,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_act_get_barcode.get_posting_fbs_act_barcode,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_act_get_barcode.FBSActData(
             id=23,
         ),
@@ -1045,10 +1015,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_get
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_get.get_posting_fbs_data,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_get.PostingFBSData(
             posting_number="23",
             with_=posting_fbs_get.PostingAdditionalFields(
@@ -1062,10 +1032,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v3/posting/fbs/get",
         response_cls=posting_fbs_get.GetPostingFBSDataResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_get.get_posting_fbs_data,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_get.PostingFBSData(
             posting_number="23",
             with_=posting_fbs_get.PostingAdditionalFields(
@@ -1081,10 +1051,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_list
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_list.get_posting_fbs_list,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_list.PaginatedGetPostingFBSListFilter(
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 delivery_method_id=[123, 142],
@@ -1113,10 +1083,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v3/posting/fbs/list",
         response_cls=posting_fbs_list.GetPostingFBSListResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=posting_fbs_list.get_posting_fbs_list_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_list.PaginatedGetPostingFBSListFilter(
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 delivery_method_id=[123, 142],
@@ -1892,10 +1862,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_list.get_posting_fbs_list,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_list.PaginatedGetPostingFBSListFilter(
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 delivery_method_id=[123, 142],
@@ -1926,10 +1896,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_package_label
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_package_label.get_posting_fbs_package_label,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_package_label.FBSPackageData(
             posting_number=["23", "42"],
         ),
@@ -1937,10 +1907,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/package-label",
         response_cls=None,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_package_label.get_posting_fbs_package_label,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_package_label.FBSPackageData(
             posting_number=["23", "42"],
         ),
@@ -1950,10 +1920,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_list
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_list.get_posting_fbs_list,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_list.PaginatedGetPostingFBSListFilter(
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 delivery_method_id=[123, 142],
@@ -1982,10 +1952,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v3/posting/fbs/list",
         response_cls=posting_fbs_list.GetPostingFBSListResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_list.get_posting_fbs_list,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_list.PaginatedGetPostingFBSListFilter(
             filter=posting_fbs_list.GetPostingFBSListFilter(
                 delivery_method_id=[123, 142],
@@ -2016,10 +1986,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_product_country_list
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_product_country_list.get_posting_fbs_product_country_list,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_product_country_list.CountryFilter(
             name_search="name",
         ),
@@ -2027,10 +1997,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/product/country/list",
         response_cls=posting_fbs_product_country_list.GetPostingFBSProductCountryListResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_product_country_list.get_posting_fbs_product_country_list,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_product_country_list.CountryFilter(
             name_search="name",
         ),
@@ -2040,10 +2010,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_product_country_set
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_product_country_set.posting_fbs_product_country_set,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_product_country_set.OderData(
             posting_number="23",
             product_id=42,
@@ -2053,10 +2023,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/posting/fbs/product/country/set",
         response_cls=posting_fbs_product_country_set.GetCountrySetFBSResponseResult,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_product_country_set.posting_fbs_product_country_set,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_product_country_set.OderData(
             posting_number="23",
             product_id=42,
@@ -2068,10 +2038,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # posting_fbs_ship_gtd
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=posting_fbs_ship_gtd.create_posting_fbs_ship_with_gtd,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=posting_fbs_ship_gtd.PostingFBSShipWithGTDData(
             packages=[
                 posting_fbs_ship_gtd.PostingFBSShipWithGTDPackage(
@@ -2156,10 +2126,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v3/posting/fbs/ship",
         response_cls=posting_fbs_ship_gtd.CreatePostingFBSShipWithGTDResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=posting_fbs_ship_gtd.create_posting_fbs_ship_with_gtd,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=posting_fbs_ship_gtd.PostingFBSShipWithGTDData(
             packages=[
                 posting_fbs_ship_gtd.PostingFBSShipWithGTDPackage(
@@ -2246,10 +2216,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_description
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_description.get_product_description,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_description.ProductData(
             offer_id="23",
             product_id=42,
@@ -2258,10 +2228,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/product/info/description",
         response_cls=product_description.GetProductInfoDescriptionResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_description.get_product_description,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_description.ProductData(
             offer_id="23",
             product_id=42,
@@ -2272,10 +2242,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_import_prices
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_import_prices.set_product_import_price,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_import_prices.PricesData(
             prices=[
                 product_import_prices.ItemPriceData(
@@ -2300,10 +2270,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/product/import/prices",
         response_cls=product_import_prices.GetProductImportPriceResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_import_prices.set_product_import_price,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_import_prices.PricesData(
             prices=[
                 product_import_prices.ItemPriceData(
@@ -2330,10 +2300,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_import_stocks
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_import_stocks.set_stocks,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_import_stocks.ProductImportProductsStocks(
             stocks=[
                 product_import_stocks.ProductsStocksList(
@@ -2354,10 +2324,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/products/stocks",
         response_cls=product_import_stocks.ProductsStocksResponseProcessResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_import_stocks.set_stocks,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_import_stocks.ProductImportProductsStocks(
             stocks=[
                 product_import_stocks.ProductsStocksList(
@@ -2380,10 +2350,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_info_attributes
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_info_attributes.get_product_attributes,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_info_attributes.PaginatedProductFilter(
             filter=product_info_attributes.ProductFilter(
                 offer_id=["105", "205"],
@@ -2400,10 +2370,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v4/product/info/attributes",
         response_cls=product_info_attributes.GetProductAttributesResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=product_info_attributes.get_product_attributes_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_info_attributes.PaginatedProductFilter(
             filter=product_info_attributes.ProductFilter(
                 offer_id=["105", "205"],
@@ -2795,10 +2765,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_info_attributes.get_product_attributes,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_info_attributes.PaginatedProductFilter(
             filter=product_info_attributes.ProductFilter(
                 offer_id=["105", "205"],
@@ -2817,10 +2787,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_info
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_info.get_product_info,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_info.ProductData(
             offer_id="12",
             product_id=23,
@@ -2830,10 +2800,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/product/info",
         response_cls=product_info.GetProductInfoResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_info.get_product_info,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_info.ProductData(
             offer_id="12",
             product_id=23,
@@ -2845,10 +2815,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # product_pictures_import
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=product_pictures_import.send_product_pictures,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=product_pictures_import.ProductPictures(
             color_image="color image",
             images=["image #1", "image #2"],
@@ -2859,10 +2829,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v1/product/pictures/import",
         response_cls=product_pictures_import.ProductPicturesResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=product_pictures_import.send_product_pictures,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=product_pictures_import.ProductPictures(
             color_image="color image",
             images=["image #1", "image #2"],
@@ -2875,10 +2845,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # products_stocks
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=products_stocks.set_stocks,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=products_stocks.StocksData(
             stocks=[
                 products_stocks.ProductData(
@@ -2899,10 +2869,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/products/stocks",
         response_cls=products_stocks.SetProductStocksResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=products_stocks.set_stocks,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=products_stocks.StocksData(
             stocks=[
                 products_stocks.ProductData(
@@ -2925,10 +2895,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # returns_fbo
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=returns_fbo.get_returns_company_fbo,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=returns_fbo.PaginatedGetReturnsCompanyFBOFilter(
             filter=returns_fbo.GetReturnsCompanyFBOFilter(
                 posting_number="12",
@@ -2941,10 +2911,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/returns/company/fbo",
         response_cls=returns_fbo.GetReturnsCompanyFBOResponseResult,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=returns_fbo.get_returns_company_fbo_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=returns_fbo.PaginatedGetReturnsCompanyFBOFilter(
             filter=returns_fbo.GetReturnsCompanyFBOFilter(
                 posting_number="12",
@@ -3028,10 +2998,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=returns_fbo.get_returns_company_fbo,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=returns_fbo.PaginatedGetReturnsCompanyFBOFilter(
             filter=returns_fbo.GetReturnsCompanyFBOFilter(
                 posting_number="12",
@@ -3046,10 +3016,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # returns_fbs
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=returns_fbs.get_returns_company_fbs,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=returns_fbs.PaginatedGetReturnsCompanyFBSFilter(
             filter=returns_fbs.GetReturnsCompanyFBSFilter(
                 accepted_from_customer_moment=[
@@ -3101,10 +3071,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v2/returns/company/fbs",
         response_cls=returns_fbs.GetReturnsCompanyFBSResponseResultWrapper,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=returns_fbs.get_returns_company_fbs_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=returns_fbs.PaginatedGetReturnsCompanyFBSFilter(
             filter=returns_fbs.GetReturnsCompanyFBSFilter(
                 accepted_from_customer_moment=[
@@ -3267,10 +3237,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=returns_fbs.get_returns_company_fbs,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=returns_fbs.PaginatedGetReturnsCompanyFBSFilter(
             filter=returns_fbs.GetReturnsCompanyFBSFilter(
                 accepted_from_customer_moment=[
@@ -3324,10 +3294,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
     ),
 
     # stocks
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="success",
         requester=stocks.get_product_info_stocks,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=stocks.PaginatedProductFilter(
             filter=stocks.ProductFilter(
                 offer_id=["105", "205"],
@@ -3344,10 +3314,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
         expected_endpoint="/v4/product/info/stocks",
         response_cls=stocks.GetProductInfoStocksResponseResult,
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="iterative",
         requester=stocks.get_product_info_stocks_iterative,
-        request_credentials=_TEST_EXPECTED_CREDENTIALS,
+        request_credentials=common.TEST_EXPECTED_CREDENTIALS,
         request_data=stocks.PaginatedProductFilter(
             filter=stocks.ProductFilter(
                 offer_id=["105", "205"],
@@ -3431,10 +3401,10 @@ _INTEGRATION_TEST_CASES: list[_IntegrationTestCase] = [
             ),
         ],
     ),
-    _IntegrationTestCase(
+    IntegrationTestCase(
         kind="error",
         requester=stocks.get_product_info_stocks,
-        request_credentials=_TEST_INVALID_CREDENTIALS,
+        request_credentials=common.TEST_INVALID_CREDENTIALS,
         request_data=stocks.PaginatedProductFilter(
             filter=stocks.ProductFilter(
                 offer_id=["105", "205"],
@@ -3461,100 +3431,22 @@ class TestIntegration(unittest.TestCase):
             test_case_name = f"{requester_name} [{test_case.kind}]"
 
             with self.subTest(test_case_name):
-                request_module = qualified_name.get_last_module(test_case.request_data) \
-                    if test_case.request_data is not None \
-                    else None
-                response_module = qualified_name.get_last_module(test_case.response_cls) \
-                    if test_case.response_cls is not None \
-                    else None
-                if (
-                    request_module is not None
-                    and response_module is not None
-                    and request_module != response_module
-                ):
-                    raise RuntimeError(
-                        "different modules for the request and response: " +
-                            f"{request_module} and {response_module}, respectively",
-                    )
+                test_case.validate_modules()
+                test_case.validate_iterative_mode()
 
-                for item_index, item in enumerate(test_case.expected_response_items or []):
-                    item_module = qualified_name.get_last_module(item)
-                    if item_module not in (request_module, response_module):
-                        raise RuntimeError(
-                            f"unexpected module {item_module} " +
-                                f"for the expected response item #{item_index}; " +
-                                f"expected {request_module or response_module}",
-                        )
+                endpoints = [
+                    test_case.make_endpoint(step_index)
+                    for step_index in range(test_case.step_count)
+                ]
 
-                if test_case.step_count < 1:
-                    raise RuntimeError("step count must be greater than zero")
-                elif test_case.step_count > 1 and test_case.expected_response_items is None:
-                    raise RuntimeError(
-                        "expected response items are not provided " +
-                            "for the test case with multiple steps",
-                    )
-
-                endpoints: list[TestServerEndpoint] = []
-                for step_index in range(test_case.step_count):
-                    test_case_kind = f"{common.FULL_TEST_CASE_KIND}_step_{step_index + 1}" \
-                        if test_case.step_count > 1 \
-                        else common.FULL_TEST_CASE_KIND
-
-                    expected_request_json = load_test_case.load_test_case(
-                        test_case_kind,
-                        test_case.request_data,
-                    ) \
-                        if test_case.request_data is not None \
-                        else None
-
-                    if test_case.response_cls is not None:
-                        response_type = "application/json"
-                        response_data = load_test_case.load_test_case(
-                            test_case_kind,
-                            test_case.response_cls,
-                        )
-                    else:
-                        response_type = "text/plain"
-                        response_data = _TEST_TEXT_RESPONSE_DATA
-
-                    endpoints.append(TestServerEndpoint(
-                        expected_method=test_case.expected_method,
-                        expected_endpoint=test_case.expected_endpoint,
-                        expected_credentials=_TEST_EXPECTED_CREDENTIALS,
-                        expected_request_json=expected_request_json,
-                        provided_response_type=response_type,
-                        provided_response_data=response_data,
-                    ))
-
-                expected_response: Any = None
-                if test_case.expected_response_items is not None:
-                    expected_response = test_case.expected_response_items
-                else:
-                    if len(endpoints) != 1:
-                        raise RuntimeError(
-                            "unable to determine the response data: " +
-                                "the number of endpoints is not equal to one",
-                        )
-
-                    response_data = endpoints[0].provided_response_data
-                    if test_case.response_cls is not None:
-                        expected_response = test_case.response_cls.schema().loads(response_data)
-                    else:
-                        expected_response = response_data.encode("utf-8")
+                expected_response = test_case.make_expected_response(endpoints)
 
                 with TestServer(endpoints) as server:
                     request_api._API_BASE_URL = server.address
 
-                    def _custom_requester() -> Any:
-                        requester_args = (test_case.request_credentials, test_case.request_data) \
-                            if test_case.request_data is not None \
-                            else (test_case.request_credentials,)
-                        response = test_case.requester(*requester_args) # type: ignore[arg-type]
-                        return list(response) if isinstance(response, Iterator) else response
-
                     if test_case.expected_exception is not None:
                         with self.assertRaises(http_error.HTTPError) as actual_exception_catcher:
-                            _custom_requester()
+                            test_case.call_requester()
 
                         expected_exception, actual_exception = \
                             test_case.expected_exception, actual_exception_catcher.exception
@@ -3565,6 +3457,6 @@ class TestIntegration(unittest.TestCase):
                             actual_exception.response_data,
                         )
                     else:
-                        actual_response = _custom_requester()
+                        actual_response = test_case.call_requester()
 
                         self.assertEqual(expected_response, actual_response)
