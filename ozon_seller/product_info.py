@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import CatchAll, Undefined, dataclass_json
+from dataclasses_json import Undefined, CatchAll, config
 
 from .common import credentials, request_api, datetime_field
 from .common.data_class_json_mixin import DataClassJsonMixin
@@ -21,10 +21,12 @@ class ProductData(DataClassJsonMixin):
 # Response
 
 
-@dataclass_json(undefined=Undefined.INCLUDE)
 @dataclass
-class GetProductInfoResponseOptionalDescriptionElements:
-    properties: CatchAll
+class GetProductInfoResponseOptionalDescriptionElements(DataClassJsonMixin): # type: ignore[misc]
+    dataclass_json_config = \
+        config(undefined=Undefined.INCLUDE)["dataclasses_json"] # type: ignore[assignment]
+
+    properties: CatchAll # type: ignore[type-arg]
 
 
 @dataclass
