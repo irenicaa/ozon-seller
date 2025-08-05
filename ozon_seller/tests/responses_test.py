@@ -3,8 +3,8 @@ import unittest
 import datetime
 
 from . import common
-from . import qualified_name
 from . import load_test_case
+from .base_test_case import BaseTestCase, primary_field
 from ..common import data_class_json_mixin
 from .. import (
     actions_candidates,
@@ -35,9 +35,8 @@ from .. import (
 
 
 @dataclass
-class _ResponseTestCase:
-    kind: str
-    expected_data: data_class_json_mixin.DataClassJsonMixin
+class _ResponseTestCase(BaseTestCase):
+    expected_data: data_class_json_mixin.DataClassJsonMixin = primary_field()
 
 
 _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
@@ -4201,10 +4200,7 @@ _RESPONSES_TEST_CASES: list[_ResponseTestCase] = [
 class TestResponses(unittest.TestCase):
     def test_responses(self) -> None:
         for test_case in _RESPONSES_TEST_CASES:
-            data_name = qualified_name.get_full_qualified_name(test_case.expected_data)
-            test_case_name = f"{data_name} [{test_case.kind}]"
-
-            with self.subTest(test_case_name):
+            with self.subTest(test_case.name):
                 input_json = load_test_case.load_test_case(test_case.kind, test_case.expected_data)
 
                 data_cls = test_case.expected_data.__class__

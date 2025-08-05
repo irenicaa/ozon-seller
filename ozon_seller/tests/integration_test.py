@@ -3,7 +3,6 @@ import unittest
 import http
 
 from . import common
-from . import qualified_name
 from .test_server_handler import create_error_response
 from .test_server import TestServer
 from .integration_test_case import IntegrationTestCase
@@ -3427,10 +3426,7 @@ _INTEGRATION_TEST_CASES: list[IntegrationTestCase] = [
 class TestIntegration(unittest.TestCase):
     def test_integration(self) -> None:
         for test_case in _INTEGRATION_TEST_CASES:
-            requester_name = qualified_name.get_last_module(test_case.requester)
-            test_case_name = f"{requester_name} [{test_case.kind}]"
-
-            with self.subTest(test_case_name):
+            with self.subTest(test_case.name):
                 test_case.validate_modules()
                 test_case.validate_iterative_mode()
 

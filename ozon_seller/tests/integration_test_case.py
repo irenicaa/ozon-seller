@@ -6,6 +6,7 @@ from . import common
 from . import qualified_name
 from . import load_test_case
 from .test_server_endpoint import TestServerEndpoint
+from .base_test_case import BaseTestCase, primary_field
 from ..common import credentials
 from ..common import data_class_json_mixin
 from ..common import http_error
@@ -13,16 +14,15 @@ from ..common import error_response
 
 
 @dataclass
-class IntegrationTestCase: # type: ignore[misc]
-    kind: str
-    requester: Union[
-        Callable[[credentials.Credentials, Any], Any],
-        Callable[[credentials.Credentials], Any],
-    ]
+class IntegrationTestCase(BaseTestCase): # type: ignore[misc]
     request_credentials: credentials.Credentials
     request_data: Optional[data_class_json_mixin.DataClassJsonMixin]
     expected_method: str
     expected_endpoint: str
+    requester: Union[
+        Callable[[credentials.Credentials, Any], Any],
+        Callable[[credentials.Credentials], Any],
+    ] = primary_field()
     response_cls: Optional[type[data_class_json_mixin.DataClassJsonMixin]] = None
     step_count: int = 1
     expected_response_items: Optional[list[data_class_json_mixin.DataClassJsonMixin]] = None
