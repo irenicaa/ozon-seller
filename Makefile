@@ -1,7 +1,7 @@
 PROJECT_NAME := ozon-seller
 PROJECT_PACKAGE := $(shell echo "$(PROJECT_NAME)" | tr "-" "_")
 
-.PHONY: help lint test install uninstall check-installation
+.PHONY: help lint test install uninstall check-installation build upload upload-test
 
 help:
 	@echo "Usage:"
@@ -16,6 +16,9 @@ help:
 	@echo "  install             Install the project package."
 	@echo "  uninstall           Uninstall the project package."
 	@echo "  check-installation  Check the installation of the project package."
+	@echo "  build               Generate distribution archives."
+	@echo "  upload              Upload the distribution archives to https://pypi.org/."
+	@echo "  upload-test         Upload the distribution archives to https://test.pypi.org/."
 
 lint:
 	mypy "$(PROJECT_PACKAGE)"
@@ -33,3 +36,17 @@ uninstall:
 
 check-installation:
 	python3 -c "import $(PROJECT_PACKAGE); print($(PROJECT_PACKAGE).__version__)"
+
+build:
+	python3 -m build
+	python3 -m twine check dist/*
+
+upload: uninstall
+	python3 -m twine upload dist/*
+	python3 -m pip install --no-deps "$(PROJECT_NAME)"
+	"$(MAKE)" check-installation
+
+upload-test: uninstall
+	python3 -m twine upload --repository testpypi dist/*
+	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps "$(PROJECT_NAME)"
+	"$(MAKE)" check-installation
