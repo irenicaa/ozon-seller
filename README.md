@@ -168,4 +168,4 @@ if __name__ == "__main__":
 
 The MIT License (MIT)
 
-Copyright &copy; 2022 irenica
+Copyright &copy; 2025 irenica
