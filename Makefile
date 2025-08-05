@@ -19,6 +19,7 @@ help:
 
 lint:
 	mypy "$(PROJECT_PACKAGE)"
+	mypy examples
 
 test:
 	python3 -m unittest discover --pattern '*_test.py'
