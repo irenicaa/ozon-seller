@@ -15,4 +15,4 @@ class ErrorResponseDetail(DataClassJsonMixin):
 class ErrorResponse(DataClassJsonMixin):
     code: Optional[int]
     message: Optional[str]
-    details: Optional[list[ErrorResponseDetail]]
+    details: Optional[list[ErrorResponseDetail]] = None
