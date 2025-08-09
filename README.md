@@ -103,6 +103,16 @@ A library that implements a client for [Ozon Seller API](https://docs.ozon.ru/ap
 
 ## Installation
 
+### From [PyPI](https://pypi.org/)
+
+Install the library from [PyPI](https://pypi.org/):
+
+```
+$ python3 -m pip install ozon-seller
+```
+
+### From source
+
 Clone this repository:
 
 ```
