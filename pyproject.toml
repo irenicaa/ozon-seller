@@ -1,12 +1,13 @@
 [build-system]
-requires = ["setuptools >= 65.1.0, < 69.0.0", "wheel >= 0.37.1, < 0.38.0"]
+requires = ["setuptools >= 80.9.0, < 81.0.0", "wheel >= 0.45.1, < 0.46.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ozon-seller"
 description = "Ozon seller library"
 readme = "README.md"
-license = { text = "MIT License" }
+license = "MIT" # SPDX License Identifier
+license-files = ["LICENSE.txt"]
 authors = [{ name = "irenica", email = "root@irenica.pro" }]
 requires-python = ">= 3.9.13, < 4.0.0"
 dependencies = [
