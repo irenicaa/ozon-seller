@@ -12,4 +12,5 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: make install
+      - run: python3 -m pip install mypy
       - run: make lint
